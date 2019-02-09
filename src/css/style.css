@@ -21,6 +21,8 @@ html, body {
 
 /*id to target ship name h2*/
 #ship-name {
+    font-family: "Bad Script" , cursive;;
+    font-size: 1.5rem;
 }
 
 /*id to target main-screen img*/
@@ -29,6 +31,13 @@ html, body {
     height: 70%;
     border-radius: 20%;
     margin: 1rem;
+}
+
+#message-board {
+    width: 70%;
+    background-color: whitesmoke;
+    text-align: center;
+    font-family: "VT323";
 }
 
 /*class to target side panels*/
@@ -143,8 +152,10 @@ html, body {
 }
 
 #direction-input {
+    display: inline-block;
     border-radius: 50%;
 }
 
 #magnitude-input {
+    display: inline-block;
 }

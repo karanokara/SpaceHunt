@@ -11,6 +11,7 @@
    <!--stylesheet links here-->
    <link rel="stylesheet" type="text/css" href="./src/css/reset.css"/>
    <link rel="stylesheet" type="text/css" href="./src/css/style.css"/>
+   <link href="https://fonts.googleapis.com/css?family=Bad+Script|VT232" rel="stylesheet">
 </head>
 
 <body onload="updateHeading()">
@@ -21,16 +22,16 @@
    <div class="data-panel">
       <h3>Heading</h3>
       <div id="heading-container">
-         X: <span id="x-heading" class="heading-span"></span><br/>
-         Y: <span id="y-heading" class="heading-span"></span><br/>
+         X: <span id="x-heading" class="heading-span">10</span><br/>
+         Y: <span id="y-heading" class="heading-span">20</span><br/>
       </div>
    </div>
 
    <!--main-screen-->
    <div class="small-container">
-      <h2 id="ship-name">G.S.S OldSpice</h2>
+      <h1 id="ship-name">G.S.S OldSpice</h1>
       <img alt="A photo of space" id="main-screen" src="./resources/images/outerspace.jpg">
-      <div class="message">Message Board</div>
+      <div id="message-board">Message Board</div>
    </div>
 
    <!--RHS top panel-->
@@ -71,8 +72,8 @@
       <h4>Command Console</h4>
       <form class="control-fields">
          <fieldset>
-            <label class="input-label" for="direction-input">Direction:</label><br/>
-            <span id="direction-value"></span>
+            <label class="input-label" for="direction-input">Direction:</label>
+            <span id="direction-value">0</span><br/>
             <input id="direction-input" type="range" oninput="showDirectionInput()"
                    max="270" min="0" step="90" value="0"/><br/>
             <label class="input-label" for="magnitude-input">Celestial Units</label><br/>
