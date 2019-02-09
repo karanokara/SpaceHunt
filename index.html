@@ -13,7 +13,7 @@
    <link rel="stylesheet" type="text/css" href="./src/css/style.css"/>
 </head>
 
-<body>
+<body onload="updateHeading()">
 <!--top half of web-page-->
 <div class="top-container">
 
@@ -73,9 +73,10 @@
          <fieldset>
             <label class="input-label" for="direction-input">Direction:</label><br/>
             <span id="direction-value"></span>
-            <input id="direction-input" type="range" max="270" min="0" step="90" value="0"/><br/>
+            <input id="direction-input" type="range" oninput="showDirectionInput()"
+                   max="270" min="0" step="90" value="0"/><br/>
             <label class="input-label" for="magnitude-input">Celestial Units</label><br/>
-            <input id="magnitude-input" max="2" min="0" type="number" value="0"><br/>
+            <input id="magnitude-input" max="10" min="0" type="number" value="0"><br/>
          </fieldset>
          <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading()">
       </form>

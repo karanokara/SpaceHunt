@@ -18,7 +18,6 @@ function submitHeading() {
 
     //stores new coordinates in local storage
     localStorage.setItem("heading", JSON.stringify(heading));
-    updateHeading();
 }
 
 function updateHeading() {
@@ -29,11 +28,13 @@ function updateHeading() {
 
     let newHeading = JSON.parse(localStorage.getItem("heading"));
 
-    //DEBUG: values stored to local but don't render????
-    console.log(newHeading.x_heading);
-    console.log(newHeading.y_heading);
-
     //renders new coordinates to user
     x.innerHTML = newHeading.x_heading;
     y.innerHTML = newHeading.y_heading;
+}
+
+function showDirectionInput() {
+    let slider = document.getElementById("direction-input");
+    let output = document.getElementById("direction-value");
+    output.innerHTML = slider.value;
 }
