@@ -1,5 +1,8 @@
-class Ship{
-    constructor(xi, yi, energy = 1000, supplies = 100, credit = 1000, engine = "basic", isDamaged = false){
+
+
+
+class Ship {
+    constructor( xi, yi, energy, supplies, credit, engine, isDamaged ) {
         this.x = xi;
         this.y = yi;
         this.energy = energy;
@@ -7,5 +10,13 @@ class Ship{
         this.credit = credit;
         this.engine = engine;
         this.isDamaged = isDamaged;
+        this.sensor = new Sensor( this.x, this.y );
     }
+
+
+
+
+
+
+
 }
