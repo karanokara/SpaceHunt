@@ -13,6 +13,13 @@ class Ship {
         this.sensor = new Sensor( this.x, this.y );
     }
 
+    Collision() {
+        let cellObj = GetCelestialObject(this.x, this.y);
+        if(cellObj != null){
+            cellObj.Collide();
+        }
+    }
+
 
 
 
