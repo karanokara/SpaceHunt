@@ -27,17 +27,17 @@ html, body {
 
 /*id to target main-screen img*/
 #main-screen {
-    width: 80%;
+    width: 70%;
     height: 70%;
     border-radius: 20%;
     margin: 1rem;
+    overflow: hidden;
 }
 
 #message-board {
     width: 70%;
     background-color: whitesmoke;
     text-align: center;
-    font-family: "VT323";
 }
 
 /*class to target side panels*/
@@ -58,7 +58,10 @@ html, body {
 }
 
 #data-log {
+    padding-top: 10%;
     text-align: inherit;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .log {
@@ -81,7 +84,7 @@ html, body {
     justify-content: center;
     align-items: center;
     background-color: darkgrey;
-    width: 100%;
+    width: 70%;
     height: 100%;
 }
 
@@ -89,7 +92,7 @@ html, body {
 /*bottom container styles*/
 .bottom-container {
     display: inherit;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: row;
     align-items: center;
     background-color: grey;
@@ -106,22 +109,32 @@ html, body {
     text-align: center;
     width: 20%;
     height: 75%;
-    margin: 0 5%;
 }
 
 
 /*map container specific*/
 #map {
+    display: inherit;
+    align-content: center;
+    justify-content: center;
     background-color: black;
-    color: lawngreen;
-    width: 12rem;
-    height: 12rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
-    overflow: hidden;
 }
 
 #status {
     background-color: darkturquoise;
+}
+
+#status-list {
+    height: 100%;
+    width: 100%;
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: left;
+    margin-left: 2rem;
 }
 
 /*control container specific*/

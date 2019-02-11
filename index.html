@@ -11,7 +11,8 @@
    <!--stylesheet links here-->
    <link rel="stylesheet" type="text/css" href="./src/css/reset.css"/>
    <link rel="stylesheet" type="text/css" href="./src/css/style.css"/>
-   <link href="https://fonts.googleapis.com/css?family=Bad+Script|VT232" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="./src/css/radar.css"/>
+   <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 </head>
 
 <body onload="updateHeading()">
@@ -30,14 +31,20 @@
    <!--main-screen-->
    <div class="small-container">
       <h1 id="ship-name">G.S.S OldSpice</h1>
-      <img alt="A photo of space" id="main-screen" src="./resources/images/outerspace.jpg">
+      <div id="main-screen">
+      <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
+      <!--<video id="hyperspace-video" autoplay>
+         <source src="./resources/video/Hyperspace%20Jump%20FX%20Guy%20Stock%20Footage.mp4">
+         video not supported
+      </video>-->
+      </div>
       <div id="message-board">Message Board</div>
    </div>
 
    <!--RHS top panel-->
    <div class="data-panel">
       <div class="data-log-container">
-         <h2>Data Log:</h2>
+         <h2 style="margin: 10% 0">Data Log:</h2>
          <ul id="data-log">
             <li class="log">Celeron</li>
             <li class="log">Xeon</li>
@@ -51,16 +58,14 @@
 <div class="bottom-container">
 
    <!--map-->
-   <div id="map" class="map-control-containers">
-      <ul>
-         <li>I'm the map!</li>
-         <li>I'm the map!</li>
-         <li>I'm the map!</li>
-      </ul>
-   </div>
+      <div class="radar">
+         <div class="pointer"></div>
+      </div>
+
+
 
    <div id="status" class="map-control-containers">
-      <ul>
+      <ul id="status-list">
          <li>Credits: </li>
          <li>Energy: </li>
          <li>Supplies: </li>
@@ -79,7 +84,7 @@
             <label class="input-label" for="magnitude-input">Celestial Units</label><br/>
             <input id="magnitude-input" max="10" min="0" type="number" value="0"><br/>
          </fieldset>
-         <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading()">
+         <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
       </form>
    </div>
 </div>
