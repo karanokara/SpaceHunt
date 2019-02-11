@@ -1,4 +1,13 @@
+function BadMax()
+{
+    var maxObj = CelestialObject();
 
-var CelestialInstance = Object.create(CelestialObject);
+    var super_Collide = maxObj.Collide();
 
-var BadMax = Object.create(Object.create(CelestialInstance));
+    maxObj.Collide = function() 
+    {
+        super_Collide();
+    };
+
+    return maxObj;
+}

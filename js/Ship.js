@@ -14,7 +14,7 @@ class Ship {
     }
 
     Collision() {
-        let cellObj = GetCelestialObject(this.x, this.y);
+        let cellObj = map.contents(this.x, this.y);
         if(cellObj != null){
             cellObj.Collide();
         }
