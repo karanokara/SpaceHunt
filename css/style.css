@@ -1,0 +1,180 @@
+/*document root styles*/
+html, body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+
+/*top container styles*/
+.top-container {
+    display: inherit;
+    width: 100%;
+    height: 100%;
+}
+
+/*id to target ship name h2*/
+#ship-name {
+    font-family: "Bad Script" , cursive;;
+    font-size: 1.5rem;
+}
+
+/*id to target main-screen img*/
+#main-screen {
+    width: 70%;
+    height: 70%;
+    border-radius: 20%;
+    margin: 1rem;
+    overflow: hidden;
+}
+
+#message-board {
+    width: 70%;
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+/*class to target side panels*/
+.data-panel {
+    display: inherit;
+    flex-direction: column;
+    background-color: lightskyblue;
+    opacity: 90%;
+    width: 25%;
+    height: 100%;
+}
+
+.data-log-container {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: center;
+    text-align: center;
+}
+
+#data-log {
+    padding-top: 10%;
+    text-align: inherit;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.log {
+    padding: 1rem 0;
+}
+
+/*class to target heading spans*/
+.heading-span {
+    display: inline-block;
+    margin: 1rem 0;
+}
+
+.heading-container {
+    padding-left: 2rem;
+}
+
+.small-container {
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+    width: 70%;
+    height: 100%;
+}
+
+
+/*bottom container styles*/
+.bottom-container {
+    display: inherit;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    background-color: grey;
+    width: 100%;
+    height: 70%;
+}
+
+
+/*covers both map and control panel containers*/
+.map-control-containers {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+#radar-container {
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    background: black;
+}
+
+/*map container specific*/
+#map {
+    display: inherit;
+    align-content: center;
+    justify-content: center;
+    background-color: black;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+}
+
+#status {
+    background-color: darkturquoise;
+}
+
+#status-list {
+    height: 100%;
+    width: 100%;
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: left;
+    margin-left: 2rem;
+}
+
+/*control container specific*/
+#controls {
+    background-color: lightblue;
+}
+
+/*to target input fields container*/
+.control-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem;
+    text-align: center;
+}
+
+
+/*class to target input labels*/
+.input-label {
+    display: inline-block;
+    margin: .5rem;
+}
+
+#heading-submit {
+    margin-top: 1rem;
+    width: 50%;
+}
+
+#direction-input {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+#magnitude-input {
+    display: inline-block;
+}
