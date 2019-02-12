@@ -1,0 +1,43 @@
+<html>
+<script src="Setup.js"></script>
+<div id="devMode" class="dev-mode">
+<div class="dev-mode-content">
+<form name=setupMode>
+	
+	<p>
+		Starting Location:
+		<input type=text name=xInput size=3 value="0">,
+		<input type=text name=yInput size=3 value="0">
+	
+	<p>  
+		Energy:
+		<input type=text name=energyInput size=4 value="1000">
+
+	<p>
+		Supplies:
+   		<input type=text name=suppliesInput size=3 value="100">%
+
+	<p>
+		Credits:
+   		<input type=text name=creditsInput size=6 value="1000">
+
+	<p>
+		Wormhole mode:
+		<input type=radio name=wormholeModeInput value="Fixed"> Fixed
+		<input type=radio name=wormholeModeInput value="Random"> Random
+
+	<p>
+		Gameplay mode:
+			<input type=radio name=gameplayModeInput value="Normal"> Normal
+			<input type=radio name=gameplayModeInput value="Never die"> Never die
+	<p>
+		Map size:
+   	 	<input type=text name=mapSizeInput size=3 value="128">
+
+	<p>
+   		<input type=button onclick="developerModeSubmit()" value="Save Changes">
+	
+</form>
+</div>
+</div>
+</html>
