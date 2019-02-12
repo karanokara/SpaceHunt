@@ -27,9 +27,19 @@ class Map {
         this.map[x][y] = object;
         return true;
     }
-
-    //Return the contents of the map at location (x, y)
+    /*
+    Return the contents of the map at location (x, y).
+    If location is empty, returns null.
+    */
     contents(x, y) {
         return this.map[x][y];
     }
+
+    /*
+    Return true if there is an object at location (x, y).
+    If location is empty, returns null.
+    */
+    hasObject(x, y) {
+        return Boolean(this.map[x][y]);
+}
 }
