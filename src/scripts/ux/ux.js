@@ -18,6 +18,7 @@ function submitHeading() {
 
     //stores new coordinates in local storage
     localStorage.setItem("heading", JSON.stringify(heading));
+
 }
 
 function updateHeading() {
@@ -37,4 +38,14 @@ function showDirectionInput() {
     let slider = document.getElementById("direction-input");
     let output = document.getElementById("direction-value");
     output.innerHTML = slider.value;
+}
+
+function createNewLog() {
+
+    let new_log = JSON.parse(localStorage.getItem("heading"));
+    let ul = document.getElementById("data-log");
+    let li = document.createElement("li");
+    li.setAttribute("class", "log");
+    li.innerHTML= new_log.x_heading + new_log.y_heading;
+    ul.appendChild(li);
 }
