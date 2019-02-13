@@ -3,8 +3,7 @@ Stylesheet for the setup page
 */
 
 .setup-game {
-    -webkit-transition: all .5s;
-    transition: all .5s;
+    transition: all .5s ease-out;
 }
 
 .setup-game {
@@ -15,7 +14,12 @@ Stylesheet for the setup page
     left: 0;
     text-align: center;
     opacity: 1;
+    visibility: visible;
     z-index: 10;
+}
+.setup-game.hide {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .setup-game .game-start-btn {

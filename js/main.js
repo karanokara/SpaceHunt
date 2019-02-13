@@ -39,12 +39,7 @@ function gameSetup () {
     // when click the start btn
     document.querySelectorAll( ".game-start-btn" )[0].onclick = function () {
         var setupPage = document.querySelectorAll( ".setup-game" )[0];
-        setupPage.style.opacity = 0;
-        setTimeout( ( function ( a ) {
-            return function () {
-                a.style.zIndex = 1;
-            }
-        } )( setupPage ), 500 );
+        setupPage.attributes.class.value += " hide"
 
     };
 }
