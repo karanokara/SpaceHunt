@@ -20,9 +20,13 @@
 
         <link rel="stylesheet" type="text/css" href="css/reset.css" />
 
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 
         <link rel="stylesheet" type="text/css" href="css/radar.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/setup-game.css">
 
         <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 
@@ -39,77 +43,95 @@
     </head>
 
     <body>
-        <!--top half of web-page-->
-        <div class="top-container">
 
-            <!--LHS top panel-->
-            <div class="data-panel">
-                <h3>Heading</h3>
-                <div id="heading-container">
-                    X: <span id="x-heading" class="heading-span">10</span><br />
-                    Y: <span id="y-heading" class="heading-span">20</span><br />
+        <div class="setup-game jumbotron">
+            <h1 class="display-4">Space Hunt</h1>
+            <p class="lead">Welcome to our fancy game Space Hunt!</p>
+            <hr class="my-4">
+            <p>Some settings going below here!</p>
+            <ul>
+                <li>setting1</li>
+                <li>setting2</li>
+                <li>setting3</li>
+                <li>setting4</li>
+            </ul>
+            <button class="btn btn-primary btn-lg game-start-btn">Start</button>
+        </div>
+
+        <div class="main-game">
+            <!--top half of web-page-->
+            <div class="top-container">
+
+                <!--LHS top panel-->
+                <div class="data-panel">
+                    <h3>Heading</h3>
+                    <div id="heading-container">
+                        X: <span id="x-heading" class="heading-span">10</span><br />
+                        Y: <span id="y-heading" class="heading-span">20</span><br />
+                    </div>
                 </div>
-            </div>
 
-            <!--main-screen-->
-            <div class="small-container">
-                <h1 id="ship-name">G.S.S OldSpice</h1>
-                <div id="main-screen">
-                    <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
-                    <!--<video id="hyperspace-video" autoplay>
+                <!--main-screen-->
+                <div class="small-container">
+                    <h1 id="ship-name">G.S.S OldSpice</h1>
+                    <div id="main-screen">
+                        <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
+                        <!--<video id="hyperspace-video" autoplay>
          <source src="./resources/video/Hyperspace%20Jump%20FX%20Guy%20Stock%20Footage.mp4">
          video not supported
       </video>-->
+                    </div>
+                    <div id="message-board">Message Board</div>
                 </div>
-                <div id="message-board">Message Board</div>
+
+                <!--RHS top panel-->
+                <div class="data-panel">
+                    <div class="data-log-container">
+                        <h2 style="margin: 10% 0">Data Log:</h2>
+                        <ul id="data-log">
+                            <li class="log">Celeron</li>
+                            <li class="log">Xeon</li>
+                            <li class="log">Ryzen</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <!--RHS top panel-->
-            <div class="data-panel">
-                <div class="data-log-container">
-                    <h2 style="margin: 10% 0">Data Log:</h2>
-                    <ul id="data-log">
-                        <li class="log">Celeron</li>
-                        <li class="log">Xeon</li>
-                        <li class="log">Ryzen</li>
+            <!--bottom half of web-page-->
+            <div class="bottom-container">
+
+                <!--map-->
+                <div class="radar">
+                    <div class="pointer"></div>
+                </div>
+
+
+
+                <div id="status" class="map-control-containers">
+                    <ul id="status-list">
+                        <li>Credits: <span class="credit-value">0</span></li>
+                        <li>Energy: <span class="energy-value">0</span></li>
+                        <li>Supplies: <span class="supply-value">0</span></li>
                     </ul>
                 </div>
-            </div>
-        </div>
 
-        <!--bottom half of web-page-->
-        <div class="bottom-container">
-
-            <!--map-->
-            <div class="radar">
-                <div class="pointer"></div>
-            </div>
-
-
-
-            <div id="status" class="map-control-containers">
-                <ul id="status-list">
-                    <li>Credits: <span class="credit-value">0</span></li>
-                    <li>Energy: <span class="energy-value">0</span></li>
-                    <li>Supplies: <span class="supply-value">0</span></li>
-                </ul>
+                <!--control panel-->
+                <div id="controls" class="map-control-containers">
+                    <h4>Command Console</h4>
+                    <form class="control-fields">
+                        <fieldset>
+                            <label class="input-label" for="direction-input">Direction:</label>
+                            <span id="direction-value">0</span><br />
+                            <input id="direction-input" type="range" oninput="showDirectionInput()" max="270" min="0"
+                                step="90" value="0" /><br />
+                            <label class="input-label" for="magnitude-input">Celestial Units</label><br />
+                            <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
+                        </fieldset>
+                        <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
+                    </form>
+                </div>
             </div>
 
-            <!--control panel-->
-            <div id="controls" class="map-control-containers">
-                <h4>Command Console</h4>
-                <form class="control-fields">
-                    <fieldset>
-                        <label class="input-label" for="direction-input">Direction:</label>
-                        <span id="direction-value">0</span><br />
-                        <input id="direction-input" type="range" oninput="showDirectionInput()" max="270" min="0" step="90"
-                            value="0" /><br />
-                        <label class="input-label" for="magnitude-input">Celestial Units</label><br />
-                        <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
-                    </fieldset>
-                    <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
-                </form>
-            </div>
         </div>
 
 

@@ -51,9 +51,15 @@ class Ship {
             this.y = coordinate.y;
         }
 
+        if ( this.energy <= 0 ) {
 
+        }
+        else if ( this.supplies <= 0 ) {
 
-        this.updateShipInfo();
+        }
+        else {
+            this.updateShipInfo();
+        }
     }
 
     /**
