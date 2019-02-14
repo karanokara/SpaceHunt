@@ -13,4 +13,3 @@ function readState(){
     else{
         return "Nothing to Access";
     }
-}
