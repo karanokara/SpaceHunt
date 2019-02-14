@@ -49,3 +49,7 @@ function createNewLog() {
     li.innerHTML= new_log.x_heading + new_log.y_heading;
     ul.appendChild(li);
 }
+
+function createGrid(size) {
+
+}
