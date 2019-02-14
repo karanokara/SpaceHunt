@@ -1,6 +1,4 @@
 /*
-*
-*
 * List of map objects (Entities that occupy space on the GameMap):
 ** BadMax
 ** Celestial Artifacts (Planets, Asteroids, Space Stations)
@@ -18,6 +16,7 @@
 */
 
 
+
 function MapObject(type, radius)
 {
     /*Base class for MapObjects*/
@@ -27,24 +26,31 @@ function MapObject(type, radius)
 
 MapObject.prototype.Collide = function() 
 {
-    console.log("Logging MapObject collisions.");
+    console.log("Logging MapObject collision");
 }
+
+
 
 function Asteroid(){};
 
 Asteroid.prototype = new MapObject('Asteroid', 0);
 
-Asteroid.prototype.DamageShip = function() {
+Asteroid.prototype.DamageShip = function() 
+{
     alert("You skimmed an asteroid and took damage!");
 }
 
-Asteroid.prototype.DestroyShip = function() {
+Asteroid.prototype.DestroyShip = function() 
+{
     alert("You slammed into and asteroid blew up!");
 }
 
-Asteroid.prototype.Collide = function() {
+Asteroid.prototype.Collide = function() 
+{
+    MapObject.prototype.Collide.call(this);
     let eventDecider = Math.random();
-    if(eventDecider <= 0.9){
+    if(eventDecider <= 0.9)
+    {
         this.DamageShip();
     }
     else
@@ -54,16 +60,32 @@ Asteroid.prototype.Collide = function() {
 }
 
 
+
+function MeteorShower() {}
+
+MeteorShower.prototype = new MapObject("MeteorShower", 0);
+
+
+
+function AbFreighter() {}
+
+AbFreighter.prototype = new MapObject("AbFreighter", 0);
+
+
+
 function Planet(name)
 {
     this.name = name;
 }
 
-Planet.prototype = new MapObject('planet', 1);
+Planet.prototype = new MapObject('Planet', 1);
 
-Planet.prototype.EnterOrbit = function() {
+Planet.prototype.EnterOrbit = function() 
+{
     alert("You have entered the orbit of " + this.name);
 }
+
+
 
 function Ryzen(){};
 
@@ -71,8 +93,11 @@ Ryzen.prototype = new Planet('Ryzen');
 
 Ryzen.prototype.Collide = function()
 {
+    MapObject.prototype.Collide.call(this);
     this.EnterOrbit();
 }
+
+
 
 function Eniac(){};
 
@@ -80,38 +105,72 @@ Eniac.prototype = new Planet('Eniac');
 
 Eniac.prototype.Collide = function()
 {
+    MapObject.prototype.Collide.call(this);
     this.EnterOrbit();
 }
 
 
 
+function BadMax(){}
 
+BadMax.prototype = new MapObject("BadMax", 0);
 
-/*
-function SpaceStation()
+BadMax.prototype.Collide = function()
 {
-    var spStationObj = MapObject('space_station', 0);
-    var super_Collide = spStationObj.Collide;
-
-    spStationObj.Collide = function() {
-        super_Collide();
-        alert("You hit a space station!");
-    }
-
-    return spStationObj;
-}
-
-function BadMax()
-{
-    var maxObj = MapObject();
-
-    var super_Collide = maxObj.Collide;
-
-    maxObj.Collide = function() 
+    MapObject.prototype.Collide.call(this);
+    let eventDecider = Math.random();
+    if(eventDecider <= 0.5) 
     {
-        super_Collide();
+        this.Escape();
     }
-
-    return maxObj;
+    else if( eventDecider > 0.5 && eventDecider <= 0.8)
+    {
+        this.Steal();
+    }
+    else
+    {
+        this.DestroyShip();
+    }
 }
-*/
+
+BadMax.prototype.Steal = function()
+{
+    alert("BadMax has stolen your supplies and credits!");
+}
+
+BadMax.prototype.DestroyShip = function()
+{
+    alert("BadMax has destroyed your ship!");
+}
+
+BadMax.prototype.Escape = function()
+{
+    alert("You have run away from BadMax!");
+}
+
+
+
+function SpaceStation(type) 
+{
+    this.objType = type;
+}
+
+SpaceStation.prototype = new MapObject("Station", 0);
+
+
+
+function MuskTesla() {}
+
+MuskTesla.prototype = new SpaceStation("MuskTesla");
+
+
+
+function MiniMart() {}
+
+MiniMart.prototype = new SpaceStation("MiniMart")
+
+
+
+function RepairDepot() {}
+
+RepairDepot.prototype = new SpaceStation("RepairDepot")
