@@ -29,9 +29,20 @@ MapObject.prototype.Collide = function()
     console.log("Logging MapObject collision");
 }
 
+function WormHole() {}
 
+WormHole.prototype = new MapObject("Wormhole", 0);
 
-function Asteroid(){};
+WormHole.prototype.Collide = function()
+{
+    MapObject.prototype.Collide.call(this);
+    alert("You fell into a wormhole!");
+    //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
+    xrand = Math.random() * 125 + 1;
+    yrand = Math.random() * 125 + 1;
+}
+
+function Asteroid(){}
 
 Asteroid.prototype = new MapObject('Asteroid', 0);
 
@@ -42,7 +53,7 @@ Asteroid.prototype.DamageShip = function()
 
 Asteroid.prototype.DestroyShip = function() 
 {
-    alert("You slammed into an asteroid and blew up!");
+    alert("You slammed into an asteroid and blew up! You lose!");
 }
 
 Asteroid.prototype.Collide = function() 
@@ -140,7 +151,7 @@ BadMax.prototype.Steal = function()
 
 BadMax.prototype.DestroyShip = function()
 {
-    alert("BadMax has destroyed your ship!");
+    alert("BadMax has destroyed your ship! You lose!");
 }
 
 BadMax.prototype.Escape = function()
