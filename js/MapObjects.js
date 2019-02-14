@@ -20,7 +20,7 @@
 function MapObject(type, radius)
 {
     /*Base class for MapObjects*/
-    this.objType= name;
+    this.objType= type;
     this.radius = radius;
 }
 
@@ -42,7 +42,7 @@ Asteroid.prototype.DamageShip = function()
 
 Asteroid.prototype.DestroyShip = function() 
 {
-    alert("You slammed into and asteroid blew up!");
+    alert("You slammed into an asteroid and blew up!");
 }
 
 Asteroid.prototype.Collide = function() 
@@ -119,11 +119,11 @@ BadMax.prototype.Collide = function()
 {
     MapObject.prototype.Collide.call(this);
     let eventDecider = Math.random();
-    if(eventDecider <= 0.5) 
+    if(eventDecider < 0.5) 
     {
         this.Escape();
     }
-    else if( eventDecider > 0.5 && eventDecider <= 0.8)
+    else if( eventDecider < 0.8)
     {
         this.Steal();
     }
