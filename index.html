@@ -22,12 +22,30 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <link rel="stylesheet" href="css/radar.css"/>
+  
+    <link rel="stylesheet" href="css/setup-game.css">
 
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 
 </head>
 
 <body>
+   <div class="main-game">
+  
+   <div class="setup-game jumbotron">
+            <h1 class="display-4">Space Hunt</h1>
+            <p class="lead">Welcome to our fancy game Space Hunt!</p>
+            <hr class="my-4">
+            <p>Some settings going below here!</p>
+            <ul>
+                <li>setting1</li>
+                <li>setting2</li>
+                <li>setting3</li>
+                <li>setting4</li>
+            </ul>
+            <button class="btn btn-primary btn-lg game-start-btn">Start</button>
+        </div>
+  
 <!--top half of web-page-->
 <div class="top-container">
 
@@ -64,6 +82,7 @@
             </ul>
         </div>
     </div>
+     </div>
 </div>
 
 <!--bottom half of web-page-->
@@ -91,7 +110,6 @@
         <div class="grid-block"></div>
         <div class="grid-block"></div>
         <div class="grid-block"></div>
-
     </div>
 
     <!--control panel-->
@@ -111,16 +129,15 @@
     </div>
 </div>
 
-<!--script links here-->
-<script src="js/ux.js"></script>
+<!--script links here-->        
+  <script src="js/Sensor.js"></script>
 
-<script src="js/Sensor.js"></script>
+  <script src="js/GameMap.js"></script>
 
-<script src="js/Ship.js"></script>
+  <script src="js/Ship.js"></script>
 
-<script src="js/move.js"></script>
+  <script src="js/main.js"></script>
 
-<script src="js/main.js"></script>
 </body>
 
 </html>

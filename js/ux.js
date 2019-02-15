@@ -51,5 +51,4 @@ function createNewLog() {
 }
 
 function createGrid(size) {
-
 }
