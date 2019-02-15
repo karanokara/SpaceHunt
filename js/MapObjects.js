@@ -15,8 +15,6 @@
 ** Sensors
 */
 
-
-
 function MapObject(type, radius)
 {
     /*Base class for MapObjects*/
@@ -29,6 +27,8 @@ MapObject.prototype.Collide = function()
     console.log("Logging MapObject collision");
 }
 
+/*----------------------------------------------------*/
+
 function WormHole() {}
 
 WormHole.prototype = new MapObject("Wormhole", 0);
@@ -37,10 +37,23 @@ WormHole.prototype.Collide = function()
 {
     MapObject.prototype.Collide.call(this);
     alert("You fell into a wormhole!");
-    //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
-    xrand = Math.random() * 125 + 1;
-    yrand = Math.random() * 125 + 1;
+
+    //TODO: validation mode flag to use a fixed wormhole jump
+    if(true)
+    {
+        xrand = Math.random() * map.size - 2; //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
+        yrand = Math.random() * map.size - 2;
+        oldSpice.x = xrand;
+        oldSpice.y = yrand;
+    }
+    else
+    {
+        oldSpice.x = 1;
+        oldSpice.y = 1;
+    }
 }
+
+/*----------------------------------------------------*/
 
 function Asteroid(){}
 
@@ -54,6 +67,7 @@ Asteroid.prototype.DamageShip = function()
 Asteroid.prototype.DestroyShip = function() 
 {
     alert("You slammed into an asteroid and blew up! You lose!");
+    ctrecipe.GameOver();
 }
 
 Asteroid.prototype.Collide = function() 
@@ -70,33 +84,45 @@ Asteroid.prototype.Collide = function()
     }
 }
 
-
+/*----------------------------------------------------*/
 
 function MeteorShower() {}
 
 MeteorShower.prototype = new MapObject("MeteorShower", 0);
 
-
+/*----------------------------------------------------*/
 
 function AbFreighter() {}
 
 AbFreighter.prototype = new MapObject("AbFreighter", 0);
 
+/*----------------------------------------------------*/
 
-
-function Planet(name)
+function Planet(name, x, y)
 {
     this.name = name;
+    this.x = x;
+    this.y = y;
 }
 
 Planet.prototype = new MapObject('Planet', 1);
 
+Planet.prototype.Collide = function() 
+{
+
+}
+
 Planet.prototype.EnterOrbit = function() 
 {
     alert("You have entered the orbit of " + this.name);
+    //update energy_cost/move here
+    if(oldSpice.x == this.x && oldSpice.y == this.y)
+    {
+        //TODO: oldSpice visits the planet
+    }
 }
 
-
+/*----------------------------------------------------*/
 
 function Ryzen(){};
 
@@ -108,7 +134,7 @@ Ryzen.prototype.Collide = function()
     this.EnterOrbit();
 }
 
-
+/*----------------------------------------------------*/
 
 function Eniac(){};
 
@@ -120,7 +146,7 @@ Eniac.prototype.Collide = function()
     this.EnterOrbit();
 }
 
-
+/*----------------------------------------------------*/
 
 function BadMax(){}
 
@@ -152,6 +178,7 @@ BadMax.prototype.Steal = function()
 BadMax.prototype.DestroyShip = function()
 {
     alert("BadMax has destroyed your ship! You lose!");
+    ctrecipe.GameOver();
 }
 
 BadMax.prototype.Escape = function()
@@ -159,29 +186,90 @@ BadMax.prototype.Escape = function()
     alert("You have run away from BadMax!");
 }
 
+/*----------------------------------------------------*/
 
-
-function SpaceStation(type) 
+function SpaceStation(attachedStations) 
 {
-    this.objType = type;
+    this.stations = attachedStations; //container for attached-stations (typeof array)
 }
 
 SpaceStation.prototype = new MapObject("Station", 0);
 
+SpaceStation.prototype.Collide = function()
+{
+    let i;
+    for(i=0; i<this.stations.length; ++i)
+    {
+        if(this.stations[i].MenuPrompt())
+        {
+            this.stations[i].Purchase();
+        }
+    }
+}
 
+/*----------------------------------------------------*/
 
-function MuskTesla() {}
+function MuskTesla(energyQuantity, energyPrice) 
+{
+    this.energyQuantity = energyQuantity;
+    this.energyPrice = energyPrice;
+}
 
-MuskTesla.prototype = new SpaceStation("MuskTesla");
+MuskTesla.prototype.MenuPrompt = function()
+{
+    return confirm("MuskTesla Attendant:\n\"Do you want to buy " + this.energyQuantity + " energy for " + this.energyPrice + " credits?\"");
+}
 
+MuskTesla.prototype.Purchase = function()
+{
+    oldSpice.energy += this.energyQuantity;
+    oldSpice.supplies -= this.energyPrice;
+    alert("MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
+}
 
+/*----------------------------------------------------*/
 
-function MiniMart() {}
+function MiniMart() 
+{
+    this.supplyPrice = 100;
+    this.supplyQuantity = 0.1;
+}
 
-MiniMart.prototype = new SpaceStation("MiniMart")
+MiniMart.prototype.MenuPrompt = function()
+{
+    return confirm("MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity*100 + "% supply for " + this.supplyPrice + " credits?\"");
+}
 
+MiniMart.prototype.Purchase = function()
+{
+    oldSpice.supplies += this.supplyQuantity;
+    oldSpice.credits -= this.supplyPrice;
+    alert("MiniMart Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
+}
 
+/*----------------------------------------------------*/
 
-function RepairDepot() {}
+function RepairDepot() 
+{
+    this.repairPrice = 100;
+}
 
-RepairDepot.prototype = new SpaceStation("RepairDepot")
+RepairDepot.prototype.MenuPrompt = function()
+{
+    if(oldSpice.isDamaged)
+    {
+        return confirm("Repair Depot Mechanic:\n\"Do you want to repair your ship damage for " + this.repairPrice + " credits?\"");
+    }
+    else
+    {
+        alert("Repair Depot Mechanic:\n\"Your ship is pristine, I refuse your business!\"");
+        return false;
+    }
+}
+
+RepairDepot.prototype.Purchase = function()
+{
+    oldSpice.isDamaged = false;
+    oldSpice.credits -= this.repairPrice;
+    alert("Repair Depot Mechanic:\n\"We got the dings out sir, happy trails to you!\"" );
+} 
