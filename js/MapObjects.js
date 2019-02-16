@@ -41,8 +41,8 @@ WormHole.prototype.Collide = function()
     //TODO: validation mode flag to use a fixed wormhole jump
     if(true)
     {
-        xrand = Math.random() * map.size - 2; //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
-        yrand = Math.random() * map.size - 2;
+        xrand = Math.ceil(Math.random() * map.size - 2); //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
+        yrand = Math.ceil(Math.random() * map.size - 2);
         oldSpice.x = xrand;
         oldSpice.y = yrand;
     }
@@ -190,7 +190,14 @@ BadMax.prototype.Escape = function()
 
 function SpaceStation(attachedStations) 
 {
-    this.stations = attachedStations; //container for attached-stations (typeof array)
+    this.stations = attachedStations; //container for attached-stations 
+
+    //append string representing "sub-stations" attached to SpaceStation
+    //use for image representations on game map
+    for(let i = 0; i < this.stations.length; ++i)
+    {
+        this.objType += this.stations[i].type;
+    }
 }
 
 SpaceStation.prototype = new MapObject("Station", 0);
@@ -211,6 +218,7 @@ SpaceStation.prototype.Collide = function()
 
 function MuskTesla(energyQuantity, energyPrice) 
 {
+    this.type = 'T';
     this.energyQuantity = energyQuantity;
     this.energyPrice = energyPrice;
 }
@@ -231,6 +239,7 @@ MuskTesla.prototype.Purchase = function()
 
 function MiniMart() 
 {
+    this.type = 'M';
     this.supplyPrice = 100;
     this.supplyQuantity = 0.1;
 }
@@ -251,6 +260,7 @@ MiniMart.prototype.Purchase = function()
 
 function RepairDepot() 
 {
+    this.type = 'R';
     this.repairPrice = 100;
 }
 
