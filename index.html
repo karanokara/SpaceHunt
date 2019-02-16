@@ -5,39 +5,44 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
+    <head>
+        <meta charset="utf-8" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="icon" href="site_icon.jpg" type="image/x-icon">   sit logo icon -->
+        <!-- <link rel="icon" href="site_icon.jpg" type="image/x-icon">   sit logo icon -->
 
-    <title>Space Hunt</title>
+        <title>Space Hunt</title>
 
-    <!--stylesheet links here-->
-    <link rel="stylesheet" href="css/reset.css" />
+        <!--stylesheet links here-->
+        <link rel="stylesheet" href="css/reset.css" />
 
-    <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="css/radar.css"/>
-  
-    <link rel="stylesheet" href="css/setup-game.css">
+        <link rel="stylesheet" href="css/style.css" />
 
-    <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+        <link rel="stylesheet" href="css/radar.css" />
 
-</head>
+        <link rel="stylesheet" href="css/setup-game.css">
 
-<body>
-   <div class="main-game">
-  
-   <div class="setup-game jumbotron">
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- +++++++++++++++++ This is a configuration page +++++++++++++++++++++++++++++
+        - For setting game before start the game
+        - All game setting option can be load inside class "game-setting-option"
+        -->
+        <div class="setup-game jumbotron">
             <h1 class="display-4">Space Hunt</h1>
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
             <p>Some settings going below here!</p>
-            <ul>
+            <ul class="game-setting-option">
                 <li>setting1</li>
                 <li>setting2</li>
                 <li>setting3</li>
@@ -45,99 +50,108 @@
             </ul>
             <button class="btn btn-primary btn-lg game-start-btn">Start</button>
         </div>
-  
-<!--top half of web-page-->
-<div class="top-container">
 
-    <!--LHS top panel-->
-    <div class="data-panel">
-        <h3>Heading</h3>
-        <div id="heading-container">
-            X: <span id="x-heading" class="heading-span">10</span><br/>
-            Y: <span id="y-heading" class="heading-span">20</span><br/>
-        </div>
-    </div>
+        <!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
+        - Don't put game conten outside of the main-game tag, otherwise it will not look good.
+        
+        -->
+        <div class="main-game">
+            <!--top half of web-page-->
+            <div class="top-container">
 
-    <!--main-screen-->
-    <div class="small-container">
-        <h1 id="ship-name">G.S.S OldSpice</h1>
-        <div id="main-screen">
-            <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
-            <!--<video id="hyperspace-video" autoplay>
+                <!--LHS top panel-->
+                <div class="data-panel">
+                    <h3>Heading</h3>
+                    <div id="heading-container">
+                        X: <span id="x-heading" class="heading-span">10</span><br />
+                        Y: <span id="y-heading" class="heading-span">20</span><br />
+                    </div>
+                </div>
+
+                <!--main-screen-->
+                <div class="small-container">
+                    <h1 id="ship-name">G.S.S OldSpice</h1>
+                    <div id="main-screen">
+                        <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
+                        <!--<video id="hyperspace-video" autoplay>
                <source src="./resources/video/Hyperspace%20Jump%20FX%20Guy%20Stock%20Footage.mp4">
                video not supported
             </video>-->
+                    </div>
+                    <div id="message-board">Message Board</div>
+                </div>
+
+                <!--RHS top panel-->
+                <div class="data-panel">
+                    <div class="data-log-container">
+                        <h2 style="margin: 10% 0">Data Log:</h2>
+                        <ul id="data-log">
+                            <li class="log">Celeron</li>
+                            <li class="log">Xeon</li>
+                            <li class="log">Ryzen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--bottom half of web-page-->
+            <div class="bottom-container">
+
+                <!--status panel-->
+                <div id="status" class="status-map-control-containers">
+                    <ul id="status-list">
+                        <li>Credits: <span class="credit-value">0</span></li>
+                        <li>Energy: <span class="energy-value">0</span></li>
+                        <li>Supplies: <span class="supply-value">0</span></li>
+                    </ul>
+                </div>
+
+                <!--map panel-->
+                <div id="radar-container" class="status-map-control-containers" onload="createGrid(50)">
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                    <div class="grid-block"></div>
+                </div>
+
+                <!--control panel-->
+                <div id="controls" class="status-map-control-containers">
+                    <h4>Command Console</h4>
+                    <form class="control-fields">
+                        <fieldset>
+                            <label class="input-label" for="direction-input">Direction:</label>
+                            <span id="direction-value">0</span><br />
+                            <input id="direction-input" type="range" oninput="showDirectionInput()" max="330" min="0"
+                                step="30" value="0" /><br />
+                            <label class="input-label" for="magnitude-input">Celestial Units</label><br />
+                            <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
+                        </fieldset>
+                        <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
+                    </form>
+                </div>
+            </div>
+
         </div>
-        <div id="message-board">Message Board</div>
-    </div>
 
-    <!--RHS top panel-->
-    <div class="data-panel">
-        <div class="data-log-container">
-            <h2 style="margin: 10% 0">Data Log:</h2>
-            <ul id="data-log">
-                <li class="log">Celeron</li>
-                <li class="log">Xeon</li>
-                <li class="log">Ryzen</li>
-            </ul>
-        </div>
-    </div>
-     </div>
-</div>
+        <!--script links here-->
+        <script src="js/Sensor.js"></script>
 
-<!--bottom half of web-page-->
-<div class="bottom-container">
+        <script src="js/GameMap.js"></script>
 
-    <!--status panel-->
-    <div id="status" class="status-map-control-containers">
-        <ul id="status-list">
-            <li>Credits: </li>
-            <li>Energy: </li>
-            <li>Supplies: </li>
-        </ul>
-    </div>
+        <script src="js/Ship.js"></script>
 
-    <!--map panel-->
-    <div id="radar-container" class="status-map-control-containers" onload="createGrid(50)">
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-        <div class="grid-block"></div>
-    </div>
+        <script src="js/ux.js"></script>
 
-    <!--control panel-->
-    <div id="controls" class="status-map-control-containers">
-        <h4>Command Console</h4>
-        <form class="control-fields">
-            <fieldset>
-                <label class="input-label" for="direction-input">Direction:</label>
-                <span id="direction-value">0</span><br/>
-                <input id="direction-input" type="range" oninput="showDirectionInput()"
-                       max="330" min="0" step="30" value="0"/><br/>
-                <label class="input-label" for="magnitude-input">Celestial Units</label><br/>
-                <input id="magnitude-input" max="10" min="0" type="number" value="0"><br/>
-            </fieldset>
-            <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
-        </form>
-    </div>
-</div>
+        <script src="js/main.js"></script>
 
-<!--script links here-->        
-  <script src="js/Sensor.js"></script>
-
-  <script src="js/GameMap.js"></script>
-
-  <script src="js/Ship.js"></script>
-
-  <script src="js/main.js"></script>
-
-</body>
+    </body>
 
 </html>
