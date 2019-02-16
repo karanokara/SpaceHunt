@@ -3,11 +3,12 @@ Bring up modal window to allow custom gameplay settings.
 User input modules are loaded and rendered to the DOM.
 */
 function developerModeInit() {
+    document.getElementById("devLoad").removeChild(setupButton);
     let devModal = document.createElement("DIV");
     let devMode = document.createElement("FORM");
     devMode.setAttribute("id", "developerMode");
     devModal.appendChild(devMode);
-    document.body.appendChild(devModal);
+    document.getElementById("devLoad").appendChild(devModal);
     coordinateInit();
     energyInit();
     supplyInit();
@@ -232,7 +233,7 @@ function submitInit() {
     submitButton.setAttribute("name", "submitButton");
     submitButton.setAttribute("type", "button");
     submitButton.setAttribute("value", "Save Changes");
-    submitButton.setAttribute("onclick", "developerModeSubmit()");
+    submitButton.onclick = function() { developerModeSubmit() };
     submitLabel.appendChild(submitButton);
     
     document.getElementById("developerMode").appendChild(submitLabel);
@@ -258,4 +259,6 @@ function developerModeSubmit() {
     ship.energy = energy[0];
     ship.supplies = supplies[0];
     ship.credit = credits[0];
+
+    document.getElementById("devLoad").removeChild(document.getElementById("devModal"));
 }
