@@ -266,8 +266,6 @@ function developerModeSubmit() {
     ship.supplies = supplies[0];
     ship.credit = credits[0];
 
-    document.getElementById("devLoadModal").style.display = "none";
-    document.getElementById("devLoadModal").removeChild(document.getElementById("devModal"));
     //set flags in global ctrecipe (GameMode) object that
     //WormHole Collide method can reference
     if(wormhole[1].checked)
@@ -282,4 +280,7 @@ function developerModeSubmit() {
     oldSpice.energy = energy[0];
     oldSpice.supplies = supplies[0];
     oldSpice.credit = credits[0];
+
+    document.getElementById("devLoadModal").style.display = "none";
+    document.getElementById("devLoadModal").removeChild(document.getElementById("devModal"));
 }
