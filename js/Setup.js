@@ -269,11 +269,14 @@ function developerModeSubmit() {
         ctrecipe.WormholeY = wormhole[3].value;
     }
 
-    oldSpice.x = coordinates[0];
-    oldSpice.y = coordinates[1];
-    oldSpice.energy = energy[0];
-    oldSpice.supplies = supplies[0];
-    oldSpice.credit = credits[0];
+    window.oldSpice.x = coordinates[0];
+    window.oldSpice.y = coordinates[1];
+    window.oldSpice.energy = energy[0];
+    window.oldSpice.supplies = supplies[0];
+    window.oldSpice.credit = credits[0];
+    window.oldSpice.normalPlay = gameplay[0].checked;
+
+    window.map = new GameMap(mapSize);
 
     document.getElementById("devLoadModal").style.display = "none";
     document.getElementById("devLoadModal").removeChild(document.getElementById("devModal"));

@@ -1,6 +1,8 @@
 // Size of map can be configure from setup file later
-window.map = new GameMap( 128 );
+window.map = new GameMap(128);
+window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false );
 
+<<<<<<< HEAD
 // when DOM loaded, call this
 window.onload = function () {
 

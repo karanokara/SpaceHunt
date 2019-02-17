@@ -40,7 +40,7 @@ Stylesheet for the setup page
     width: 60%;
 }
 
-.setup-game .setup-btn {
+.setup-btn {
     padding: 1rem 2rem;
     margin-top: 50px;
 }
