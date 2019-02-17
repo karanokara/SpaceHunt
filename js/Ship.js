@@ -12,9 +12,9 @@ class Ship {
         this.credit = credit;
         this.engineLv = engineLv;         // Lv 1 ~ 3
         this.isDamaged = isDamaged;
+        this.normalPlay = true;
         this.sensor = new Sensor( this.x, this.y );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];
-
 
         this.updateShipInfo();
     }
@@ -100,5 +100,23 @@ class Ship {
         }
     }
 
+//Returns a string with the resource lacking or return “OK” if the levels are not empty
+    checkLevels() {
+        if (this.credits < 1) {
+            return "No more Credits!";
+        }
+        else if (this.energy < 1 && normalPlay) {
+            return "No more Energy...Game Over!";
+        }
+        else if (this.supplies < 1 && normalPlay) {
+            return "No more Supplies...Game Over!";
+        }
+        else {
+            return "OK";
+        }
+    }
 
+    logLevels(){
+        console.log("Energy = "+this.energy+"; Supplies = "+ this.supplies+"; Credits = "+this.credits+"Normal Play = "+this.normalPlay);  
+    }
 }
