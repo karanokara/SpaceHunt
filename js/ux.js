@@ -18,7 +18,6 @@ function submitHeading() {
 
     //stores new coordinates in local storage
     localStorage.setItem("heading", JSON.stringify(heading));
-
 }
 
 function updateHeading() {
@@ -30,8 +29,8 @@ function updateHeading() {
     let newHeading = JSON.parse(localStorage.getItem("heading"));
 
     //renders new coordinates to user
-    x.innerHTML = newHeading.x_heading;
-    y.innerHTML = newHeading.y_heading;
+    x.innerHTML = newHeading ? newHeading.x_heading : 0;
+    y.innerHTML = newHeading ? newHeading.y_heading : 0;
 }
 
 function showDirectionInput() {
