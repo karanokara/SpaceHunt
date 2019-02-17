@@ -15,8 +15,10 @@ function GameMode(params)
     //their functions that need to be called
     gameObj.tickObjects = [];
 
-    //Validation mode flag
-    gameObj.isValidationMode = false;
+    //Validation mode flags
+    gameObj.WormholeFixed = false;
+    gameObj.WormholeX = 0;
+    gameObj.WormholeY = 0;
 
     gameObj.GameOver = function()
     {
@@ -35,7 +37,7 @@ function GameMode(params)
         let i;
         for(i = 0; i < gameObj.tickObjects.length; ++i)
         {
-            gameObj.tickObjects[i];
+            gameObj.tickObjects[i]();
         }
     }
 

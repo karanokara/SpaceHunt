@@ -4,12 +4,12 @@
 *
 */
 
-function Collision(x_coord,y_coord) {
-    let colObjCheck = map.contents(x_coord, y_coord);
-    if(colObjCheck != null){
-        colObjCheck.Collide();
+var Collision = function (x_coord,y_coord) {
+    if(Collision.caller)
+    {
+        let colObjCheck = map.contents(x_coord, y_coord);
+        if(colObjCheck){
+            colObjCheck.Collide();
+        }
     }
 }
-
-// add Collision check to tick
-ctrecipe.tickObjects.push(Collision(oldSpice.x, oldSpice.y));
