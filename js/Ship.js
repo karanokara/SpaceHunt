@@ -25,7 +25,7 @@ class Ship {
      * @param {int} degrees 
      */
     move ( distance, degrees ) {
-        var radians = degrees * ( Math.PI / 180 );
+        let radians = degrees * ( Math.PI / 180 );
         this.x += Math.round( distance * Math.cos( radians ) );
         this.y += Math.round( distance * Math.sin( radians ) );
 
@@ -45,8 +45,8 @@ class Ship {
         }
 
         // make sure that the ship wont pass the 0 boundary or upper boundary
-        if ( this.x < 0 || this.y < 0 || this.x > window.gameMap.size || this.y > window.gameMap.size ) {
-            var coordinate = wormhole();
+        if ( this.x < 0 || this.y < 0 || this.x > window.map.size || this.y > window.map.size ) {
+            let coordinate = wormhole();
             this.x = coordinate.x;
             this.y = coordinate.y;
         }

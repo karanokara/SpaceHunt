@@ -37,7 +37,7 @@
         </div>
 
         <!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
-        - Don't put game conten outside of the main-game tag, otherwise it will not look good.
+        - Don't put game content outside of the main-game tag, otherwise it will not look good.
         
         -->
         <div class="main-game">
@@ -54,7 +54,7 @@
                 </div>
 
                 <!--main-screen-->
-                <div class="small-container">
+                <div class="main-screen-container">
                     <h1 id="ship-name">G.S.S OldSpice</h1>
                     <div id="main-screen">
                         <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
@@ -84,7 +84,7 @@
             <div class="bottom-container">
 
                 <!--status panel-->
-                <div id="status" class="status-map-control-containers">
+                <div id="status-container" class="status-map-control-containers">
                     <ul id="status-list">
                         <li>Credits: <span class="credit-value">0</span></li>
                         <li>Energy: <span class="energy-value">0</span></li>
@@ -93,18 +93,9 @@
                 </div>
 
                 <!--map panel-->
-                <div id="radar-container" class="status-map-control-containers" onload="createGrid(50)">
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
+                <div id="" class="status-map-control-containers">
+                    <div id="grid-container">
+                    </div>
                 </div>
 
                 <!--control panel-->
@@ -115,15 +106,14 @@
                             <label class="input-label" for="direction-input">Direction:</label>
                             <span id="direction-value">0</span><br />
                             <input id="direction-input" type="range" oninput="showDirectionInput()" max="330" min="0"
-                                step="30" value="0" /><br />
+                                   step="30" value="0" /><br />
                             <label class="input-label" for="magnitude-input">Celestial Units</label><br />
                             <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
                         </fieldset>
-                        <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
+                        <input id="heading-submit" type="button" value="Engage" onclick="submitHeading()">
                     </form>
                 </div>
             </div>
-
         </div>
 
         <!--stylesheet links here-->
@@ -153,10 +143,7 @@
         <script src="js/Ship.js"></script>
         <script src="js/MapObjects.js"></script>
         <script src="js/ux.js"></script>
-
         <script src="js/main.js"></script>
         <script src="js/Collision.js"></script>
-
     </body>
-
 </html>
