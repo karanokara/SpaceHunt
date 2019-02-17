@@ -4,8 +4,8 @@ User input modules are loaded and rendered to the DOM.
 */
 function developerModeInit() {
     let devModal = document.createElement("DIV");
-    devModal.setAttribute("class", "modal-content")
-    devModal.setAttribute("id", "devModal")
+    devModal.setAttribute("class", "modal-content");
+    devModal.setAttribute("id", "devModal");
 
     document.getElementById("devLoadModal").style.display = "block";
 
