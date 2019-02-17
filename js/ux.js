@@ -1,5 +1,9 @@
 //File contains functions to collect and handoff user entered data
 
+function renderGameMode() {}
+
+
+//function for submitting a new coordinate value to be rendered on the page
 function submitHeading() {
 
     //assign element vars
@@ -18,10 +22,12 @@ function submitHeading() {
 
     //stores new coordinates in local storage
     localStorage.setItem("heading", JSON.stringify(heading));
-
+    let stored_heading = JSON.parse(localStorage.getItem("heading"));
+    console.log(stored_heading.x_heading);
+    console.log(stored_heading.y_heading)
 }
 
-function updateHeading() {
+function renderHeading() {
 
     //assign element vars
     let x = document.getElementById("x-heading");
@@ -34,7 +40,7 @@ function updateHeading() {
     y.innerHTML = newHeading.y_heading;
 }
 
-function showDirectionInput() {
+function renderDirectionInput() {
     let slider = document.getElementById("direction-input");
     let output = document.getElementById("direction-value");
     output.innerHTML = slider.value;

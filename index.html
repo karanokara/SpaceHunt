@@ -7,9 +7,7 @@
 
     <head>
         <meta charset="utf-8" />
-
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- <link rel="icon" href="site_icon.jpg" type="image/x-icon">   sit logo icon -->
@@ -18,19 +16,13 @@
 
         <!--stylesheet links here-->
         <link rel="stylesheet" href="css/reset.css" />
-
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css" />
-
         <link rel="stylesheet" href="css/radar.css" />
-
         <link rel="stylesheet" href="css/setup-game.css">
-
         <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 
     </head>
-
     <body>
 
         <!-- +++++++++++++++++ This is a configuration page +++++++++++++++++++++++++++++
@@ -52,7 +44,7 @@
         </div>
 
         <!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
-        - Don't put game conten outside of the main-game tag, otherwise it will not look good.
+        - Don't put game content outside of the main-game tag, otherwise it will not look good.
         
         -->
         <div class="main-game">
@@ -128,30 +120,24 @@
                     <form class="control-fields">
                         <fieldset>
                             <label class="input-label" for="direction-input">Direction:</label>
-                            <span id="direction-value">0</span><br />
-                            <input id="direction-input" type="range" oninput="showDirectionInput()" max="330" min="0"
-                                step="30" value="0" /><br />
+                            <span id="direction-value">0</span><br/>
+                            <input id="direction-input" type="range" oninput="renderDirectionInput()" max="330" min="0"
+                                step="30" value="0" /><br/>
                             <label class="input-label" for="magnitude-input">Celestial Units</label><br />
-                            <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
+                            <input id="magnitude-input" max="10" min="0" type="number" value="0"><br/>
                         </fieldset>
-                        <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading(), createNewLog()">
+                        <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading()">
                     </form>
                 </div>
             </div>
-
         </div>
 
         <!--script links here-->
         <script src="js/Sensor.js"></script>
-
         <script src="js/GameMap.js"></script>
-
         <script src="js/Ship.js"></script>
-
         <script src="js/ux.js"></script>
-
         <script src="js/main.js"></script>
 
     </body>
-
 </html>
