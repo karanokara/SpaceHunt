@@ -44,13 +44,6 @@ class Ship {
                 break;
         }
 
-        // make sure that the ship wont pass the 0 boundary or upper boundary
-        if ( this.x < 0 || this.y < 0 || this.x > window.gameMap.size || this.y > window.gameMap.size ) {
-            var coordinate = wormhole();
-            this.x = coordinate.x;
-            this.y = coordinate.y;
-        }
-
         if ( this.energy <= 0 ) {
 
         }

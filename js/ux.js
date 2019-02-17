@@ -16,6 +16,8 @@ function submitHeading() {
         y_heading: y_input
     };
 
+    oldSpice.move(y_input, x_input);
+
     //stores new coordinates in local storage
     localStorage.setItem("heading", JSON.stringify(heading));
 }

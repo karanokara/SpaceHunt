@@ -3,17 +3,17 @@
 
 // Size of map can be configure from setup file later
 window.map = new GameMap(128);
+window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false );
+
+//important that pushes to tickObjects happens nearly last
+ctrecipe.tickObjects.push(function(){ Collision(window.oldSpice.x, window.oldSpice.y);});
 
 // when DOM loaded, call this
 window.onload = function () {
 
     // set the ship obj as global
-    window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false );
     updateHeading();
 
-    //important that pushes to tickObjects happens nearly last
-    ctrecipe.tickObjects.push(function(){ Collision(window.oldSpice.x, window.oldSpice.y);});
-    ctrecipe.tick();
 
     gameSetup();
 }
