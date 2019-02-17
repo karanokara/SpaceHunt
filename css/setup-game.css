@@ -22,6 +22,29 @@ Stylesheet for the setup page
     visibility: hidden;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+  
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 60%;
+}
+
+.setup-btn {
+    padding: 1rem 2rem;
+    margin-top: 50px;
+}
+
 .setup-game .game-start-btn {
     padding: 1rem 2rem;
     margin-top: 50px;

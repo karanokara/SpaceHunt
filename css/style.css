@@ -11,7 +11,7 @@ html, body {
     font-size: 16px;
 }
 
-/*top container styles*/
+/*container for top half of page*/
 .top-container {
     display: inherit;
     width: 100%;
@@ -21,6 +21,7 @@ html, body {
 /*id to target ship name h2*/
 #ship-name {
     font-family: "Bad Script" , cursive;;
+    font-weight: bolder;
     font-size: 1.5rem;
 }
 
@@ -33,22 +34,31 @@ html, body {
     overflow: hidden;
 }
 
+/*id for targeting message board*/
 #message-board {
     width: 70%;
     background-color: whitesmoke;
     text-align: center;
 }
 
-/*class to target side panels*/
+.heading-text {
+    width: 80%;
+    justify-content: flex-start;
+}
+
+/*class to target top side panels*/
 .data-panel {
     display: inherit;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background-color: lightskyblue;
     opacity: 90%;
     width: 25%;
     height: 100%;
 }
 
+/*container class for data log*/
 .data-log-container {
     display: inherit;
     flex-direction: inherit;
@@ -56,6 +66,13 @@ html, body {
     text-align: center;
 }
 
+#star-fleet-icon {
+    align-self: center;
+    height: 50px;
+    width: 50px;
+}
+
+/*id for ul containing data logs*/
 #data-log {
     padding-top: 10%;
     text-align: inherit;
@@ -63,8 +80,10 @@ html, body {
     overflow-x: hidden;
 }
 
+/*individual data log of past coordinates*/
 .log {
     padding: 1rem 0;
+    font-size: .9rem;
 }
 
 /*class to target heading spans*/
@@ -73,11 +92,13 @@ html, body {
     margin: 1rem 0;
 }
 
+/*container class for current heading*/
 .heading-container {
     padding-left: 2rem;
 }
 
-.small-container {
+/*container class for main screen (middle top page) content*/
+.main-screen-container {
     display: inherit;
     flex-direction: column;
     justify-content: center;
@@ -88,7 +109,7 @@ html, body {
 }
 
 
-/*bottom container styles*/
+/*container for bottom half of page*/
 .bottom-container {
     display: inherit;
     justify-content: space-around;
@@ -100,48 +121,48 @@ html, body {
 }
 
 
-/*covers both map and control panel containers*/
+/*class for map, control panel, and status box containers*/
 .status-map-control-containers {
     display: inherit;
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
-    width: 32%;
+    width: 25%;
     height: 100%;
     border-radius: 20%;
     background: darkturquoise;
+    overflow: hidden;
 }
 
-#radar-container {
-    display: grid;
-
-    background: white;
-    grid-gap: 5px;
-}
-
-.grid-block {
-    z-index: 500;
-    background: gray;
-    border: 5px black;
-    height: 10px;
-    width: 10px;
-}
-
-/*map container specific*/
-#map {
-    display: inherit;
-    align-content: center;
+/*id for sensor container, holds grid-container*/
+#sensor-container {
     justify-content: center;
-    background-color: black;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
+    align-items: center;
 }
 
-#status {
+/*id for map grid container*/
+#grid-container {
+    display: grid;
+    background: lightgray;
+    grid-gap: 1px;
+    height: 100%;
+    width: 100%;
+}
+
+/*class for individual map grid tiles*/
+.grid-block {
+    display: flex;
+    z-index: 500;
+    background: black;
+    border: 5px black;
+}
+
+/*id for container holding ship status ul*/
+#status-container {
     background-color: darkturquoise;
 }
 
+/*id for ul displaying ship status*/
 #status-list {
     height: 100%;
     width: 100%;
@@ -173,16 +194,19 @@ html, body {
     margin: .5rem;
 }
 
+/*id for heading submit button*/
 #heading-submit {
     margin-top: 1rem;
     width: 50%;
 }
 
+/*id for direction selector input*/
 #direction-input {
     display: inline-block;
     border-radius: 50%;
 }
 
+/*id for magnitude number input*/
 #magnitude-input {
     display: inline-block;
 }

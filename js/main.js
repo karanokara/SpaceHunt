@@ -1,6 +1,6 @@
 // Size of map can be configure from setup file later
-window.gameMap = new GameMap( 128 );
-
+window.map = new GameMap(128);
+window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false );
 
 // when DOM loaded, call this
 window.onload = function () {
@@ -9,13 +9,32 @@ window.onload = function () {
     if (dev_mode === null)
         gameSetup();
 
-    renderHeading();
+    //pull oldSpice state from local storage on load if tab closed
+    if (JSON.parse(localStorage.getItem("oldSpice")) != null)
+        window.oldSpice = JSON.parse(localStorage.getItem("oldSpice"));
+    else
+        window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false );
 
-    // setup the game 
+    //DEBUG console.log(window.oldSpice);
+    //DEBUG console.log(window.map);
+
+    // setup the game
     // var data = setup();
 
-    // set the ship obj as global
-    window.ship = new Ship( 0, 0, 1000, 100, 1000, 1, false );
+    gameSetup();
+    createGrid();
+
+    //important that pushes to tickObjects happens nearly last
+    ctrecipe.tickObjects.push(function(){ Collision(window.oldSpice.x, window.oldSpice.y);});
+    ctrecipe.tick();
+
+};
+
+//function for storing state upon tab close
+window.onclose = function () {
+    //store state to local storage
+    localStorage.setItem("oldSpice", JSON.stringify(window.oldSpice));
+    localStorage.setItem("gameMap", JSON.stringify(window.GameMap));
 };
 
 /**
@@ -24,13 +43,7 @@ window.onload = function () {
 function gameSetup () {
     // when click the start btn
     document.querySelectorAll( ".game-start-btn" )[0].onclick = function () {
-        localStorage.setItem("dev_mode", "true");
-        let dev_mode_chosen = JSON.parse(localStorage.getItem("dev_mode"));
-
-        if (dev_mode_chosen) {
-            let setupPage = document.querySelectorAll(".setup-game")[0];
-            setupPage.attributes.class.value += "hide";
-        }
-        console.log(JSON.parse(localStorage.getItem("dev_mode")));
+        let setupPage = document.querySelectorAll( ".setup-game" )[0];
+        setupPage.attributes.class.value += " hide"
     };
 }

@@ -35,21 +35,21 @@ WormHole.prototype = new MapObject("Wormhole", 0);
 
 WormHole.prototype.Collide = function()
 {
+    console.log("Collided with wormhole");
     MapObject.prototype.Collide.call(this);
     alert("You fell into a wormhole!");
 
-    //TODO: validation mode flag to use a fixed wormhole jump
-    if(true)
+    if(ctrecipe.WormholeFixed)
+    {
+        oldSpice.x = ctrecipe.WormholeX;
+        oldSpice.y = ctrecipe.WorlholeY;
+    }
+    else
     {
         xrand = Math.ceil(Math.random() * map.size - 2); //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
         yrand = Math.ceil(Math.random() * map.size - 2);
         oldSpice.x = xrand;
         oldSpice.y = yrand;
-    }
-    else
-    {
-        oldSpice.x = 1;
-        oldSpice.y = 1;
     }
 }
 

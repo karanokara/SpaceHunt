@@ -4,10 +4,17 @@ User input modules are loaded and rendered to the DOM.
 */
 function developerModeInit() {
     let devModal = document.createElement("DIV");
+    devModal.setAttribute("class", "modal-content");
+    devModal.setAttribute("id", "devModal");
+
+    document.getElementById("devLoadModal").style.display = "block";
+
     let devMode = document.createElement("FORM");
     devMode.setAttribute("id", "developerMode");
     devModal.appendChild(devMode);
-    document.body.appendChild(devModal);
+
+    document.getElementById("devLoadModal").appendChild(devModal);
+
     coordinateInit();
     energyInit();
     supplyInit();
@@ -232,7 +239,7 @@ function submitInit() {
     submitButton.setAttribute("name", "submitButton");
     submitButton.setAttribute("type", "button");
     submitButton.setAttribute("value", "Save Changes");
-    submitButton.setAttribute("onclick", "developerModeSubmit()");
+    submitButton.onclick = function() { developerModeSubmit() };
     submitLabel.appendChild(submitButton);
     
     document.getElementById("developerMode").appendChild(submitLabel);
@@ -253,9 +260,24 @@ function developerModeSubmit() {
     let gameplay = document.getElementsByName("gameplayInput");
     let mapSize = document.getElementsByName("mapSizeInput");
 
-    ship.x = coordinates[0];
-    ship.y = coordinates[1];
-    ship.energy = energy[0];
-    ship.supplies = supplies[0];
-    ship.credit = credits[0];
+    //set flags in global ctrecipe (GameMode) object that
+    //WormHole Collide method can reference
+    if(wormhole[1].checked)
+    {
+        ctrecipe.WormholeFixed = true;
+        ctrecipe.WormholeX = wormhole[2].value;
+        ctrecipe.WormholeY = wormhole[3].value;
+    }
+
+    window.oldSpice.x = coordinates[0];
+    window.oldSpice.y = coordinates[1];
+    window.oldSpice.energy = energy[0];
+    window.oldSpice.supplies = supplies[0];
+    window.oldSpice.credit = credits[0];
+    window.oldSpice.normalPlay = gameplay[0].checked;
+
+    window.map = new GameMap(mapSize);
+
+    document.getElementById("devLoadModal").style.display = "none";
+    document.getElementById("devLoadModal").removeChild(document.getElementById("devModal"));
 }

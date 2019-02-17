@@ -23,7 +23,7 @@ class Sensor {
      * called by user manually
      */
     deploy () {
-        window.ship.supplies -= 2;        // take 1 turn, consume 2% of supplies
+        window.oldSpice.supplies -= 2;        // take 1 turn, consume 2% of supplies
         var nearCP = [],                  // an array of near cp coordinates
             count = 0,
             scale = 2 * this.ScanCP + 1,
@@ -64,8 +64,8 @@ class Sensor {
      * sensor upgrade, can only upgrade once
      */
     upgrade () {
-        if ( this.level == 1 && window.ship.credit > 100 ) {
-            window.ship.credit -= 100;
+        if ( this.level == 1 && window.oldSpice.credit > 100 ) {
+            window.oldSpice.credit -= 100;
             this.level = 2;
             this.ScanCP = 5;
         }
@@ -97,11 +97,11 @@ class Sensor {
     }
 
     /**
-     * update current ship CP for sensor 
+     * update current oldSpice CP for sensor 
      */
     update() {
-        this.currentCP.x = window.ship.x;
-        this.currentCP.y = window.ship.y;
+        this.currentCP.x = window.oldSpice.x;
+        this.currentCP.y = window.oldSpice.y;
     }
 }
 

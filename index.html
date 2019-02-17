@@ -14,14 +14,6 @@
 
         <title>Space Hunt</title>
 
-        <!--stylesheet links here-->
-        <link rel="stylesheet" href="css/reset.css" />
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/radar.css" />
-        <link rel="stylesheet" href="css/setup-game.css">
-        <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
-
     </head>
     <body>
 
@@ -33,13 +25,11 @@
             <h1 class="display-4">Space Hunt</h1>
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
-            <p>Some settings going below here!</p>
-            <ul class="game-setting-option">
-                <li>setting1</li>
-                <li>setting2</li>
-                <li>setting3</li>
-                <li>setting4</li>
-            </ul>
+            <div>
+            <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
+            </div>
+            <div id="devLoadModal" class="modal">
+            </div>
             <button class="btn btn-primary btn-lg game-start-btn">Start</button>
         </div>
 
@@ -53,15 +43,20 @@
 
                 <!--LHS top panel-->
                 <div class="data-panel">
-                    <h3>Heading</h3>
-                    <div id="heading-container">
-                        X: <span id="x-heading" class="heading-span">10</span><br />
-                        Y: <span id="y-heading" class="heading-span">20</span><br />
+                    <div class="heading-text">
+                        <h3>Heading</h3>
+                        <div id="heading-container">
+                            X: <span id="x-heading" class="heading-span">10</span><br />
+                            Y: <span id="y-heading" class="heading-span">20</span><br />
+                        </div>
+                    </div>
+                    <div class="radar">
+                        <div class="pointer"></div>
                     </div>
                 </div>
 
                 <!--main-screen-->
-                <div class="small-container">
+                <div class="main-screen-container">
                     <h1 id="ship-name">G.S.S OldSpice</h1>
                     <div id="main-screen">
                         <img alt="A photo of space" id="space-img" src="./resources/images/outerspace.jpg">
@@ -76,7 +71,8 @@
                 <!--RHS top panel-->
                 <div class="data-panel">
                     <div class="data-log-container">
-                        <h2 style="margin: 10% 0">Data Log:</h2>
+                        <img id="star-fleet-icon" src="resources/images/star-fleet.png"/>
+                        <h2 style="margin: 5% 0 10% 0">Data Log:</h2>
                         <ul id="data-log">
                             <li class="log">Celeron</li>
                             <li class="log">Xeon</li>
@@ -91,7 +87,7 @@
             <div class="bottom-container">
 
                 <!--status panel-->
-                <div id="status" class="status-map-control-containers">
+                <div id="status-container" class="status-map-control-containers">
                     <ul id="status-list">
                         <li>Credits: <span class="credit-value">0</span></li>
                         <li>Energy: <span class="energy-value">0</span></li>
@@ -100,18 +96,9 @@
                 </div>
 
                 <!--map panel-->
-                <div id="radar-container" class="status-map-control-containers" onload="createGrid(50)">
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
-                    <div class="grid-block"></div>
+                <div id="" class="status-map-control-containers">
+                    <div id="grid-container">
+                    </div>
                 </div>
 
                 <!--control panel-->
@@ -120,24 +107,48 @@
                     <form class="control-fields">
                         <fieldset>
                             <label class="input-label" for="direction-input">Direction:</label>
-                            <span id="direction-value">0</span><br/>
-                            <input id="direction-input" type="range" oninput="renderDirectionInput()" max="330" min="0"
-                                step="30" value="0" /><br/>
+
+                            <span id="direction-value">0</span><br />
+                            <input id="direction-input" type="range" oninput="showDirectionInput()" max="330" min="0"
+                                   step="30" value="0" /><br />
                             <label class="input-label" for="magnitude-input">Celestial Units</label><br />
                             <input id="magnitude-input" max="10" min="0" type="number" value="0"><br/>
                         </fieldset>
-                        <input id="heading-submit" type="submit" value="Engage" onclick="submitHeading()">
+
+                        <input id="heading-submit" type="button" value="Engage" onclick="ctrecipe.tick(), submitHeading()">
                     </form>
                 </div>
             </div>
         </div>
 
+        <!--stylesheet links here-->
+        <link rel="stylesheet" href="css/reset.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="css/style.css" />
+
+        <link rel="stylesheet" href="css/radar.css" />
+
+        <link rel="stylesheet" href="css/setup-game.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+
         <!--script links here-->
+
+        <!--top level scripts (stuff depends on these)-->
+        <script src="js/Setup.js"></script>
+        <script src="js/gameMode.js"></script>
+        <script>var ctrecipe = GameMode(null);</script>
+
+
+        <!--mid level scripts -->
         <script src="js/Sensor.js"></script>
         <script src="js/GameMap.js"></script>
         <script src="js/Ship.js"></script>
+        <script src="js/MapObjects.js"></script>
         <script src="js/ux.js"></script>
         <script src="js/main.js"></script>
-
+        <script src="js/Collision.js"></script>
     </body>
 </html>

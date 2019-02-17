@@ -1,11 +1,14 @@
 .radar {
-    background: none;
-    width: 300px;
-    height: 300px;
+    background: black;
+    width: 80%;
+    padding-top: 80%;
+    margin-bottom: 20px;
+    right: 1px;
     position: relative;
-    background-size: 100% 100%;
+    z-index: 1500;
     overflow: hidden;
-    z-index: 1000;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 10px #515151;
 }
 
 .radar:hover {
@@ -51,17 +54,5 @@
     }
     to {
         transform: rotate(-360deg);
-    }
-}
-
-@keyframes shadow {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
     }
 }
