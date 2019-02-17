@@ -21,6 +21,7 @@ html, body {
 /*id to target ship name h2*/
 #ship-name {
     font-family: "Bad Script" , cursive;;
+    font-weight: bolder;
     font-size: 1.5rem;
 }
 
@@ -40,10 +41,17 @@ html, body {
     text-align: center;
 }
 
+.heading-text {
+    width: 80%;
+    justify-content: flex-start;
+}
+
 /*class to target top side panels*/
 .data-panel {
     display: inherit;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background-color: lightskyblue;
     opacity: 90%;
     width: 25%;
@@ -58,6 +66,12 @@ html, body {
     text-align: center;
 }
 
+#star-fleet-icon {
+    align-self: center;
+    height: 50px;
+    width: 50px;
+}
+
 /*id for ul containing data logs*/
 #data-log {
     padding-top: 10%;
@@ -69,6 +83,7 @@ html, body {
 /*individual data log of past coordinates*/
 .log {
     padding: 1rem 0;
+    font-size: .9rem;
 }
 
 /*class to target heading spans*/
@@ -112,7 +127,7 @@ html, body {
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
-    width: 32%;
+    width: 25%;
     height: 100%;
     border-radius: 20%;
     background: darkturquoise;
