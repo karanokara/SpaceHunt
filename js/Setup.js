@@ -260,19 +260,13 @@ function developerModeSubmit() {
     let gameplay = document.getElementsByName("gameplayInput");
     let mapSize = document.getElementsByName("mapSizeInput");
 
-    ship.x = coordinates[0];
-    ship.y = coordinates[1];
-    ship.energy = energy[0];
-    ship.supplies = supplies[0];
-    ship.credit = credits[0];
-
     //set flags in global ctrecipe (GameMode) object that
     //WormHole Collide method can reference
     if(wormhole[1].checked)
     {
         ctrecipe.WormholeFixed = true;
         ctrecipe.WormholeX = wormhole[2].value;
-        ctrecipe.WormholeY = wormhole[2].value;
+        ctrecipe.WormholeY = wormhole[3].value;
     }
 
     oldSpice.x = coordinates[0];

@@ -140,17 +140,22 @@
         <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 
         <!--script links here-->
+
+        <!--top level scripts (stuff depends on these)-->
+        <script src="js/Setup.js"></script>
+        <script src="js/gameMode.js"></script>
+        <script>var ctrecipe = GameMode(null);</script>
+
+
+        <!--mid level scripts -->
         <script src="js/Sensor.js"></script>
-
         <script src="js/GameMap.js"></script>
-
         <script src="js/Ship.js"></script>
-
+        <script src="js/MapObjects.js"></script>
         <script src="js/ux.js"></script>
 
         <script src="js/main.js"></script>
-
-        <script src="js/Setup.js"></script>
+        <script src="js/Collision.js"></script>
 
     </body>
 
