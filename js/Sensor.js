@@ -7,14 +7,13 @@
 
 class Sensor {
 
-    constructor(x,y) {
+    constructor( ship, map ) {
+        this.ship = ship;
+        this.map = map;
         this.level = 1;             // sensor level
         this.ScanCP = 2;
-        this.currentCP = {
-                x: x,
-                y: y
-            },
-        this.messageBoard = document.querySelectorAll("#message-board")[0];
+        this.dataLog = document.querySelector( '#data-log' );
+        this.messageBoard = document.querySelector( '#message-board' );
     }
 
     /**
@@ -23,20 +22,21 @@ class Sensor {
      * called by user manually
      */
     deploy () {
-        window.oldSpice.supplies -= 2;        // take 1 turn, consume 2% of supplies
+        this.ship.supplies -= 2;        // take 1 turn, consume 2% of supplies
         var nearCP = [],                  // an array of near cp coordinates
             count = 0,
             scale = 2 * this.ScanCP + 1,
-            xx = this.currentCP.x - this.ScanCP, 
-            yy = this.currentCP.y - this.ScanCP,
+            xx = this.ship.x - this.ScanCP,
+            yy = this.ship.y - this.ScanCP,
             cx = 0,
-            cy = 0;
+            cy = 0,
+            anyFound = 0;
 
-        while (cy < scale && yy <= 127) {
-            if(yy >= 0) {
-                while (cx < scale && xx <= 127) {
-                    if ( xx >= 0) {
-                        if(!(xx == this.currentCP.x && yy == this.currentCP.y)) {
+        while ( cy < scale && yy <= 127 ) {
+            if ( yy >= 0 ) {
+                while ( cx < scale && xx <= 127 ) {
+                    if ( xx >= 0 ) {
+                        if ( !( xx == this.ship.x && yy == this.ship.y ) ) {
                             nearCP[count++] = {
                                 x: xx,
                                 y: yy
@@ -48,24 +48,38 @@ class Sensor {
                 }
                 cx = 0;
             }
-            xx = this.currentCP.x - this.ScanCP;
+            xx = this.ship.x - this.ScanCP;
             ++yy;
             ++cy
         }
 
-        //TODO: Search the map to find object within those coordinates
+        // Search the map to find object within those coordinates
+        // output message of searching result to the data log
+        for ( var j = 0; j < nearCP.length; ++j ) {
+            var searchX = nearCP[j].x,
+                searchY = nearCP[j].y,
+                found = this.map.map[searchX][searchY];
+            if ( found != undefined ) {
+                anyFound = 1;
+                this.dataLog.innerHTML += '<li class="log">' + found.objType + ': (' + searchX + ', ' + searchY + ')</li>';
+            }
+        }
 
         //TODO: add location of celestial obj found to Celestial Map
+
+        if ( !anyFound ) {
+            this.messageBoard.innerHTML = "There is nothing found in the current CP!";
+        }
 
         return nearCP;
     }
 
     /**
-     * sensor upgrade, can only upgrade once
+     * sensor upgrade, can only upgrade once from the requirement
      */
     upgrade () {
-        if ( this.level == 1 && window.oldSpice.credit > 100 ) {
-            window.oldSpice.credit -= 100;
+        if ( this.level == 1 && this.ship.credit > 100 ) {
+            this.ship.credit -= 100;
             this.level = 2;
             this.ScanCP = 5;
         }
@@ -96,12 +110,5 @@ class Sensor {
         }
     }
 
-    /**
-     * update current oldSpice CP for sensor 
-     */
-    update() {
-        this.currentCP.x = window.oldSpice.x;
-        this.currentCP.y = window.oldSpice.y;
-    }
 }
 

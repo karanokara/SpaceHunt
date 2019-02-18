@@ -29,7 +29,7 @@
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
             <div>
-            <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
+                <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
             </div>
             <div id="devLoadModal" class="modal">
             </div>
@@ -74,7 +74,7 @@
                 <!--RHS top panel-->
                 <div class="data-panel">
                     <div class="data-log-container">
-                        <img id="star-fleet-icon" src="resources/images/star-fleet.png"/>
+                        <img id="star-fleet-icon" src="resources/images/star-fleet.png" />
                         <h2 style="margin: 5% 0 10% 0">Data Log:</h2>
                         <ul id="data-log">
                             <li class="log">Celeron</li>
@@ -112,11 +112,12 @@
                             <label class="input-label" for="direction-input">Direction:</label>
                             <span id="direction-value">0</span><br />
                             <input id="direction-input" type="range" oninput="showDirectionInput()" max="330" min="0"
-                                   step="30" value="0" /><br />
+                                step="30" value="0" /><br />
                             <label class="input-label" for="magnitude-input">Celestial Units</label><br />
                             <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
                         </fieldset>
                         <input id="heading-submit" type="button" value="Engage" onclick="ctrecipe.tick(), submitHeading()">
+                        <input id="sensor-scan" type="button" value="Scan">
                     </form>
                 </div>
             </div>
@@ -140,7 +141,7 @@
         <!--top level scripts (stuff depends on these)-->
         <script src="js/Setup.js"></script>
         <script src="js/gameMode.js"></script>
-        <script>var ctrecipe = GameMode(null);</script>
+        <script>var ctrecipe = GameMode( null );</script>
 
 
         <!--mid level scripts -->
@@ -153,4 +154,5 @@
         <script src="js/PopulateMap.js"></script>
         <script src="js/Collision.js"></script>
     </body>
+
 </html>
