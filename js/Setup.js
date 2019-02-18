@@ -278,6 +278,9 @@ function developerModeSubmit() {
 
     window.map = new GameMap(mapSize);
 
+    updateHeading();
+    updateLevels();
+
     document.getElementById("devLoadModal").style.display = "none";
     document.getElementById("devLoadModal").removeChild(document.getElementById("devModal"));
 }
