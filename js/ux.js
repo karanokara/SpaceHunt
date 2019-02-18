@@ -24,8 +24,20 @@ function updateHeading() {
     let y = document.getElementById("y-heading");
 
     //renders new coordinates to user
-    x.innerHTML = window.oldSpice ? window.oldSpice.x : 0;
-    y.innerHTML = window.oldSpice ? window.oldSpice.y : 0;
+    x.innerHTML = window.oldSpice ? window.oldSpice.x.value : 0;
+    y.innerHTML = window.oldSpice ? window.oldSpice.y.value : 0;
+}
+
+function updateLevels() {
+
+    //assign element vars
+    let credit = document.getElementById("creditValue");
+    let energy = document.getElementById("energyValue");
+    let supplies = document.getElementById("supplyValue");
+
+    credit.innerHTML = window.oldSpice ? window.oldSpice.credit.value : 0;
+    energy.innerHTML = window.oldSpice ? window.oldSpice.energy.value : 0;
+    supplies.innerHTML = window.oldSpice ? window.oldSpice.supplies.value : 0;
 }
 
 //function for rendering the current degree selector value to DOM

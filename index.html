@@ -49,8 +49,8 @@
                     <div class="heading-text">
                         <h3>Heading</h3>
                         <div id="heading-container">
-                            X: <span id="x-heading" class="heading-span">10</span><br />
-                            Y: <span id="y-heading" class="heading-span">20</span><br />
+                            X: <span id="x-heading" class="heading-span">0</span><br />
+                            Y: <span id="y-heading" class="heading-span">0</span><br />
                         </div>
                     </div>
                     <div class="radar">
@@ -92,9 +92,9 @@
                 <!--status panel-->
                 <div id="status-container" class="status-map-control-containers">
                     <ul id="status-list">
-                        <li>Credits: <span class="credit-value">0</span></li>
-                        <li>Energy: <span class="energy-value">0</span></li>
-                        <li>Supplies: <span class="supply-value">0</span></li>
+                        <li>Credits: <span id="creditValue" class="credit-value">0</span></li>
+                        <li>Energy: <span id="energyValue" class="energy-value">0</span></li>
+                        <li>Supplies: <span id="supplyValue" class="supply-value">0</span></li>
                     </ul>
                 </div>
 
@@ -150,6 +150,7 @@
         <script src="js/MapObjects.js"></script>
         <script src="js/ux.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/PopulateMap.js"></script>
         <script src="js/Collision.js"></script>
     </body>
 </html>
