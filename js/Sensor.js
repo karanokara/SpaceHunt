@@ -70,6 +70,9 @@ class Sensor {
         if ( !anyFound ) {
             this.messageBoard.innerHTML = "There is nothing found in the current CP!";
         }
+        else {
+            this.messageBoard.innerHTML = "Some objects found!";
+        }
 
         return nearCP;
     }
