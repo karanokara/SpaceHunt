@@ -27,7 +27,7 @@ class Ship {
         this.x += Math.round( distance * Math.cos( radians ) );
         this.y += Math.round( distance * Math.sin( radians ) );
         
-        let mapSize = window.map.length;
+        let mapSize = window.map.size;
         if (this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0)
             window.boundary.Collide();
 
@@ -46,14 +46,11 @@ class Ship {
                 break;
         }
 
-        if ( this.energy <= 0 ) {
-
+        if ( this.energy <= 0 && this.normalPlay) {
+            gameObj.GameOver();
         }
-        else if ( this.supplies <= 0 ) {
-
-        }
-        else {
-            this.updateShipInfo();
+        else if ( this.supplies <= 0 && this.normalPlay) {
+            gameObj.GameOver();
         }
     }
 
