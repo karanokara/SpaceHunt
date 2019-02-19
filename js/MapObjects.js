@@ -214,6 +214,18 @@ SpaceStation.prototype.Collide = function()
     }
 }
 
+function CheckBalance(price)
+{
+    if(price > oldSpice.credit)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
 /*----------------------------------------------------*/
 
 function MuskTesla(energyQuantity, energyPrice) 
@@ -225,13 +237,21 @@ function MuskTesla(energyQuantity, energyPrice)
 
 MuskTesla.prototype.MenuPrompt = function()
 {
-    return confirm("MuskTesla Attendant:\n\"Do you want to buy " + this.energyQuantity + " energy for " + this.energyPrice + " credits?\"");
+    if(CheckBalance(this.energyPrice))
+    {
+        return confirm("MuskTesla Attendant:\n\"Do you want to buy " + this.energyQuantity + " energy for " + this.energyPrice + " credits?\"");
+    }
+    else
+    {
+        alert("MuskTesla Attendant:\n\"I don't run a charity! Get more credits!");
+        return false;
+    }
 }
 
 MuskTesla.prototype.Purchase = function()
 {
     oldSpice.energy += this.energyQuantity;
-    oldSpice.credits -= this.energyPrice;
+    oldSpice.credit -= this.energyPrice;
     alert("MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
@@ -246,13 +266,21 @@ function MiniMart()
 
 MiniMart.prototype.MenuPrompt = function()
 {
-    if(oldSpice.supplies < 90)
+    if(CheckBalance(this.supplyPrice))
     {
-        return confirm("MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity+ " supply for " + this.supplyPrice + " credits?\"");
+        if(oldSpice.supplies < 90)
+        {
+            return confirm("MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity+ " supply for " + this.supplyPrice + " credits?\"");
+        }
+        else
+        {
+            return confirm("MiniMart Attendant:\n\"Do you want to top off your supply for " + this.supplyPrice + " credits?\"");
+        }
     }
     else
     {
-        return confirm("MiniMart Attendant:\n\"Do you want to top off your supply for " + this.supplyPrice + " credits?\"");
+        alert("MiniMart Attendant:\n\"I don't run a charity! Get more credits!");
+        return false;
     }
 }
 
@@ -266,7 +294,7 @@ MiniMart.prototype.Purchase = function()
     {
         oldSpice.supplies = 100;
     }
-    oldSpice.credits -= this.supplyPrice;
+    oldSpice.credit -= this.supplyPrice;
     alert("MiniMart Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
@@ -280,13 +308,21 @@ function RepairDepot()
 
 RepairDepot.prototype.MenuPrompt = function()
 {
-    if(oldSpice.isDamaged)
+    if(CheckBalance(this.repairPrice))
     {
-        return confirm("Repair Depot Mechanic:\n\"Do you want to repair your ship damage for " + this.repairPrice + " credits?\"");
+        if(oldSpice.isDamaged)
+        {
+            return confirm("Repair Depot Mechanic:\n\"Do you want to repair your ship damage for " + this.repairPrice + " credits?\"");
+        }
+        else
+        {
+            alert("Repair Depot Mechanic:\n\"Your ship is pristine, I refuse your business!\"");
+            return false;
+        }
     }
     else
     {
-        alert("Repair Depot Mechanic:\n\"Your ship is pristine, I refuse your business!\"");
+        alert("Repair Depot Mechanic:\n\" I don't run a charity! Get more credits!");
         return false;
     }
 }
@@ -294,6 +330,6 @@ RepairDepot.prototype.MenuPrompt = function()
 RepairDepot.prototype.Purchase = function()
 {
     oldSpice.isDamaged = false;
-    oldSpice.credits -= this.repairPrice;
+    oldSpice.credit -= this.repairPrice;
     alert("Repair Depot Mechanic:\n\"We got the dings out sir, happy trails to you!\"" );
 } 
