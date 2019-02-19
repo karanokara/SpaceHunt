@@ -37,3 +37,34 @@
     height:100%;
     width:100%;
 }
+
+.Asteroid {
+    background-image: url("../resources/images/asteroid.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
+.Planet {
+    background-image: url("../resources/images/ryzen.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
+.old-spice {
+    background-image: url("../resources/images/oldspice.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+.out-of-bounds{
+    background-color: #ff99ff;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}

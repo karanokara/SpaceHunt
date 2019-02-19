@@ -22,11 +22,12 @@ window.onload = function () {
     createGrid();
 
     grid_items = document.getElementById('grid-container').childNodes;
-    DrawGameMap(grid_items);
 
     //important that pushes to tickObjects happens nearly last
     ctrecipe.tickObjects.push( function () { Collision( window.oldSpice.x, window.oldSpice.y ); } );
+    ctrecipe.tickObjects.push( function () { DrawGameMap(grid_items); } );
     ctrecipe.tick();
+    DrawGameMap(grid_items);
 
 };
 
