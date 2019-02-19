@@ -62,6 +62,13 @@ class Ship {
         document.querySelectorAll( ".supply-value" )[0].innerHTML = this.supplies;
     }
 
+    /**
+     * Sensor Scan
+     */
+    scan () {
+        this.sensor.deploy();
+        this.updateShipInfo();
+    }
 
     /**
      * return String of the engine
