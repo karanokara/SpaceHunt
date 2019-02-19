@@ -44,8 +44,8 @@ for(let i = 0; i<10; ++i)
             break;
     }
 
-    objCoordx = Math.ceil(Math.random()*9);
-    objCoordy = Math.ceil(Math.random()*9);
+    objCoordx = Math.ceil(Math.random()*3);
+    objCoordy = Math.ceil(Math.random()*3);
 
     console.log('Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy);
 
