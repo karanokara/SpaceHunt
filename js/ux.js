@@ -12,7 +12,7 @@ function submitHeading () {
     //update user with new heading and levels
     updateHeading();
     updateLevels();
-
+    ctrecipe.tick();
     //create a log of previous location
     createNewLog();
 }
