@@ -24,7 +24,9 @@ class GameMap {
     Returns true if the object is successfully added to the map.
     */
     add ( object, x, y ) {
-        if ( this.contents( x, y ) ) return false;
+        let max = this.map.length;
+        if (x >= max || y >= max || x < 0 || y < 0) return false;
+        if (this.contents( x, y )) return false;
         this.map[x][y] = object;
         return true;
     }
@@ -33,6 +35,8 @@ class GameMap {
     If location is empty, returns null.
     */
     contents ( x, y ) {
+        let max = this.map.length;
+        if (x >= max || y >= max || x < 0 || y < 0) return null;
         return this.map[x][y];
     }
 
@@ -41,6 +45,8 @@ class GameMap {
     If location is empty, returns null.
     */
     hasObject ( x, y ) {
+        let max = this.map.length;
+        if (x >= max || y >= max || x < 0 || y < 0) return false;
         return Boolean( this.map[x][y] );
     }
 }

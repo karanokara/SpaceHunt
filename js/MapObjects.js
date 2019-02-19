@@ -62,12 +62,14 @@ Asteroid.prototype = new MapObject('Asteroid', 0);
 Asteroid.prototype.DamageShip = function() 
 {
     alert("You skimmed an asteroid and took damage!");
+    oldSpice.isDamaged = true;
 }
 
 Asteroid.prototype.DestroyShip = function() 
 {
     alert("You slammed into an asteroid and blew up! You lose!");
-    ctrecipe.GameOver();
+    oldSpice.energy = 0; 
+    ctrecipe.GameOver(); //should be redundant (0 energy triggers gameover eventually)
 }
 
 Asteroid.prototype.Collide = function() 
@@ -98,11 +100,9 @@ AbFreighter.prototype = new MapObject("AbFreighter", 0);
 
 /*----------------------------------------------------*/
 
-function Planet(name, x, y)
+function Planet(name)
 {
     this.name = name;
-    this.x = x;
-    this.y = y;
 }
 
 Planet.prototype = new MapObject('Planet', 1);
@@ -130,6 +130,7 @@ Ryzen.prototype = new Planet('Ryzen');
 
 Ryzen.prototype.Collide = function()
 {
+    alert("Collided with Ryzen");
     MapObject.prototype.Collide.call(this);
     this.EnterOrbit();
 }
