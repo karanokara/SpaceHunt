@@ -1,0 +1,39 @@
+.MuskTeslaStation{
+    background-image: url("../resources/images/muskteslastation.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
+.StationTRM {
+    background-image: url("../resources/images/stationtrm.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
+.StationTR {
+    background-image: url("../resources/images/stationtr.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
+.StationTM {
+    background-image: url("../resources/images/stationtm.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
+.StationT {
+    background-image: url("../resources/images/stationt.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}

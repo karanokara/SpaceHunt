@@ -46,8 +46,8 @@ WormHole.prototype.Collide = function()
     }
     else
     {
-        xrand = Math.ceil(Math.random() * map.size - 2); //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
-        yrand = Math.ceil(Math.random() * map.size - 2);
+        xrand = Math.ceil(Math.random() * (map.size - 2); //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
+        yrand = Math.ceil(Math.random() * (map.size - 2);
         oldSpice.x = xrand;
         oldSpice.y = yrand;
     }
