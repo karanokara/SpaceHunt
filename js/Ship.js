@@ -15,8 +15,6 @@ class Ship {
         this.normalPlay = true;
         this.sensor = new Sensor( this, window.map );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];
-
-        this.updateShipInfo();
     }
 
     /**

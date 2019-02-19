@@ -3,14 +3,15 @@
 function submitHeading () {
 
     //assign element vars
-    let direction = document.getElementById( "direction-input" );
-    let magnitude = document.getElementById( "magnitude-input" );
+    let direction = parseInt(document.getElementById( "direction-input" ).value);
+    let magnitude = parseInt(document.getElementById( "magnitude-input" ).value);
 
     //x/y input = new coordinates (assign new location to these)
-    window.oldSpice.move( magnitude.value, direction.value );
+    window.oldSpice.move( magnitude, direction );
 
-    //update user with new heading
+    //update user with new heading and levels
     updateHeading();
+    updateLevels();
 
     //create a log of previous location
     createNewLog();
@@ -35,9 +36,9 @@ function updateLevels () {
     let energy = document.getElementById( "energyValue" );
     let supplies = document.getElementById( "supplyValue" );
 
-    credit.innerHTML = window.oldSpice ? window.oldSpice.credit.value : 0;
-    energy.innerHTML = window.oldSpice ? window.oldSpice.energy.value : 0;
-    supplies.innerHTML = window.oldSpice ? window.oldSpice.supplies.value : 0;
+    credit.innerHTML = window.oldSpice ? window.oldSpice.credit : 0;
+    energy.innerHTML = window.oldSpice ? window.oldSpice.energy : 0;
+    supplies.innerHTML = window.oldSpice ? window.oldSpice.supplies : 0;
 }
 
 //function for rendering the current degree selector value to DOM

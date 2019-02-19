@@ -37,10 +37,14 @@ window.onclose = function () {
  * setup the game
  */
 function gameSetup () {
+
     /**
      * when click the start btn
      */
     document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
+        updateHeading();
+        updateLevels();
+
         let setupPage = document.querySelectorAll( '.setup-game' )[0];
         setupPage.attributes.class.value += ' hide';
     };
