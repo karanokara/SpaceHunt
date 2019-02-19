@@ -265,8 +265,8 @@ function developerModeSubmit() {
     if(wormhole[1].checked)
     {
         ctrecipe.WormholeFixed = true;
-        ctrecipe.WormholeX = wormhole[2].value;
-        ctrecipe.WormholeY = wormhole[3].value;
+        ctrecipe.WormholeX = parseInt(wormhole[2].value);
+        ctrecipe.WormholeY = parseInt(wormhole[3].value);
     }
 
     window.oldSpice.x = parseInt(coordinates[0].value);

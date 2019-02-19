@@ -42,7 +42,7 @@ WormHole.prototype.Collide = function()
     if(ctrecipe.WormholeFixed)
     {
         oldSpice.x = ctrecipe.WormholeX;
-        oldSpice.y = ctrecipe.WorlholeY;
+        oldSpice.y = ctrecipe.WormholeY;
     }
     else
     {

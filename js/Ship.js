@@ -26,6 +26,10 @@ class Ship {
         let radians = degrees * ( Math.PI / 180 );
         this.x += Math.round( distance * Math.cos( radians ) );
         this.y += Math.round( distance * Math.sin( radians ) );
+        
+        let mapSize = window.map.length;
+        if (this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0)
+            window.boundary.Collide();
 
         // the move cost energy regardless of the outcome of the destination, do this every time.
         this.supplies -= 2;
