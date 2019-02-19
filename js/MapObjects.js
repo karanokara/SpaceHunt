@@ -35,7 +35,6 @@ WormHole.prototype = new MapObject("Wormhole", 0);
 
 WormHole.prototype.Collide = function()
 {
-    console.log("Collided with wormhole");
     MapObject.prototype.Collide.call(this);
     alert("You fell into a wormhole!");
 
@@ -76,7 +75,7 @@ Asteroid.prototype.Collide = function()
 {
     MapObject.prototype.Collide.call(this);
     let eventDecider = Math.random();
-    if(eventDecider <= 0.9)
+    if(eventDecider < 0.9)
     {
         this.DamageShip();
     }
@@ -232,7 +231,7 @@ MuskTesla.prototype.MenuPrompt = function()
 MuskTesla.prototype.Purchase = function()
 {
     oldSpice.energy += this.energyQuantity;
-    oldSpice.supplies -= this.energyPrice;
+    oldSpice.credits -= this.energyPrice;
     alert("MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
@@ -242,17 +241,31 @@ function MiniMart()
 {
     this.type = 'M';
     this.supplyPrice = 100;
-    this.supplyQuantity = 0.1;
+    this.supplyQuantity = 10;
 }
 
 MiniMart.prototype.MenuPrompt = function()
 {
-    return confirm("MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity*100 + "% supply for " + this.supplyPrice + " credits?\"");
+    if(oldSpice.supplies < 90)
+    {
+        return confirm("MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity+ " supply for " + this.supplyPrice + " credits?\"");
+    }
+    else
+    {
+        return confirm("MiniMart Attendant:\n\"Do you want to top off your supply for " + this.supplyPrice + " credits?\"");
+    }
 }
 
 MiniMart.prototype.Purchase = function()
 {
-    oldSpice.supplies += this.supplyQuantity;
+    if(oldSpice.supplies < 90)
+    {
+        oldSpice.supplies += this.supplyQuantity;
+    }
+    else
+    {
+        oldSpice.supplies = 100;
+    }
     oldSpice.credits -= this.supplyPrice;
     alert("MiniMart Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }

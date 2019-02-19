@@ -24,8 +24,8 @@ window.onload = function () {
     grid_items = document.getElementById('grid-container').childNodes;
 
     //important that pushes to tickObjects happens nearly last
-    ctrecipe.tickObjects.push( function () { Collision( window.oldSpice.x, window.oldSpice.y ); } );
     ctrecipe.tickObjects.push( function () { DrawGameMap(grid_items); } );
+    ctrecipe.tickObjects.push( function () { Collision( window.oldSpice.x, window.oldSpice.y ); } );
     ctrecipe.tick();
     DrawGameMap(grid_items);
 
