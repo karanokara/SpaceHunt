@@ -99,9 +99,11 @@ AbFreighter.prototype = new MapObject("AbFreighter", 0);
 
 /*----------------------------------------------------*/
 
-function Planet(name)
+function Planet(name, x, y)
 {
     this.name = name;
+    this.x = x;
+    this.y = y;
 }
 
 Planet.prototype = new MapObject('Planet', 1);
@@ -125,7 +127,7 @@ Planet.prototype.EnterOrbit = function()
 
 function Ryzen(){};
 
-Ryzen.prototype = new Planet('Ryzen');
+Ryzen.prototype = new Planet('Ryzen', -1, -1);
 
 Ryzen.prototype.Collide = function()
 {
@@ -136,9 +138,35 @@ Ryzen.prototype.Collide = function()
 
 /*----------------------------------------------------*/
 
+function Celeron(){};
+
+Celeron.prototype = new Planet('Celeron', -1, -1);
+
+Celeron.prototype.Collide = function()
+{
+    alert("Collided with Celeron");
+    MapObject.prototype.Collide.call(this);
+    this.EnterOrbit();
+}
+
+/*----------------------------------------------------*/
+
+function Xeon(){};
+
+Xeon.prototype = new Planet('Xeon', -1, -1);
+
+Xeon.prototype.Collide = function()
+{
+    alert("Collided with Xeon");
+    MapObject.prototype.Collide.call(this);
+    this.EnterOrbit();
+}
+
+/*----------------------------------------------------*/
+
 function Eniac(){};
 
-Eniac.prototype = new Planet('Eniac');
+Eniac.prototype = new Planet('Eniac', -1, -1);
 
 Eniac.prototype.Collide = function()
 {
