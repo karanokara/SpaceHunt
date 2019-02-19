@@ -54,6 +54,14 @@
     width:100%;
 }
 
+.out-of-bounds{
+    background-color: #ff99ff;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
 .old-spice {
     background-image: url("../resources/images/oldspice.png");
     background-size: contain;
@@ -61,10 +69,52 @@
     height:100%;
     width:100%;
 }
-.out-of-bounds{
-    background-color: #ff99ff;
-    background-size: contain;
-    background-repeat: no-repeat;
-    height:100%;
-    width:100%;
+
+.deg0 {
+    -webkit-transform: rotate(90deg);
+}
+
+
+.deg30 {
+    -webkit-transform: rotate(120deg);
+}
+
+.deg60 {
+    -webkit-transform: rotate(150deg);
+}
+
+.deg90 {
+    -webkit-transform: rotate(180deg);
+}
+
+.deg120 {
+    -webkit-transform: rotate(210deg);
+}
+
+.deg150 {
+    -webkit-transform: rotate(240deg);
+}
+
+.deg180 {
+    -webkit-transform: rotate(270deg);
+}
+
+.deg210 {
+    -webkit-transform: rotate(300deg);
+}
+
+.deg240 {
+    -webkit-transform: rotate(330deg);
+}
+
+.deg270 {
+    -webkit-transform: rotate(360deg);
+}
+
+.deg300 {
+    -webkit-transform: rotate(390deg);
+}
+
+.deg330 {
+    -webkit-transform: rotate(420deg);
 }

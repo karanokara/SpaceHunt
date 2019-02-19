@@ -17,7 +17,10 @@ function DrawGameMap(parent)
     let yCenter = window.oldSpice.y;
     let size = Math.sqrt(parent.length-1);
 
+    let direction = document.getElementById( "direction-input" ).value;
+
     let centerCell = Math.floor((parent.length-1)/2);
+
     ClearGrid(parent);
     for(let i = 0; i<parent.length-1; ++i)
     {
@@ -26,7 +29,7 @@ function DrawGameMap(parent)
 
         if(i == centerCell)
         {
-            parent[i+1].className += " " + "old-spice";
+            parent[i+1].className += " " + "old-spice" + " " + "deg" + direction;
         }
         else if(cellX < 0 || cellY < 0 || cellX > map.size || cellY > map.size) 
         {
