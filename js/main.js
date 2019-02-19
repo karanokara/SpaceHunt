@@ -20,7 +20,7 @@ window.onload = function () {
 
     gameSetup();
     createGrid();
-
+    PopulateMap(window.map);
     grid_items = document.getElementById('grid-container').childNodes;
 
     //important that pushes to tickObjects happens nearly last

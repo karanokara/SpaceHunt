@@ -277,6 +277,7 @@ function developerModeSubmit() {
     window.oldSpice.normalPlay = gameplay[0].checked;
 
     window.map = new GameMap(parseInt(mapSize[0].value));
+    PopulateMap(window.map);
 
     updateHeading();
     updateLevels();
