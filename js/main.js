@@ -50,6 +50,6 @@ function gameSetup () {
      * When click the sensor scan button
      */
     document.querySelector( '#sensor-scan' ).onclick = function () {
-        window.oldSpice.sensor.deploy();
+        window.oldSpice.scan();
     }
 }
