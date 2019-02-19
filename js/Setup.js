@@ -269,8 +269,8 @@ function developerModeSubmit() {
         ctrecipe.WormholeY = wormhole[3].value;
     }
 
-    window.oldSpice.x = coordinates[0];
-    window.oldSpice.y = coordinates[1];
+    window.oldSpice.x = coordinates[0].value;
+    window.oldSpice.y = coordinates[1].value;
     window.oldSpice.energy = energy[0];
     window.oldSpice.supplies = supplies[0];
     window.oldSpice.credit = credits[0];
