@@ -82,7 +82,7 @@ function initGame () {
 //function for storing state upon tab close
 window.onclose = function () {
     //store state to local storage
-    //localStorage.setItem( "oldSpice", JSON.stringify( window.oldSpice ) );
+    //localStorage.setItem( "oldSpice", JSON.stringify( window.oldSpice ) );        // error here
     //localStorage.setItem( "gameMap", JSON.stringify( window.GameMap ) );
 };
 
