@@ -46,16 +46,16 @@
 
                 <!--LHS top panel-->
                 <div class="data-panel">
-                    <div class="heading-text">
-                        <h3>Heading</h3>
-                        <div id="heading-container">
-                            X: <span id="x-heading" class="heading-span">0</span><br />
-                            Y: <span id="y-heading" class="heading-span">0</span><br />
+                    <div id="gazetteer" class="gazetteer">
+                        <h1 class="data-title">Gazetteer</h1>
+                        <div class="gazetteer-list-wrapper">
+                            <ul class="list-group gazetteer-list">
+                            </ul>
                         </div>
                     </div>
-                    <div class="radar">
+                    <!-- <div class="radar">
                         <div class="pointer"></div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!--main-screen-->
@@ -109,6 +109,13 @@
                 <!--control panel-->
                 <div id="controls" class="status-map-control-containers">
                     <h4>Command Console</h4>
+                    <div class="heading-text">
+                        <div id="heading-container">
+                            X: <span id="x-heading" class="heading-span">0</span><br />
+                            Y: <span id="y-heading" class="heading-span">0</span><br />
+                        </div>
+                    </div>
+
                     <form class="control-fields">
                         <fieldset>
                             <label class="input-label" for="direction-input">Direction:</label>
