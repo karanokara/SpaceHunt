@@ -15,38 +15,33 @@
 ** Sensors
 */
 
-function MapObject(type, radius)
-{
+function MapObject ( type, radius ) {
     /*Base class for MapObjects*/
-    this.objType= type;
+    this.objType = type;
     this.radius = radius;
 }
 
-MapObject.prototype.Collide = function() 
-{
-    console.log("Logging MapObject collision");
+MapObject.prototype.Collide = function () {
+    console.log( "Logging MapObject collision" );
 }
 
 /*----------------------------------------------------*/
 
-function WormHole() {}
+function WormHole () { }
 
-WormHole.prototype = new MapObject("Wormhole", 0);
+WormHole.prototype = new MapObject( "Wormhole", 0 );
 
-WormHole.prototype.Collide = function()
-{
-    MapObject.prototype.Collide.call(this);
-    alert("You fell into a wormhole!");
+WormHole.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
+    alert( "You fell into a wormhole!" );
 
-    if(ctrecipe.WormholeFixed)
-    {
+    if ( ctrecipe.WormholeFixed ) {
         oldSpice.x = ctrecipe.WormholeX;
         oldSpice.y = ctrecipe.WormholeY;
     }
-    else
-    {
-        xrand = Math.ceil(Math.random() * (map.size - 2)); //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
-        yrand = Math.ceil(Math.random() * (map.size - 2));
+    else {
+        xrand = Math.ceil( Math.random() * ( gameMap.size - 2 ) ); //change position of oldSpice to xrand, yrand (avoid borders at x=0|127 and y =0|127)
+        yrand = Math.ceil( Math.random() * ( gameMap.size - 2 ) );
         oldSpice.x = xrand;
         oldSpice.y = yrand;
     }
@@ -54,310 +49,261 @@ WormHole.prototype.Collide = function()
 
 /*----------------------------------------------------*/
 
-function Asteroid(){}
+function Asteroid () { }
 
-Asteroid.prototype = new MapObject('Asteroid', 0);
+Asteroid.prototype = new MapObject( 'Asteroid', 0 );
 
-Asteroid.prototype.DamageShip = function() 
-{
-    alert("You skimmed an asteroid and took damage!");
+Asteroid.prototype.DamageShip = function () {
+    alert( "You skimmed an asteroid and took damage!" );
     oldSpice.isDamaged = true;
 }
 
-Asteroid.prototype.DestroyShip = function() 
-{
-    alert("You slammed into an asteroid and blew up! You lose!");
-    oldSpice.energy = 0; 
+Asteroid.prototype.DestroyShip = function () {
+    alert( "You slammed into an asteroid and blew up! You lose!" );
+    oldSpice.energy = 0;
     ctrecipe.GameOver(); //should be redundant (0 energy triggers gameover eventually)
 }
 
-Asteroid.prototype.Collide = function() 
-{
-    MapObject.prototype.Collide.call(this);
+Asteroid.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
     let eventDecider = Math.random();
-    if(eventDecider < 0.9)
-    {
+    if ( eventDecider < 0.9 ) {
         this.DamageShip();
     }
-    else
-    {
+    else {
         this.DestroyShip();
     }
 }
 
 /*----------------------------------------------------*/
 
-function MeteorShower() {}
+function MeteorShower () { }
 
-MeteorShower.prototype = new MapObject("MeteorShower", 0);
-
-/*----------------------------------------------------*/
-
-function AbFreighter() {}
-
-AbFreighter.prototype = new MapObject("AbFreighter", 0);
+MeteorShower.prototype = new MapObject( "MeteorShower", 0 );
 
 /*----------------------------------------------------*/
 
-function Planet(name, x, y)
-{
+function AbFreighter () { }
+
+AbFreighter.prototype = new MapObject( "AbFreighter", 0 );
+
+/*----------------------------------------------------*/
+
+function Planet ( name, x, y ) {
     this.name = name;
     this.x = x;
     this.y = y;
 }
 
-Planet.prototype = new MapObject('Planet', 1);
+Planet.prototype = new MapObject( 'Planet', 1 );
 
-Planet.prototype.Collide = function() 
-{
+Planet.prototype.Collide = function () {
 
 }
 
-Planet.prototype.EnterOrbit = function() 
-{
-    alert("You have entered the orbit of " + this.name);
+Planet.prototype.EnterOrbit = function () {
+    alert( "You have entered the orbit of " + this.name );
     //update energy_cost/move here
-    if(oldSpice.x == this.x && oldSpice.y == this.y)
-    {
+    if ( oldSpice.x == this.x && oldSpice.y == this.y ) {
         //TODO: oldSpice visits the planet
     }
 }
 
 /*----------------------------------------------------*/
 
-function Ryzen(){};
+function Ryzen () { };
 
-Ryzen.prototype = new Planet('Ryzen', -1, -1);
+Ryzen.prototype = new Planet( 'Ryzen', -1, -1 );
 
-Ryzen.prototype.Collide = function()
-{
-    alert("Collided with Ryzen");
-    MapObject.prototype.Collide.call(this);
+Ryzen.prototype.Collide = function () {
+    alert( "Collided with Ryzen" );
+    MapObject.prototype.Collide.call( this );
     this.EnterOrbit();
 }
 
 /*----------------------------------------------------*/
 
-function Celeron(){};
+function Celeron () { };
 
-Celeron.prototype = new Planet('Celeron', -1, -1);
+Celeron.prototype = new Planet( 'Celeron', -1, -1 );
 
-Celeron.prototype.Collide = function()
-{
-    alert("Collided with Celeron");
-    MapObject.prototype.Collide.call(this);
+Celeron.prototype.Collide = function () {
+    alert( "Collided with Celeron" );
+    MapObject.prototype.Collide.call( this );
     this.EnterOrbit();
 }
 
 /*----------------------------------------------------*/
 
-function Xeon(){};
+function Xeon () { };
 
-Xeon.prototype = new Planet('Xeon', -1, -1);
+Xeon.prototype = new Planet( 'Xeon', -1, -1 );
 
-Xeon.prototype.Collide = function()
-{
-    alert("Collided with Xeon");
-    MapObject.prototype.Collide.call(this);
+Xeon.prototype.Collide = function () {
+    alert( "Collided with Xeon" );
+    MapObject.prototype.Collide.call( this );
     this.EnterOrbit();
 }
 
 /*----------------------------------------------------*/
 
-function Eniac(){};
+function Eniac () { };
 
-Eniac.prototype = new Planet('Eniac', -1, -1);
+Eniac.prototype = new Planet( 'Eniac', -1, -1 );
 
-Eniac.prototype.Collide = function()
-{
-    MapObject.prototype.Collide.call(this);
+Eniac.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
     this.EnterOrbit();
 }
 
 /*----------------------------------------------------*/
 
-function BadMax(){}
+function BadMax () { }
 
-BadMax.prototype = new MapObject("BadMax", 0);
+BadMax.prototype = new MapObject( "BadMax", 0 );
 
-BadMax.prototype.Collide = function()
-{
-    MapObject.prototype.Collide.call(this);
+BadMax.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
     let eventDecider = Math.random();
-    if(eventDecider < 0.5) 
-    {
+    if ( eventDecider < 0.5 ) {
         this.Escape();
     }
-    else if( eventDecider < 0.8)
-    {
+    else if ( eventDecider < 0.8 ) {
         this.Steal();
     }
-    else
-    {
+    else {
         this.DestroyShip();
     }
 }
 
-BadMax.prototype.Steal = function()
-{
-    alert("BadMax has stolen your supplies and credits!");
+BadMax.prototype.Steal = function () {
+    alert( "BadMax has stolen your supplies and credits!" );
 }
 
-BadMax.prototype.DestroyShip = function()
-{
-    alert("BadMax has destroyed your ship! You lose!");
+BadMax.prototype.DestroyShip = function () {
+    alert( "BadMax has destroyed your ship! You lose!" );
     ctrecipe.GameOver();
 }
 
-BadMax.prototype.Escape = function()
-{
-    alert("You have run away from BadMax!");
+BadMax.prototype.Escape = function () {
+    alert( "You have run away from BadMax!" );
 }
 
 /*----------------------------------------------------*/
 
-function SpaceStation(attachedStations) 
-{
+function SpaceStation ( attachedStations ) {
     this.stations = attachedStations; //container for attached-stations 
 
     //append string representing "sub-stations" attached to SpaceStation
     //use for image representations on game map
-    for(let i = 0; i < this.stations.length; ++i)
-    {
+    for ( let i = 0; i < this.stations.length; ++i ) {
         this.objType += this.stations[i].type;
     }
 }
 
-SpaceStation.prototype = new MapObject("Station", 0);
+SpaceStation.prototype = new MapObject( "Station", 0 );
 
-SpaceStation.prototype.Collide = function()
-{
+SpaceStation.prototype.Collide = function () {
     let i;
-    for(i=0; i<this.stations.length; ++i)
-    {
-        if(this.stations[i].MenuPrompt())
-        {
+    for ( i = 0; i < this.stations.length; ++i ) {
+        if ( this.stations[i].MenuPrompt() ) {
             this.stations[i].Purchase();
         }
     }
 }
 
-function CheckBalance(price)
-{
-    if(price > oldSpice.credit)
-    {
+function CheckBalance ( price ) {
+    if ( price > oldSpice.credit ) {
         return false;
     }
-    else
-    {
+    else {
         return true;
     }
 }
 
 /*----------------------------------------------------*/
 
-function MuskTesla(energyQuantity, energyPrice) 
-{
+function MuskTesla ( energyQuantity, energyPrice ) {
     this.type = 'T';
     this.energyQuantity = energyQuantity;
     this.energyPrice = energyPrice;
 }
 
-MuskTesla.prototype.MenuPrompt = function()
-{
-    if(CheckBalance(this.energyPrice))
-    {
-        return confirm("MuskTesla Attendant:\n\"Do you want to buy " + this.energyQuantity + " energy for " + this.energyPrice + " credits?\"");
+MuskTesla.prototype.MenuPrompt = function () {
+    if ( CheckBalance( this.energyPrice ) ) {
+        return confirm( "MuskTesla Attendant:\n\"Do you want to buy " + this.energyQuantity + " energy for " + this.energyPrice + " credits?\"" );
     }
-    else
-    {
-        alert("MuskTesla Attendant:\n\"I don't run a charity! Get more credits!");
+    else {
+        alert( "MuskTesla Attendant:\n\"I don't run a charity! Get more credits!" );
         return false;
     }
 }
 
-MuskTesla.prototype.Purchase = function()
-{
+MuskTesla.prototype.Purchase = function () {
     oldSpice.energy += this.energyQuantity;
     oldSpice.credit -= this.energyPrice;
-    alert("MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
+    alert( "MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
 /*----------------------------------------------------*/
 
-function MiniMart() 
-{
+function MiniMart () {
     this.type = 'M';
     this.supplyPrice = 100;
     this.supplyQuantity = 10;
 }
 
-MiniMart.prototype.MenuPrompt = function()
-{
-    if(CheckBalance(this.supplyPrice))
-    {
-        if(oldSpice.supplies < 90)
-        {
-            return confirm("MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity+ " supply for " + this.supplyPrice + " credits?\"");
+MiniMart.prototype.MenuPrompt = function () {
+    if ( CheckBalance( this.supplyPrice ) ) {
+        if ( oldSpice.supplies < 90 ) {
+            return confirm( "MiniMart Attendant:\n\"Do you want to buy " + this.supplyQuantity + " supply for " + this.supplyPrice + " credits?\"" );
         }
-        else
-        {
-            return confirm("MiniMart Attendant:\n\"Do you want to top off your supply for " + this.supplyPrice + " credits?\"");
+        else {
+            return confirm( "MiniMart Attendant:\n\"Do you want to top off your supply for " + this.supplyPrice + " credits?\"" );
         }
     }
-    else
-    {
-        alert("MiniMart Attendant:\n\"I don't run a charity! Get more credits!");
+    else {
+        alert( "MiniMart Attendant:\n\"I don't run a charity! Get more credits!" );
         return false;
     }
 }
 
-MiniMart.prototype.Purchase = function()
-{
-    if(oldSpice.supplies < 90)
-    {
+MiniMart.prototype.Purchase = function () {
+    if ( oldSpice.supplies < 90 ) {
         oldSpice.supplies += this.supplyQuantity;
     }
-    else
-    {
+    else {
         oldSpice.supplies = 100;
     }
     oldSpice.credit -= this.supplyPrice;
-    alert("MiniMart Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
+    alert( "MiniMart Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
 /*----------------------------------------------------*/
 
-function RepairDepot() 
-{
+function RepairDepot () {
     this.type = 'R';
     this.repairPrice = 100;
 }
 
-RepairDepot.prototype.MenuPrompt = function()
-{
-    if(CheckBalance(this.repairPrice))
-    {
-        if(oldSpice.isDamaged)
-        {
-            return confirm("Repair Depot Mechanic:\n\"Do you want to repair your ship damage for " + this.repairPrice + " credits?\"");
+RepairDepot.prototype.MenuPrompt = function () {
+    if ( CheckBalance( this.repairPrice ) ) {
+        if ( oldSpice.isDamaged ) {
+            return confirm( "Repair Depot Mechanic:\n\"Do you want to repair your ship damage for " + this.repairPrice + " credits?\"" );
         }
-        else
-        {
-            alert("Repair Depot Mechanic:\n\"Your ship is pristine, I refuse your business!\"");
+        else {
+            alert( "Repair Depot Mechanic:\n\"Your ship is pristine, I refuse your business!\"" );
             return false;
         }
     }
-    else
-    {
-        alert("Repair Depot Mechanic:\n\" I don't run a charity! Get more credits!");
+    else {
+        alert( "Repair Depot Mechanic:\n\" I don't run a charity! Get more credits!" );
         return false;
     }
 }
 
-RepairDepot.prototype.Purchase = function()
-{
+RepairDepot.prototype.Purchase = function () {
     oldSpice.isDamaged = false;
     oldSpice.credit -= this.repairPrice;
-    alert("Repair Depot Mechanic:\n\"We got the dings out sir, happy trails to you!\"" );
+    alert( "Repair Depot Mechanic:\n\"We got the dings out sir, happy trails to you!\"" );
 } 

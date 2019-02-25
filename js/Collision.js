@@ -4,11 +4,10 @@
 *
 */
 
-var Collision = function (x_coord,y_coord) {
-    if(Collision.caller)
-    {
-        let colObjCheck = map.contents(x_coord, y_coord);
-        if(colObjCheck){
+var Collision = function ( x_coord, y_coord ) {
+    if ( Collision.caller ) {
+        let colObjCheck = window.gameMap.contents( x_coord, y_coord );
+        if ( colObjCheck ) {
             colObjCheck.Collide();
         }
     }
