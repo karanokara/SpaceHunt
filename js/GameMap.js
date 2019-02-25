@@ -13,7 +13,7 @@ class GameMap {
     constructor( size ) {
         this.size = size;
         this.map = new Array( size );
-        for ( var i = 0; i < size; ++i ) {
+        for ( var i = 0; i < size; ++i ) {      // 0 ~ 127, 128 elements
             this.map[i] = new Array( size );
         }
     }
@@ -28,6 +28,11 @@ class GameMap {
         if ( x >= max || y >= max || x < 0 || y < 0 ) return false;
         if ( this.contents( x, y ) ) return false;
         this.map[x][y] = object;
+
+        // add obj to the map
+        // just add a class name now
+        document.querySelector( '#c' + x + '-' + y + ' .map-obj' ).className += ' ' + object.objType;
+
         return true;
     }
     /*
@@ -61,14 +66,17 @@ class GameMap {
         outer.appendChild( this.mapContainer );
         this.mapContainer.className = 'map-table table table-bordered';
 
-        for ( var i = 0; i < this.size; ++i ) {
+        for ( var row = ( this.size - 1 ); row >= 0; --row ) {
             var mapRow = document.createElement( "tr" );
             mapRow.className = 'map-row';
-            mapRow.setAttribute( 'id', 'row-' + i );
-            for ( var j = 0; j < this.size; ++j ) {
-                var mapCell = document.createElement( 'td' );
+            mapRow.setAttribute( 'id', 'row-' + row );
+            for ( var col = 0; col < this.size; ++col ) {
+                var mapCell = document.createElement( 'td' ),
+                    mapObj = document.createElement( 'div' );
                 mapCell.className = 'map-cell';
-                mapCell.setAttribute( 'id', 'c' + i + '-' + j );
+                mapCell.setAttribute( 'id', 'c' + col + '-' + row );
+                mapObj.className = 'map-obj';
+                mapCell.appendChild( mapObj );
                 mapRow.appendChild( mapCell );
 
             }
