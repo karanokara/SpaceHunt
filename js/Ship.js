@@ -4,7 +4,7 @@
 
 class Ship {
 
-    constructor( xi, yi, energy, supplies, credit, engineLv, isDamaged ) {
+    constructor( xi, yi, energy, supplies, credit, engineLv, isDamaged, normalPlay ) {
         this.x = xi;
         this.y = yi;
         this.energy = energy;
@@ -12,8 +12,8 @@ class Ship {
         this.credit = credit;
         this.engineLv = engineLv;         // Lv 1 ~ 3
         this.isDamaged = isDamaged;
-        this.normalPlay = true;
-        this.sensor = new Sensor( this, window.map );
+        this.normalPlay = normalPlay;
+        this.sensor = new Sensor( this, window.gameMap );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];
     }
 
@@ -24,12 +24,10 @@ class Ship {
      */
     move ( distance, degrees ) {
         let radians = degrees * ( Math.PI / 180 );
+        let mapSize = window.gameMap.size;
+
         this.x += Math.round( distance * Math.cos( radians ) );
         this.y += Math.round( distance * Math.sin( radians ) );
-        
-        let mapSize = window.map.size;
-        if (this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0)
-            window.boundary.Collide();
 
         // the move cost energy regardless of the outcome of the destination, do this every time.
         this.supplies -= 2;
@@ -46,11 +44,25 @@ class Ship {
                 break;
         }
 
-        if ( this.energy <= 0 && this.normalPlay) {
-            gameObj.GameOver();
+        // update screen new heading and levels before checking game ove or collision
+        // so user can see current status before game over
+        updateHeading();
+        updateLevels();
+        window.gameMap.move( this.x, this.y );
+
+        // let the ship move first, then check boundary, gameover, then jump for wormhole
+        if ( ( this.energy <= 0 && this.normalPlay ) || ( this.supplies <= 0 && this.normalPlay ) ) {
+            setTimeout( function () {
+                gameObj.GameOver();
+            }, 1000 );
         }
-        else if ( this.supplies <= 0 && this.normalPlay) {
-            gameObj.GameOver();
+        else if ( this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0 ) {
+            setTimeout( function () {
+                window.boundary.Collide();
+                updateHeading();
+                updateLevels();
+                window.gameMap.move( window.oldSpice.x, window.oldSpice.y );
+            }, 1000 );
         }
     }
 
