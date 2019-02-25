@@ -14,6 +14,7 @@ class Ship {
         this.isDamaged = isDamaged;
         this.normalPlay = normalPlay;
         this.sensor = new Sensor( this, window.gameMap );
+        this.shipIcon = document.querySelector( '.old-spice' );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];
     }
 
@@ -48,7 +49,10 @@ class Ship {
         // so user can see current status before game over
         updateHeading();
         updateLevels();
+
+        this.updateShipHeading( degrees );
         window.gameMap.move( this.x, this.y );
+
 
         // let the ship move first, then check boundary, gameover, then jump for wormhole
         if ( ( this.energy <= 0 && this.normalPlay ) || ( this.supplies <= 0 && this.normalPlay ) ) {
@@ -61,6 +65,7 @@ class Ship {
                 window.boundary.Collide();
                 updateHeading();
                 updateLevels();
+                window.oldSpice.updateShipHeading( 0 );
                 window.gameMap.move( window.oldSpice.x, window.oldSpice.y );
             }, 1000 );
         }
@@ -73,6 +78,11 @@ class Ship {
         document.querySelectorAll( ".credit-value" )[0].innerHTML = this.credit;
         document.querySelectorAll( ".energy-value" )[0].innerHTML = this.energy;
         document.querySelectorAll( ".supply-value" )[0].innerHTML = this.supplies;
+    }
+
+
+    updateShipHeading ( degree ) {
+        this.shipIcon.className = this.shipIcon.className.replace( /(deg)(.*)/i, 'deg' + degree );
     }
 
     /**
@@ -130,4 +140,6 @@ class Ship {
     logLevels () {
         console.log( "Energy = " + this.energy + "; Supplies = " + this.supplies + "; Credits = " + this.credits + "Normal Play = " + this.normalPlay );
     }
+
+
 }
