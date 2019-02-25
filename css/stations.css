@@ -68,6 +68,8 @@
     background-repeat: no-repeat;
     height:100%;
     width:100%;
+    position: relative;
+    z-index: 10;
 }
 
 .deg0 {
@@ -75,45 +77,45 @@
 }
 
 .deg30 {
-    -webkit-transform: rotate(120deg);
+    -webkit-transform: rotate(60deg);
 }
 
 .deg60 {
-    -webkit-transform: rotate(150deg);
+    -webkit-transform: rotate(30deg);
 }
 
 .deg90 {
-    -webkit-transform: rotate(180deg);
+    -webkit-transform: rotate(0deg);
 }
 
 .deg120 {
-    -webkit-transform: rotate(210deg);
+    -webkit-transform: rotate(-30deg);
 }
 
 .deg150 {
-    -webkit-transform: rotate(240deg);
+    -webkit-transform: rotate(-60deg);
 }
 
 .deg180 {
-    -webkit-transform: rotate(270deg);
+    -webkit-transform: rotate(-90deg);
 }
 
 .deg210 {
-    -webkit-transform: rotate(300deg);
+    -webkit-transform: rotate(-120deg);
 }
 
 .deg240 {
-    -webkit-transform: rotate(330deg);
+    -webkit-transform: rotate(-150deg);
 }
 
 .deg270 {
-    -webkit-transform: rotate(360deg);
+    -webkit-transform: rotate(-180deg);
 }
 
 .deg300 {
-    -webkit-transform: rotate(390deg);
+    -webkit-transform: rotate(-210deg);
 }
 
 .deg330 {
-    -webkit-transform: rotate(420deg);
+    -webkit-transform: rotate(-240deg);
 }

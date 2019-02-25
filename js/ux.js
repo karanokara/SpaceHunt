@@ -3,15 +3,12 @@
 function submitHeading () {
 
     //assign element vars
-    let direction = parseInt(document.getElementById( "direction-input" ).value);
-    let magnitude = parseInt(document.getElementById( "magnitude-input" ).value);
+    let direction = parseInt( document.getElementById( "direction-input" ).value );
+    let magnitude = parseInt( document.getElementById( "magnitude-input" ).value );
 
     //x/y input = new coordinates (assign new location to these)
     window.oldSpice.move( magnitude, direction );
 
-    //update user with new heading and levels
-    updateHeading();
-    updateLevels();
     ctrecipe.tick();
     //create a log of previous location
     createNewLog();
