@@ -39,6 +39,11 @@ Stylesheet for the setup page
     padding: 20px;
     width: 60%;
 }
+/* this is the text box for the player's name */
+.playerNameField {
+    background: #E9ECEF;
+
+}
 
 .setup-btn {
     padding: 1rem 2rem;
@@ -46,6 +51,10 @@ Stylesheet for the setup page
 }
 
 .setup-game .game-start-btn {
+    padding: 1rem 2rem;
+    margin-top: 50px;
+}
+.game-cont-btn{
     padding: 1rem 2rem;
     margin-top: 50px;
 }

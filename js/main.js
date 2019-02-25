@@ -3,6 +3,10 @@ window.map = new GameMap( 128 );
 window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false );
 window.boundary = new WormHole();
 
+const nameInput = document.querySelector('#playerName');
+
+
+
 // when DOM loaded, call this
 window.onload = function () {
 
@@ -35,7 +39,13 @@ window.onload = function () {
 window.onclose = function () {
     //store state to local storage
     localStorage.setItem( "oldSpice", JSON.stringify( window.oldSpice ) );
-    localStorage.setItem( "gameMap", JSON.stringify( window.GameMap ) );
+    localStorage.setItem( "gameMap",  JSON.stringify( window.GameMap  ) );
+
+
+    //Testing persistent state with name
+    if(typeof(Storage) != "undefined")
+        localStorage.setItem('name', nameInput.value);
+
 };
 
 /**
@@ -52,6 +62,9 @@ function gameSetup () {
 
         let setupPage = document.querySelectorAll( '.setup-game' )[0];
         setupPage.attributes.class.value += ' hide';
+        //Testing persistent state with name
+        if(typeof(Storage) != "undefined")
+            localStorage.setItem('name', nameInput.value);
     };
 
 

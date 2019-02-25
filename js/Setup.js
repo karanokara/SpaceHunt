@@ -22,7 +22,8 @@ function developerModeInit() {
     wormholeInit();
     gameplayInit();
     mapSizeInit();
-    submitInit();  
+    playerNameInit();
+    submitInit();
 }
   
 /*
@@ -243,6 +244,25 @@ function submitInit() {
     submitLabel.appendChild(submitButton);
     
     document.getElementById("developerMode").appendChild(submitLabel);
+}
+
+/*
+Create text box for the player's name for persistent state.
+Default value is admin.
+*/
+function playerNameInit() {
+    let playerNameLabel = document.createElement("P");
+    let playerNameLabelText = document.createTextNode("Player Name: ");
+    playerNameLabel.appendChild(playerNameLabelText);
+
+    let playerNameInput = document.createElement("INPUT");
+    playerNameInput.setAttribute("name", "playerNameInput");
+    playerNameInput.setAttribute("type", "text");
+    playerNameInput.setAttribute("value", "admin");
+    playerNameInput.setAttribute("size", "10");
+    playerNameLabel.appendChild(playerNameInput);
+
+    document.getElementById("developerMode").appendChild(playerNameLabel);
 }
 
 /*
