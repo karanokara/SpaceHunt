@@ -58,6 +58,17 @@ html, body {
     height: 100%;
 }
 
+.data-panel .gazetteer {
+    height: 100%;
+}
+
+.data-panel .gazetteer-list-wrapper {
+    height: 85%;
+    overflow: auto;
+}
+
+
+
 /*container class for data log*/
 .data-log-container {
     display: inherit;

@@ -71,5 +71,8 @@ function PopulateMap ( gameMap ) {
         }
         console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
         gameMap.add( mapObj, objCoordx, objCoordy );
+
+        // populate objects into gazetteer
+        gazePopulate( mapObj.objType, objCoordx, objCoordy );
     }
 }        

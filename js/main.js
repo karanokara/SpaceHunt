@@ -98,3 +98,16 @@ function gameEffect () {
         window.oldSpice.scan();
     }
 }
+
+/**
+ * A function to fill obj data into gazetteer
+ */
+function gazePopulate ( obj, objX, objY ) {
+    var gazeList = document.querySelector( '#gazetteer .gazetteer-list' );
+    gazeList.innerHTML +=
+        '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+        '<span class="gazetteer-obj-name">' + obj + '</span>' +
+        '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
+        '</li>';
+
+}
