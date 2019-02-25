@@ -22,7 +22,7 @@ window.onload = function () {
  */
 function initGame () {
 
-    // First check if in user defined mode
+    // 1st check if in user defined mode
     if ( window.gameData != undefined ) {
 
         window.oldSpice = new Ship(
@@ -39,13 +39,13 @@ function initGame () {
         window.gameMap = new GameMap( window.gameData.mapSize );
     }
     else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
-        // Persistent State
+        // 2nd Check for Persistent State
         //pull oldSpice state from local storage on load if tab closed
 
         //window.gameMap = new GameMap( 128 );
         //window.oldSpice = JSON.parse( localStorage.getItem( "oldSpice" ) );
     }
-    else { // default
+    else { // 3rd By default
         window.gameMap = new GameMap( 128 );
         window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false, true );
     }
