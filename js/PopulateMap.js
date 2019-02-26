@@ -25,10 +25,10 @@ function PopulateMap ( gameMap ) {
         if ( i == 0 ) {
             mapObj = new Celeron();
 
-            if ( gameData.celeronX && gameData.celeronY ) {
+            if ( gameData.celeronX || gameData.celeronX == 0 ) 
                 objCoordx = gameData.celeronX;
+            if ( gameData.celeronY || gameData.celeronY == 0 ) 
                 objCoordy = gameData.celeronY;
-            }
 
             mapObj.x = objCoordx;
             mapObj.y = objCoordy;
@@ -38,10 +38,10 @@ function PopulateMap ( gameMap ) {
         else if ( i == 1 ) {
             mapObj = new Xeon();
 
-            if ( gameData.xeonX || gameData.xeonY ) {
+            if ( gameData.xeonX || gameData.xeonX == 0 )
                 objCoordx = gameData.xeonX;
+            if ( gameData.xeonY || gameData.xeonY == 0 )
                 objCoordy = gameData.xeonY;
-            }
 
             mapObj.x = objCoordx;
             mapObj.y = objCoordy;
@@ -51,10 +51,10 @@ function PopulateMap ( gameMap ) {
         else if ( i == 2 ) {
             mapObj = new Ryzen();
 
-            if ( gameData.ryzenX || gameData.ryzenY ) {
+            if ( gameData.ryzenX || gameData.ryzenX == 0 )
                 objCoordx = gameData.ryzenX;
+            if ( gameData.ryzenY || gameData.ryzenY == 0 )
                 objCoordy = gameData.ryzenY;
-            }
 
             mapObj.x = objCoordx;
             mapObj.y = objCoordy;
