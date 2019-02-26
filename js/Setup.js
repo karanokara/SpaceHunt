@@ -22,6 +22,9 @@ function developerModeInit () {
     wormholeInit();
     gameplayInit();
     mapSizeInit();
+    celeronInit();
+    xeonInit();
+    ryzenInit();
     submitInit();
 }
 
@@ -210,6 +213,96 @@ function gameplayInit () {
 }
 
 /*
+Initialize starting coordinates of Celeron.
+*/
+function celeronInit () {
+    let celeronLabel = document.createElement( "P" );
+    let celeronLabelText = document.createTextNode( "Celeron Starting Coordinates: " );
+    celeronLabel.appendChild( celeronLabelText );
+
+    let xInput = document.createElement( "INPUT" );
+    xInput.setAttribute( "name", "celeronInput" );
+    xInput.setAttribute( "type", "text" );
+    xInput.setAttribute( "value", "0" );
+    xInput.setAttribute( "size", "3" );
+    celeronLabel.appendChild( xInput );
+
+    let coordinateComma = document.createElement( "SPAN" );
+    let coordinateCommaText = document.createTextNode( ", " );
+    coordinateComma.appendChild( coordinateCommaText );
+    celeronLabel.appendChild( coordinateComma );
+
+    let yInput = document.createElement( "INPUT" );
+    yInput.setAttribute( "name", "celeronInput" );
+    yInput.setAttribute( "type", "text" );
+    yInput.setAttribute( "value", "0" );
+    yInput.setAttribute( "size", "3" );
+    celeronLabel.appendChild( yInput );
+
+    document.getElementById( "developerMode" ).appendChild( celeronLabel );
+}
+
+/*
+Initialize starting coordinates of Xeon.
+*/
+function xeonInit () {
+    let xeonLabel = document.createElement( "P" );
+    let xeonLabelText = document.createTextNode( "Xeon Starting Coordinates: " );
+    xeonLabel.appendChild( xeonLabelText );
+
+    let xInput = document.createElement( "INPUT" );
+    xInput.setAttribute( "name", "xeonInput" );
+    xInput.setAttribute( "type", "text" );
+    xInput.setAttribute( "value", "0" );
+    xInput.setAttribute( "size", "3" );
+    xeonLabel.appendChild( xInput );
+
+    let coordinateComma = document.createElement( "SPAN" );
+    let coordinateCommaText = document.createTextNode( ", " );
+    coordinateComma.appendChild( coordinateCommaText );
+    xeonLabel.appendChild( coordinateComma );
+
+    let yInput = document.createElement( "INPUT" );
+    yInput.setAttribute( "name", "xeonInput" );
+    yInput.setAttribute( "type", "text" );
+    yInput.setAttribute( "value", "0" );
+    yInput.setAttribute( "size", "3" );
+    xeonLabel.appendChild( yInput );
+
+    document.getElementById( "developerMode" ).appendChild( xeonLabel );
+}
+
+/*
+Initialize starting coordinates of Ryzen.
+*/
+function ryzenInit () {
+    let ryzenLabel = document.createElement( "P" );
+    let ryzenLabelText = document.createTextNode( "Ryzen Starting Coordinates: " );
+    ryzenLabel.appendChild( ryzenLabelText );
+
+    let xInput = document.createElement( "INPUT" );
+    xInput.setAttribute( "name", "ryzenInput" );
+    xInput.setAttribute( "type", "text" );
+    xInput.setAttribute( "value", "0" );
+    xInput.setAttribute( "size", "3" );
+    ryzenLabel.appendChild( xInput );
+
+    let coordinateComma = document.createElement( "SPAN" );
+    let coordinateCommaText = document.createTextNode( ", " );
+    coordinateComma.appendChild( coordinateCommaText );
+    ryzenLabel.appendChild( coordinateComma );
+
+    let yInput = document.createElement( "INPUT" );
+    yInput.setAttribute( "name", "ryzenInput" );
+    yInput.setAttribute( "type", "text" );
+    yInput.setAttribute( "value", "0" );
+    yInput.setAttribute( "size", "3" );
+    ryzenLabel.appendChild( yInput );
+
+    document.getElementById( "developerMode" ).appendChild( ryzenLabel );
+}
+
+/*
 Function to initialize map to given size.
 Default value is 128.
 */
@@ -259,6 +352,9 @@ function developerModeSubmit () {
     let wormhole = document.getElementsByName( "wormholeInput" );
     let gameplay = document.getElementsByName( "gameplayInput" );
     let mapSize = document.getElementsByName( "mapSizeInput" );
+    let celeron = document.getElementsByName( "celeronInput" );
+    let xeon = document.getElementsByName( "xeonInput" );
+    let ryzen = document.getElementsByName( "ryzenInput" );
 
     //set flags in global ctrecipe (GameMode) object that
     //WormHole Collide method can reference
@@ -275,7 +371,13 @@ function developerModeSubmit () {
         shipSupplies: parseInt( supplies[0].value ),
         shipCredit: parseInt( credits[0].value ),
         shipNormalPlay: gameplay[0].checked,
-        mapSize: parseInt( mapSize[0].value )
+        mapSize: parseInt( mapSize[0].value ),
+        celeronX: parseInt( celeron[0].value ),
+        celeronY: parseInt( celeron[1].value),
+        xeonX: parseInt( xeon[0].value ),
+        xeonY: parseInt( xeon[1].value),
+        ryzenX: parseInt( ryzen[0].value ),
+        ryzenY: parseInt( ryzen[1].value)
     };
 
     document.getElementById( "devLoadModal" ).style.display = "none";
