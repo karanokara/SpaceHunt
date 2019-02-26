@@ -1,5 +1,19 @@
 
-
+window.gameData = {
+    shipX: 0,
+    shipY: 0,
+    shipEnergy: 1000,
+    shipSupplies: 100,
+    shipCredit: 1000,
+    shipNormalPlay: 1,
+    mapSize: 128,
+    celeronX: 100,
+    celeronY: 100,
+    xeonX: 50,
+    xeonY: 50,
+    ryzenX: 20,
+    ryzenY: 20
+};
 // when DOM loaded, call this
 window.onload = function () {
 
@@ -38,13 +52,13 @@ function initGame () {
 
         window.gameMap = new GameMap( window.gameData.mapSize );
     }
-    else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
+    //else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
         // 2nd Check for Persistent State
         //pull oldSpice state from local storage on load if tab closed
 
         //window.gameMap = new GameMap( 128 );
         //window.oldSpice = JSON.parse( localStorage.getItem( "oldSpice" ) );
-    }
+    //}
     else { // 3rd By default
         window.gameMap = new GameMap( 128 );
         window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false, true );
