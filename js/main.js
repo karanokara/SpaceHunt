@@ -7,12 +7,6 @@ window.gameData = {
     shipCredit: 1000,
     shipNormalPlay: 1,
     mapSize: 128,
-    celeronX: 100,
-    celeronY: 100,
-    xeonX: 50,
-    xeonY: 50,
-    ryzenX: 20,
-    ryzenY: 20
 };
 // when DOM loaded, call this
 window.onload = function () {
