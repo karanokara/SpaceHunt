@@ -223,7 +223,6 @@ function celeronInit () {
     let xInput = document.createElement( "INPUT" );
     xInput.setAttribute( "name", "celeronInput" );
     xInput.setAttribute( "type", "text" );
-    xInput.setAttribute( "value", "0" );
     xInput.setAttribute( "size", "3" );
     celeronLabel.appendChild( xInput );
 
@@ -235,7 +234,6 @@ function celeronInit () {
     let yInput = document.createElement( "INPUT" );
     yInput.setAttribute( "name", "celeronInput" );
     yInput.setAttribute( "type", "text" );
-    yInput.setAttribute( "value", "0" );
     yInput.setAttribute( "size", "3" );
     celeronLabel.appendChild( yInput );
 
@@ -253,7 +251,6 @@ function xeonInit () {
     let xInput = document.createElement( "INPUT" );
     xInput.setAttribute( "name", "xeonInput" );
     xInput.setAttribute( "type", "text" );
-    xInput.setAttribute( "value", "0" );
     xInput.setAttribute( "size", "3" );
     xeonLabel.appendChild( xInput );
 
@@ -265,7 +262,6 @@ function xeonInit () {
     let yInput = document.createElement( "INPUT" );
     yInput.setAttribute( "name", "xeonInput" );
     yInput.setAttribute( "type", "text" );
-    yInput.setAttribute( "value", "0" );
     yInput.setAttribute( "size", "3" );
     xeonLabel.appendChild( yInput );
 
@@ -283,7 +279,6 @@ function ryzenInit () {
     let xInput = document.createElement( "INPUT" );
     xInput.setAttribute( "name", "ryzenInput" );
     xInput.setAttribute( "type", "text" );
-    xInput.setAttribute( "value", "0" );
     xInput.setAttribute( "size", "3" );
     ryzenLabel.appendChild( xInput );
 
@@ -295,7 +290,6 @@ function ryzenInit () {
     let yInput = document.createElement( "INPUT" );
     yInput.setAttribute( "name", "ryzenInput" );
     yInput.setAttribute( "type", "text" );
-    yInput.setAttribute( "value", "0" );
     yInput.setAttribute( "size", "3" );
     ryzenLabel.appendChild( yInput );
 
