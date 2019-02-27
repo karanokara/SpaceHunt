@@ -18,9 +18,9 @@ function PopulateMap ( gameMap ) {
     dataLog = document.getElementById( 'data-log' ).childNodes;
     console.log( dataLog );
 
-    generateCeleron ( gameMap );
-    generateXeon ( gameMap );
-    generateRyzen ( gameMap );
+    generateCeleron( gameMap );
+    generateXeon( gameMap );
+    generateRyzen( gameMap );
 
     for ( let i = 0; i < 50; ++i ) {
         objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
@@ -47,14 +47,14 @@ function PopulateMap ( gameMap ) {
                 mapObj = new Asteroid();
                 break;
         }
-        
+
         console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
         gameMap.add( mapObj, objCoordx, objCoordy );
 
         // populate objects into gazetteer
-        gazePopulate( mapObj.objType, objCoordx, objCoordy );
+        gazePopulate( mapObj, objCoordx, objCoordy );
     }
-}  
+}
 
 function generateCeleron ( gameMap ) {
     let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
@@ -62,9 +62,9 @@ function generateCeleron ( gameMap ) {
 
     mapObj = new Celeron();
 
-    if ( gameData.celeronX || gameData.celeronX === 0 ) 
+    if ( gameData.celeronX || gameData.celeronX === 0 )
         objCoordx = gameData.celeronX;
-    if ( gameData.celeronY || gameData.celeronY === 0 ) 
+    if ( gameData.celeronY || gameData.celeronY === 0 )
         objCoordy = gameData.celeronY;
 
     mapObj.x = objCoordx;
@@ -73,7 +73,7 @@ function generateCeleron ( gameMap ) {
     dataLog[2].nodeValue = objCoordx + " " + objCoordy;
     console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
     gameMap.add( mapObj, objCoordx, objCoordy );
-    gazePopulate( mapObj.objType, objCoordx, objCoordy );
+    gazePopulate( mapObj, objCoordx, objCoordy );
 }
 
 function generateXeon ( gameMap ) {
@@ -93,7 +93,7 @@ function generateXeon ( gameMap ) {
     dataLog[4].nodeValue = objCoordx + " " + objCoordy;
     console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
     gameMap.add( mapObj, objCoordx, objCoordy );
-    gazePopulate( mapObj.objType, objCoordx, objCoordy );
+    gazePopulate( mapObj, objCoordx, objCoordy );
 }
 
 function generateRyzen ( gameMap ) {
@@ -113,5 +113,5 @@ function generateRyzen ( gameMap ) {
     dataLog[6].nodeValue = objCoordx + " " + objCoordy;
     console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
     gameMap.add( mapObj, objCoordx, objCoordy );
-    gazePopulate( mapObj.objType, objCoordx, objCoordy );
+    gazePopulate( mapObj, objCoordx, objCoordy );
 }

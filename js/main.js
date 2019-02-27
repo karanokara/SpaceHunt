@@ -47,11 +47,11 @@ function initGame () {
         window.gameMap = new GameMap( window.gameData.mapSize );
     }
     //else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
-        // 2nd Check for Persistent State
-        //pull oldSpice state from local storage on load if tab closed
+    // 2nd Check for Persistent State
+    //pull oldSpice state from local storage on load if tab closed
 
-        //window.gameMap = new GameMap( 128 );
-        //window.oldSpice = JSON.parse( localStorage.getItem( "oldSpice" ) );
+    //window.gameMap = new GameMap( 128 );
+    //window.oldSpice = JSON.parse( localStorage.getItem( "oldSpice" ) );
     //}
     else { // 3rd By default
         window.gameMap = new GameMap( 128 );
@@ -111,10 +111,11 @@ function gameEffect () {
  * A function to fill obj data into gazetteer
  */
 function gazePopulate ( obj, objX, objY ) {
-    var gazeList = document.querySelector( '#gazetteer .gazetteer-list' );
+    var gazeList = document.querySelector( '#gazetteer .gazetteer-list' ),
+        objName = ( obj.name != undefined ) ? obj.name : obj.objType;
     gazeList.innerHTML +=
         '<li class="list-group-item d-flex justify-content-between align-items-center">' +
-        '<span class="gazetteer-obj-name">' + obj + '</span>' +
+        '<span class="gazetteer-obj-name">' + objName + '</span>' +
         '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
         '</li>';
 
