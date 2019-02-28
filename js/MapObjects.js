@@ -190,6 +190,8 @@ BadMax.prototype.Escape = function () {
 }
 
 /*----------------------------------------------------*/
+//Global game of chance game config variable
+var playGameOfChance;
 
 function SpaceStation ( attachedStations ) {
     this.stations = attachedStations; //container for attached-stations 
@@ -210,6 +212,7 @@ SpaceStation.prototype.Collide = function () {
             this.stations[i].Purchase();
         }
     }
+    gameOfChance();
 }
 
 function CheckBalance ( price ) {
@@ -220,6 +223,33 @@ function CheckBalance ( price ) {
         return true;
     }
 }
+
+//For the game of chance at stations
+function gameOfChance(){
+    //Game of Chance: if the game config variable is set to true
+    if(playGameOfChance){
+        if(confirm("DEVMODE: You have been asked to play a game of chance. Would you like to play?")){
+            PlayGameOfChance();
+        }
+    }else{
+        //Game of Chance: This section creates a randome chance for normal game mode
+        var playChance = Math.floor(Math.random() * Math.floor(3));
+        if(playChance < 2 ){
+            if(confirm("You have been asked to play a game of chance. Would you like to play?")){
+                PlayGameOfChance();      
+            }
+        }
+
+    }
+}
+//calculates winnings for game of chance
+function PlayGameOfChance (){
+    var winnings = Math.floor(Math.random() * Math.floor(200));
+    oldSpice.credit += winnings;
+    alert("You have won " + winnings + " credit(s)!");
+    updateLevels();
+}
+
 
 /*----------------------------------------------------*/
 
@@ -242,6 +272,7 @@ MuskTesla.prototype.MenuPrompt = function () {
 MuskTesla.prototype.Purchase = function () {
     oldSpice.energy += this.energyQuantity;
     oldSpice.credit -= this.energyPrice;
+    updateLevels();
     alert( "MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
