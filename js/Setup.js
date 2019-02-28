@@ -25,6 +25,7 @@ function developerModeInit () {
     celeronInit();
     xeonInit();
     ryzenInit();
+    playerNameInit();
     submitInit();
 }
 
