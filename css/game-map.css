@@ -1,0 +1,47 @@
+
+
+#grid-container {
+    overflow: hidden;
+    position: relative;
+}
+
+#map-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    transform: translate(-50%, -50%);
+}
+
+#map-wrapper .ship-ic {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+}
+
+.map-table {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    outline: 60px solid #d98ada;
+    background: #717171;
+    transition: all 1s ease-in-out;
+}
+
+.map-row {
+   
+}
+
+.map-table .map-row .map-cell {
+    padding: 0px;
+    border: 1px solid #8aab8a;
+}
+
+.map-table .map-row .map-cell .map-obj {
+    width: 59px;
+    height: 59px;
+}

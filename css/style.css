@@ -58,6 +58,33 @@ html, body {
     height: 100%;
 }
 
+.data-panel .gazetteer-list-wrapper {
+    overflow: auto;
+    margin: 10px 5px;
+}
+
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-track {
+    background: #fff; 
+}
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-thumb {
+    background: #007bff;; 
+}
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.gazetteer-list-wrapper .gazetteer-obj-coordinate {
+    margin-left: 10px;
+}
+
+/* title for a specific part of game */
+.data-title {
+    margin: 20px 0 15px 0;
+}
+
 /*container class for data log*/
 .data-log-container {
     display: inherit;
