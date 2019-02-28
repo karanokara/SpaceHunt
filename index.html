@@ -28,13 +28,31 @@
             <h1 class="display-4">Space Hunt</h1>
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
+            <div class="playerNameField">
+               <p>
+                   <label for="playerName">Player Name: </label>
+                   <input  id="playerName" type="text" required>
+               </p>
+            </div>
+
             <div>
                 <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
             </div>
             <div id="devLoadModal" class="modal">
             </div>
-            <button class="btn btn-primary btn-lg game-start-btn">Start</button>
+
+            <button class="btn btn-primary btn-lg game-start-btn" id="startButton">Start New Game</button>
+
+            <div>
+                <button class="btn btn-primary btn-lg game-cont-btn" id="continueButton" onclick="">Continue Previous Game</button>
+            </div>
+
         </div>
+
+
+
+
+
 
         <!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
         - Don't put game content outside of the main-game tag, otherwise it will not look good.

@@ -1,4 +1,4 @@
-
+const nameInput = document.querySelector('#playerName');
 window.gameData = {
     shipX: 0,
     shipY: 0,
@@ -8,19 +8,38 @@ window.gameData = {
     shipNormalPlay: 1,
     mapSize: 128,
 };
+
+window.gameDataTest = {
+    shipX: 10,
+    shipY: 10,
+    shipEnergy: 100,
+    shipSupplies: 10,
+    shipCredit: 10,
+    shipNormalPlay: 11,
+    shipEngineLv: 1,
+    shipDamaged: false,
+    mapSize: 128,
+};
 // when DOM loaded, call this
 window.onload = function () {
 
     /**
      * when click the start btn, start loading game
      */
-    document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
-        let setupPage = document.querySelectorAll( '.setup-game' )[0];
+    let setupPage = document.querySelectorAll( '.setup-game' )[0];
 
+    document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
         // initial the game object according to the setting
         initGame();
-
         setupPage.attributes.class.value += ' hide';
+    };
+    document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
+        // call the initGame where it will check to see if the ship and map need to be
+        // new objects or be populated with the data in the local storage
+        localStorage.setItem("game", JSON.stringify(gameDataTest)); // this line imitates the onclose function, I need it for testing.
+
+        initGame();
+       setupPage.attributes.class.value += ' hide';
     };
 
 };
@@ -29,9 +48,9 @@ window.onload = function () {
  * Inital game, using default setting or user defined setting or default setting
  */
 function initGame () {
-
     // 1st check if in user defined mode
-    if ( window.gameData != undefined ) {
+    if (localStorage.getItem('game') == null){
+    //if ( window.gameData != undefined ) {
 
         window.oldSpice = new Ship(
             window.gameData.shipX,
@@ -45,15 +64,33 @@ function initGame () {
         );
 
         window.gameMap = new GameMap( window.gameData.mapSize );
-    }
-    //else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
-    // 2nd Check for Persistent State
-    //pull oldSpice state from local storage on load if tab closed
 
-    //window.gameMap = new GameMap( 128 );
-    //window.oldSpice = JSON.parse( localStorage.getItem( "oldSpice" ) );
-    //}
-    else { // 3rd By default
+    } else if (localStorage.getItem('game') != null){
+        //else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
+        // 2nd Check for Persistent State
+        //pull oldSpice state from local storage on load if tab closed
+        if (typeof (Storage) != "undefined") {
+            //let temp = JSON.parse(localStorage.getItem('game'));
+            // call the constructor with pertinent data (not map size)
+            let temp = JSON.parse(localStorage.getItem('game'));
+            window.oldSpice = new Ship(
+                temp.shipX,
+                temp.shipY,
+                temp.shipEnergy,
+                temp.shipSupplies,
+                temp.shipCredit,
+                temp.shipEngineLv,
+                temp.shipDamaged,
+                temp.shipNormalPlay
+            );
+
+            // NEED to do nested for loops to read the map from storage
+            // INSTEAD of making a new empty map.  For now this will do.
+            window.gameMap = new GameMap(window.gameData.mapSize);
+            localStorage.removeItem('game');   // this will be gone once I can get onclose to work.
+        }
+
+    } else { // 3rd By default
         window.gameMap = new GameMap( 128 );
         window.oldSpice = new Ship( 0, 0, 1000, 100, 1000, 1, false, true );
     }
@@ -61,7 +98,7 @@ function initGame () {
     // setup wormhole
     window.boundary = new WormHole();
     //DEBUG console.log(window.oldSpice);
-    //DEBUG console.log(window.gmaeMap);
+    //DEBUG console.log(window.gameMap);
 
     // setup the game
     // var data = setup();
@@ -85,10 +122,23 @@ function initGame () {
     ctrecipe.tickObjects.push( function () { Collision( window.oldSpice.x, window.oldSpice.y ); } );
     ctrecipe.tick();
     //DrawGameMap(grid_items);
+    //document.querySelectorAll( '.setup-game' )[0].attributes.class.value += ' hide';
 }
 
 //function for storing state upon tab close
 window.onclose = function () {
+    //Testing persistent state with name
+    localStorage.removeItem('game');
+    localStorage.setItem("name", nameInput.value);
+    window.gameData.shipX        = window.oldSpice.x;
+    window.gameData.shipY        = window.oldSpice.y;
+    window.gameData.shipEnergy   = window.oldSpice.energy;
+    window.gameData.shipSupplies = window.oldSpice.supplies;
+    window.gameData.shipCredit   = window.oldSpice.credit;
+    window.gameData.shipEngineLv = window.oldSpice.engineLv;
+    window.gameData.shipDamaged  = window.oldSpice.isDamaged;
+    window.gameData.shipNormalPlay = window.oldSpice.normalPlay
+    localStorage.setItem("game", JSON.stringify(gameData));
     //store state to local storage
     //localStorage.setItem( "oldSpice", JSON.stringify( window.oldSpice ) );        // error here
     //localStorage.setItem( "gameMap", JSON.stringify( window.GameMap ) );
