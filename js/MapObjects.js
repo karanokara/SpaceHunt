@@ -59,9 +59,8 @@ Asteroid.prototype.DamageShip = function () {
 }
 
 Asteroid.prototype.DestroyShip = function () {
-    alert( "You slammed into an asteroid and blew up! You lose!" );
     oldSpice.energy = 0;
-    ctrecipe.GameOver(); //should be redundant (0 energy triggers gameover eventually)
+    ctrecipe.GameOver("You slammed into an asteroid!"); 
 }
 
 Asteroid.prototype.Collide = function () {
@@ -181,8 +180,7 @@ BadMax.prototype.Steal = function () {
 }
 
 BadMax.prototype.DestroyShip = function () {
-    alert( "BadMax has destroyed your ship! You lose!" );
-    ctrecipe.GameOver();
+    ctrecipe.GameOver("BadMax has destroyed your ship!");
 }
 
 BadMax.prototype.Escape = function () {

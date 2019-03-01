@@ -55,9 +55,15 @@ class Ship {
 
 
         // let the ship move first, then check boundary, gameover, then jump for wormhole
-        if ( ( this.energy <= 0 && this.normalPlay ) || ( this.supplies <= 0 && this.normalPlay ) ) {
+        if ( ( this.energy <= 0 && this.normalPlay ) ) {
             setTimeout( function () {
-                gameObj.GameOver();
+                gameObj.GameOver("Ran out of energy!");
+            }, 1000 );
+        }
+        else if( this.supplies <= 0 && this.normalPlay )
+        {
+            setTimeout( function () {
+                gameObj.GameOver("Ran out of supplies!");
             }, 1000 );
         }
         else if ( this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0 ) {
