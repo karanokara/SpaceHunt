@@ -156,6 +156,14 @@ function gameEffect () {
     document.querySelector( '#sensor-scan' ).onclick = function () {
         window.oldSpice.scan();
     }
+
+    /**
+     * when click the game save button
+     */
+    document.querySelector( '#game-save' ).onclick = function () {
+
+        alert( "saved game!" );
+    };
 }
 
 /**

@@ -29,10 +29,10 @@
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
             <div class="playerNameField">
-               <p>
-                   <label for="playerName">Player Name: </label>
-                   <input  id="playerName" type="text" required>
-               </p>
+                <p>
+                    <label for="playerName">Player Name: </label>
+                    <input id="playerName" type="text" required>
+                </p>
             </div>
 
             <div>
@@ -44,7 +44,8 @@
             <button class="btn btn-primary btn-lg game-start-btn" id="startButton">Start New Game</button>
 
             <div>
-                <button class="btn btn-primary btn-lg game-cont-btn" id="continueButton" onclick="">Continue Previous Game</button>
+                <button class="btn btn-primary btn-lg game-cont-btn" id="continueButton" onclick="">Continue Previous
+                    Game</button>
             </div>
 
         </div>
@@ -92,7 +93,11 @@
                 <!--RHS top panel-->
                 <div class="data-panel">
                     <div class="data-log-container">
-                        <img id="star-fleet-icon" src="resources/images/star-fleet.png" />
+                        <div class="data-title">
+                            <button id="game-save" type="button" class="btn btn-success btn-game-save"><img id="star-fleet-icon"
+                                    src="resources/images/star-fleet.png" />SAVE
+                                GAME</button>
+                        </div>
                         <h2 style="margin: 5% 0 10% 0">Data Log:</h2>
                         <ul id="data-log">
                             <li class="log">Celeron</li>

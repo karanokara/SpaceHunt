@@ -237,3 +237,15 @@ html, body {
 #magnitude-input {
     display: inline-block;
 }
+
+/*the game saving button */
+.data-title .btn-game-save {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+}
+.data-title .btn-game-save:not(:disabled):not(.disabled):active {
+    color: #000;
+}
+
+
