@@ -81,10 +81,60 @@ function MeteorShower () { }
 MeteorShower.prototype = new MapObject( "MeteorShower", 0 );
 
 /*----------------------------------------------------*/
+/* Abandoned Freighters drop some amount of resources
+when encountered
+*/
 
 function AbFreighter () { }
 
 AbFreighter.prototype = new MapObject( "AbFreighter", 0 );
+
+AbFreighter.prototype.Loot = function() {
+    /*Computes a basic loot table for encountering a freighter*/
+    
+    let maxEnergy = 1000;
+    let maxSupply = 100;
+    let retEnergy;
+    let retSupply;
+
+    let roll = Math.random();
+    if (roll < 0.75)
+    {
+        retEnergy = 0.1*maxEnergy;
+        retSupply = 0.1*maxSupply;
+    }
+    else if(roll < 0.95)
+    {
+        retEnergy = 0.5*maxEnergy;
+        retSupply = 0.5*maxSupply;
+    }
+    else{
+        retEnergy = maxEnergy;
+        retSupply = maxSupply;
+    }
+    return [retEnergy, retSupply];
+}
+
+AbFreighter.prototype.Collide = function() {
+    MapObject.prototype.Collide.call( this );
+    let loot = this.Loot();
+
+    lootEnergy = parseInt(loot[0]);
+    lootSupply = parseInt(loot[1]);
+
+    alert("You encountered an abandoned freighter and collected " + lootEnergy + " energy and " + lootSupply + " supply from its remains!");
+
+    oldSpice.energy += lootEnergy;
+    if(oldSpice.supply + lootSupply <= 100)
+        oldSpice.supply += lootSupply;
+    else
+        oldSpice.supply = 100;
+
+    updateLevels(); //display new supply and energy
+    gameMap.remove(oldSpice.x, oldSpice.y); // remove this freighter from the map
+
+
+}
 
 /*----------------------------------------------------*/
 
@@ -99,6 +149,7 @@ Planet.prototype = new MapObject( 'Planet', 1 );
 Planet.prototype.Collide = function () {
 
 }
+
 
 Planet.prototype.EnterOrbit = function () {
     alert( "You have entered the orbit of " + this.name );

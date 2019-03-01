@@ -26,7 +26,7 @@ function PopulateMap ( gameMap ) {
         objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
         objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
 
-        switch ( i % 5 ) {
+        switch ( i % 6 ) {
             case 0:
                 mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new RepairDepot, new MiniMart()] );
                 break;
@@ -45,6 +45,10 @@ function PopulateMap ( gameMap ) {
 
             case 4:
                 mapObj = new Asteroid();
+                break;
+
+            case 5:
+                mapObj = new AbFreighter();
                 break;
         }
 

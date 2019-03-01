@@ -35,6 +35,20 @@ class GameMap {
 
         return true;
     }
+
+    /*
+    Delete reference to object at position x, y 
+    in the map if it exists and return true.
+    If location is empty, returns false.
+    */
+    remove(x, y){
+        if( this.hasObject(x, y)){
+            delete this.map[x][y];
+            return true;
+        }
+        return false;
+    }
+
     /*
     Return the contents of the map at location (x, y).
     If location is empty, returns null.
