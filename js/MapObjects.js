@@ -60,7 +60,7 @@ Asteroid.prototype.DamageShip = function () {
 
 Asteroid.prototype.DestroyShip = function () {
     oldSpice.energy = 0;
-    ctrecipe.GameOver("You slammed into an asteroid!"); 
+    ctrecipe.GameOver( "You slammed into an asteroid!" );
 }
 
 Asteroid.prototype.Collide = function () {
@@ -89,49 +89,47 @@ function AbFreighter () { }
 
 AbFreighter.prototype = new MapObject( "AbFreighter", 0 );
 
-AbFreighter.prototype.Loot = function() {
+AbFreighter.prototype.Loot = function () {
     /*Computes a basic loot table for encountering a freighter*/
-    
+
     let maxEnergy = 1000;
     let maxSupply = 100;
     let retEnergy;
     let retSupply;
 
     let roll = Math.random();
-    if (roll < 0.75)
-    {
-        retEnergy = 0.1*maxEnergy;
-        retSupply = 0.1*maxSupply;
+    if ( roll < 0.75 ) {
+        retEnergy = 0.1 * maxEnergy;
+        retSupply = 0.1 * maxSupply;
     }
-    else if(roll < 0.95)
-    {
-        retEnergy = 0.5*maxEnergy;
-        retSupply = 0.5*maxSupply;
+    else if ( roll < 0.95 ) {
+        retEnergy = 0.5 * maxEnergy;
+        retSupply = 0.5 * maxSupply;
     }
-    else{
+    else {
         retEnergy = maxEnergy;
         retSupply = maxSupply;
     }
     return [retEnergy, retSupply];
 }
 
-AbFreighter.prototype.Collide = function() {
+AbFreighter.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
     let loot = this.Loot();
 
-    lootEnergy = parseInt(loot[0]);
-    lootSupply = parseInt(loot[1]);
+    lootEnergy = parseInt( loot[0] );
+    lootSupply = parseInt( loot[1] );
 
-    alert("You encountered an abandoned freighter and collected " + lootEnergy + " energy and " + lootSupply + " supply from its remains!");
+    alert( "You encountered an abandoned freighter and collected " + lootEnergy + " energy and " + lootSupply + " supply from its remains!" );
 
     oldSpice.energy += lootEnergy;
-    if(oldSpice.supply + lootSupply <= 100)
-        oldSpice.supply += lootSupply;
+    if ( oldSpice.supply + lootSupply <= 100 )
+        oldSpice.supplies += lootSupply;
     else
-        oldSpice.supply = 100;
+        oldSpice.supplies = 100;
 
     updateLevels(); //display new supply and energy
-    gameMap.remove(oldSpice.x, oldSpice.y); // remove this freighter from the map
+    gameMap.remove( oldSpice.x, oldSpice.y ); // remove this freighter from the map
 
 
 }
@@ -231,7 +229,7 @@ BadMax.prototype.Steal = function () {
 }
 
 BadMax.prototype.DestroyShip = function () {
-    ctrecipe.GameOver("BadMax has destroyed your ship!");
+    ctrecipe.GameOver( "BadMax has destroyed your ship!" );
 }
 
 BadMax.prototype.Escape = function () {
@@ -274,28 +272,28 @@ function CheckBalance ( price ) {
 }
 
 //For the game of chance at stations
-function gameOfChance(){
+function gameOfChance () {
     //Game of Chance: if the game config variable is set to true
-    if(playGameOfChance){
-        if(confirm("DEVMODE: You have been asked to play a game of chance. Would you like to play?")){
+    if ( playGameOfChance ) {
+        if ( confirm( "DEVMODE: You have been asked to play a game of chance. Would you like to play?" ) ) {
             PlayGameOfChance();
         }
-    }else{
+    } else {
         //Game of Chance: This section creates a randome chance for normal game mode
-        var playChance = Math.floor(Math.random() * Math.floor(3));
-        if(playChance < 2 ){
-            if(confirm("You have been asked to play a game of chance. Would you like to play?")){
-                PlayGameOfChance();      
+        var playChance = Math.floor( Math.random() * Math.floor( 3 ) );
+        if ( playChance < 2 ) {
+            if ( confirm( "You have been asked to play a game of chance. Would you like to play?" ) ) {
+                PlayGameOfChance();
             }
         }
 
     }
 }
 //calculates winnings for game of chance
-function PlayGameOfChance (){
-    var winnings = Math.floor(Math.random() * Math.floor(200));
+function PlayGameOfChance () {
+    var winnings = Math.floor( Math.random() * Math.floor( 200 ) );
     oldSpice.credit += winnings;
-    alert("You have won " + winnings + " credit(s)!");
+    alert( "You have won " + winnings + " credit(s)!" );
     updateLevels();
 }
 

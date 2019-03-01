@@ -9,7 +9,7 @@ function submitHeading () {
     //x/y input = new coordinates (assign new location to these)
     window.oldSpice.move( magnitude, direction );
 
-    ctrecipe.tick();
+
     //create a log of previous location
     createNewLog();
 }

@@ -1,4 +1,4 @@
-const nameInput = document.querySelector('#playerName');
+const nameInput = document.querySelector( '#playerName' );
 window.gameData = {
     shipX: 0,
     shipY: 0,
@@ -36,10 +36,10 @@ window.onload = function () {
     document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
         // call the initGame where it will check to see if the ship and map need to be
         // new objects or be populated with the data in the local storage
-        localStorage.setItem("game", JSON.stringify(gameDataTest)); // this line imitates the onclose function, I need it for testing.
+        localStorage.setItem( "game", JSON.stringify( gameDataTest ) ); // this line imitates the onclose function, I need it for testing.
 
         initGame();
-       setupPage.attributes.class.value += ' hide';
+        setupPage.attributes.class.value += ' hide';
     };
 
 };
@@ -49,8 +49,10 @@ window.onload = function () {
  */
 function initGame () {
     // 1st check if in user defined mode
-    if (localStorage.getItem('game') == null){
-    //if ( window.gameData != undefined ) {
+    if ( localStorage.getItem( 'game' ) == null ) {
+        //if ( window.gameData != undefined ) {
+
+        window.gameMap = new GameMap( window.gameData.mapSize );
 
         window.oldSpice = new Ship(
             window.gameData.shipX,
@@ -63,16 +65,15 @@ function initGame () {
             window.gameData.shipNormalPlay
         );
 
-        window.gameMap = new GameMap( window.gameData.mapSize );
 
-    } else if (localStorage.getItem('game') != null){
+    } else if ( localStorage.getItem( 'game' ) != null ) {
         //else if ( JSON.parse( localStorage.getItem( "oldSpice" ) ) != null ) {
         // 2nd Check for Persistent State
         //pull oldSpice state from local storage on load if tab closed
-        if (typeof (Storage) != "undefined") {
+        if ( typeof ( Storage ) != "undefined" ) {
             //let temp = JSON.parse(localStorage.getItem('game'));
             // call the constructor with pertinent data (not map size)
-            let temp = JSON.parse(localStorage.getItem('game'));
+            let temp = JSON.parse( localStorage.getItem( 'game' ) );
             window.oldSpice = new Ship(
                 temp.shipX,
                 temp.shipY,
@@ -86,8 +87,8 @@ function initGame () {
 
             // NEED to do nested for loops to read the map from storage
             // INSTEAD of making a new empty map.  For now this will do.
-            window.gameMap = new GameMap(window.gameData.mapSize);
-            localStorage.removeItem('game');   // this will be gone once I can get onclose to work.
+            window.gameMap = new GameMap( window.gameData.mapSize );
+            localStorage.removeItem( 'game' );   // this will be gone once I can get onclose to work.
         }
 
     } else { // 3rd By default
@@ -128,17 +129,17 @@ function initGame () {
 //function for storing state upon tab close
 window.onclose = function () {
     //Testing persistent state with name
-    localStorage.removeItem('game');
-    localStorage.setItem("name", nameInput.value);
-    window.gameData.shipX        = window.oldSpice.x;
-    window.gameData.shipY        = window.oldSpice.y;
-    window.gameData.shipEnergy   = window.oldSpice.energy;
+    localStorage.removeItem( 'game' );
+    localStorage.setItem( "name", nameInput.value );
+    window.gameData.shipX = window.oldSpice.x;
+    window.gameData.shipY = window.oldSpice.y;
+    window.gameData.shipEnergy = window.oldSpice.energy;
     window.gameData.shipSupplies = window.oldSpice.supplies;
-    window.gameData.shipCredit   = window.oldSpice.credit;
+    window.gameData.shipCredit = window.oldSpice.credit;
     window.gameData.shipEngineLv = window.oldSpice.engineLv;
-    window.gameData.shipDamaged  = window.oldSpice.isDamaged;
+    window.gameData.shipDamaged = window.oldSpice.isDamaged;
     window.gameData.shipNormalPlay = window.oldSpice.normalPlay
-    localStorage.setItem("game", JSON.stringify(gameData));
+    localStorage.setItem( "game", JSON.stringify( gameData ) );
     //store state to local storage
     //localStorage.setItem( "oldSpice", JSON.stringify( window.oldSpice ) );        // error here
     //localStorage.setItem( "gameMap", JSON.stringify( window.GameMap ) );

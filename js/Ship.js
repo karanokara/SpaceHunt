@@ -54,27 +54,28 @@ class Ship {
         window.gameMap.move( this.x, this.y );
 
 
-        // let the ship move first, then check boundary, gameover, then jump for wormhole
-        if ( ( this.energy <= 0 && this.normalPlay ) ) {
-            setTimeout( function () {
-                gameObj.GameOver("Ran out of energy!");
-            }, 1000 );
-        }
-        else if( this.supplies <= 0 && this.normalPlay )
-        {
-            setTimeout( function () {
-                gameObj.GameOver("Ran out of supplies!");
-            }, 1000 );
-        }
-        else if ( this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0 ) {
-            setTimeout( function () {
+        // let the ship move first, 
+        // then check boundary (jumping for wormhole), gameover, pop out object event, ....
+        setTimeout( function () {
+            if ( ( window.oldSpice.energy <= 0 && window.oldSpice.normalPlay ) ) {
+                gameObj.GameOver( "Ran out of energy!" );
+            }
+            else if ( window.oldSpice.supplies <= 0 && window.oldSpice.normalPlay ) {
+                gameObj.GameOver( "Ran out of supplies!" );
+            }
+            else if ( window.oldSpice.x >= mapSize || window.oldSpice.y >= mapSize || window.oldSpice.x < 0 || window.oldSpice.y < 0 ) {
                 window.boundary.Collide();
                 updateHeading();
                 updateLevels();
                 window.oldSpice.updateShipHeading( 0 );
                 window.gameMap.move( window.oldSpice.x, window.oldSpice.y );
-            }, 1000 );
-        }
+            }
+
+            // check out any objects events
+            ctrecipe.tick();
+
+        }, 1000 );
+
     }
 
     /**

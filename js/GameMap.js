@@ -41,9 +41,12 @@ class GameMap {
     in the map if it exists and return true.
     If location is empty, returns false.
     */
-    remove(x, y){
-        if( this.hasObject(x, y)){
+    remove ( x, y ) {
+        if ( this.hasObject( x, y ) ) {
             delete this.map[x][y];
+
+            // remove obj to the map, just revert back to a simple CP now
+            document.querySelector( '#c' + x + '-' + y + ' .map-obj' ).className = 'map-obj';
             return true;
         }
         return false;
