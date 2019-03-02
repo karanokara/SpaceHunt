@@ -24,8 +24,11 @@ class Ship {
      * @param {int} degrees 
      */
     move ( distance, degrees ) {
-        let radians = degrees * ( Math.PI / 180 );
-        let mapSize = window.gameMap.size;
+        let radians = degrees * ( Math.PI / 180 ),
+            mapSize = window.gameMap.size,
+            oldX = this.x,
+            oldY = this.y,
+            midwayAsteroid;
 
         this.x += Math.round( distance * Math.cos( radians ) );
         this.y += Math.round( distance * Math.sin( radians ) );
@@ -43,6 +46,13 @@ class Ship {
             case 3:
                 this.energy -= ( this.isDamaged ) ? 5 * distance : distance;
                 break;
+        }
+
+        // check if there is Asteroid on midway, then stop the ship there (update ship X Y)
+        midwayAsteroid = window.gameMap.checkAsteroidOnWay( oldX, oldY, this.x, this.y );
+        if ( midwayAsteroid ) {
+            this.x = midwayAsteroid.x;
+            this.y = midwayAsteroid.y;
         }
 
         // update screen new heading and levels before checking game ove or collision
