@@ -15,107 +15,124 @@ function PopulateMap ( gameMap ) {
         objCoordx,
         objCoordy;
 
-    dataLog = document.getElementById( 'data-log' ).childNodes;
-    console.log( dataLog );
 
-    generateCeleron( gameMap );
-    generateXeon( gameMap );
-    generateRyzen( gameMap );
+
+
+    generateCeleronRandom( gameMap );
+    generateXeonRandom( gameMap );
+    generateRyzenRandom( gameMap );
 
     for ( let i = 0; i < 50; ++i ) {
-        objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
-        objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+        objCoordx = Math.ceil(Math.random() * (gameMap.size));
+        objCoordy = Math.ceil(Math.random() * (gameMap.size));
 
-        switch ( i % 6 ) {
-            case 0:
-                mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new RepairDepot, new MiniMart()] );
-                break;
-
-            case 1:
-                mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new RepairDepot()] );
-                break;
-
-            case 2:
-                mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new MiniMart()] );
-                break;
-
-            case 3:
-                mapObj = new SpaceStation( [new MuskTesla( 100, 1000 )] );
-                break;
-
-            case 4:
-                mapObj = new Asteroid();
-                break;
-
-            case 5:
-                mapObj = new AbFreighter();
-                break;
-        }
-
-        console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
-        gameMap.add( mapObj, objCoordx, objCoordy );
-
-        // populate objects into gazetteer
-        gazePopulate( mapObj, objCoordx, objCoordy );
+        generateCelestialObjects(gameMap, i %6, objCoordx, objCoordy);
     }
 }
 
-function generateCeleron ( gameMap ) {
-    let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
-    let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+function generateCelestialObjects(gameMap, type, celestX, celestY){
+    switch ( type) {
+        case 0:
+            mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new RepairDepot, new MiniMart()] );
+            break;
+
+        case 1:
+            mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new RepairDepot()] );
+            break;
+
+        case 2:
+            mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new MiniMart()] );
+            break;
+
+        case 3:
+            mapObj = new SpaceStation( [new MuskTesla( 100, 1000 )] );
+            break;
+
+        case 4:
+            mapObj = new Asteroid();
+            break;
+
+        case 5:
+            mapObj = new AbFreighter();
+            break;
+    }
+    update(gameMap, mapObj, celestX, celestY);
+}
+
+
+function update(gameMap, mapObj, objCoordX, objCoordY ){
+    console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordX + ' ' + objCoordY );
+    gameMap.add( mapObj, objCoordX, objCoordY );
+    gazePopulate( mapObj, objCoordX, objCoordY );
+}
+
+
+function generateCeleronRandom ( gameMap ) {
+    let randomCelX = Math.ceil(Math.random() * (gameMap.size));
+    let randomCelY = Math.ceil(Math.random() * (gameMap.size));
+    generateCeleron(gameMap, randomCelX, randomCelY);
+}
+
+function generateCeleron(gameMap, celeronCoordX, celeronCoordY) {
 
     mapObj = new Celeron();
 
     if ( gameData.celeronX || gameData.celeronX === 0 )
-        objCoordx = gameData.celeronX;
+        celeronCoordX = gameData.celeronX;
     if ( gameData.celeronY || gameData.celeronY === 0 )
-        objCoordy = gameData.celeronY;
+        celeronCoordY = gameData.celeronY;
 
-    mapObj.x = objCoordx;
-    mapObj.y = objCoordy;
+    mapObj.x = celeronCoordX;
+    mapObj.y = celeronCoordY;
 
-    dataLog[2].nodeValue = objCoordx + " " + objCoordy;
-    console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
-    gameMap.add( mapObj, objCoordx, objCoordy );
-    gazePopulate( mapObj, objCoordx, objCoordy );
+    dataLog[2].nodeValue = celeronCoordX + " " + celeronCoordY;
+
+    update(gameMap, mapObj, celeronCoordX, celeronCoordY);
 }
 
-function generateXeon ( gameMap ) {
-    objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
-    objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+
+function generateXeonRandom ( gameMap ) {
+    let randomXeonX = Math.ceil(Math.random() * (gameMap.size));
+    let randomXeonY = Math.ceil(Math.random() * (gameMap.size));
+    generateXeon(gameMap, randomXeonX, randomXeonY )
+}
+
+function generateXeon(gameMap, xeonCoordX, xeonCoordY) {
 
     mapObj = new Xeon();
 
     if ( gameData.xeonX || gameData.xeonX === 0 )
-        objCoordx = gameData.xeonX;
+        xeonCoordX = gameData.xeonX;
     if ( gameData.xeonY || gameData.xeonY === 0 )
-        objCoordy = gameData.xeonY;
+        xeonCoordY = gameData.xeonY;
 
-    mapObj.x = objCoordx;
-    mapObj.y = objCoordy;
+    mapObj.x = xeonCoordX;
+    mapObj.y = xeonCoordY;
 
-    dataLog[4].nodeValue = objCoordx + " " + objCoordy;
-    console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
-    gameMap.add( mapObj, objCoordx, objCoordy );
-    gazePopulate( mapObj, objCoordx, objCoordy );
+    dataLog[4].nodeValue = xeonCoordX + " " + xeonCoordY;
+
+    update(gameMap, mapObj, xeonCoordX, xeonCoordY);
 }
 
-function generateRyzen ( gameMap ) {
-    objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
-    objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+
+function generateRyzenRandom ( gameMap ) {
+    let randomRyzenX = Math.ceil(Math.random() * (gameMap.size));
+    let randomRyzenY = Math.ceil(Math.random() * (gameMap.size));
+    generateRyzen(gameMap, randomRyzenX, randomRyzenY)
+}
+
+function generateRyzen(gameMap, ryzenCoordX, ryzenCoordY) {
 
     mapObj = new Ryzen();
 
     if ( gameData.ryzenX || gameData.ryzenX === 0 )
-        objCoordx = gameData.ryzenX;
+        ryzenCoordX = gameData.ryzenX;
     if ( gameData.ryzenY || gameData.ryzenY === 0 )
-        objCoordy = gameData.ryzenY;
+        ryzenCoordY = gameData.ryzenY;
 
-    mapObj.x = objCoordx;
-    mapObj.y = objCoordy;
+    mapObj.x = ryzenCoordX;
+    mapObj.y = ryzenCoordY;
 
-    dataLog[6].nodeValue = objCoordx + " " + objCoordy;
-    console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordx + ' ' + objCoordy );
-    gameMap.add( mapObj, objCoordx, objCoordy );
-    gazePopulate( mapObj, objCoordx, objCoordy );
+    dataLog[6].nodeValue = ryzenCoordX + " " + ryzenCoordY;
+    update(gameMap, mapObj, ryzenCoordX, ryzenCoordY);
 }
