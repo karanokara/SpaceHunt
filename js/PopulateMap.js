@@ -56,14 +56,17 @@ function generateCelestialObjects(gameMap, type, celestX, celestY){
             mapObj = new AbFreighter();
             break;
     }
-    update(gameMap, mapObj, celestX, celestY);
+    updateLogs(gameMap, mapObj, celestX, celestY);
 }
 
 
-function update(gameMap, mapObj, objCoordX, objCoordY ){
+function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
     console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordX + ' ' + objCoordY );
     gameMap.add( mapObj, objCoordX, objCoordY );
     gazePopulate( mapObj, objCoordX, objCoordY );
+    //saveMap when it is populate as the object's locations won't move ever
+    // gazetteer keeps the same order when continuing a game
+    saveMap(gameData, gameMap);
 }
 
 
@@ -87,7 +90,7 @@ function generateCeleron(gameMap, celeronCoordX, celeronCoordY) {
 
     dataLog[2].nodeValue = celeronCoordX + " " + celeronCoordY;
 
-    update(gameMap, mapObj, celeronCoordX, celeronCoordY);
+    updateLogs(gameMap, mapObj, celeronCoordX, celeronCoordY);
 }
 
 
@@ -111,7 +114,7 @@ function generateXeon(gameMap, xeonCoordX, xeonCoordY) {
 
     dataLog[4].nodeValue = xeonCoordX + " " + xeonCoordY;
 
-    update(gameMap, mapObj, xeonCoordX, xeonCoordY);
+    updateLogs(gameMap, mapObj, xeonCoordX, xeonCoordY);
 }
 
 
@@ -134,5 +137,5 @@ function generateRyzen(gameMap, ryzenCoordX, ryzenCoordY) {
     mapObj.y = ryzenCoordY;
 
     dataLog[6].nodeValue = ryzenCoordX + " " + ryzenCoordY;
-    update(gameMap, mapObj, ryzenCoordX, ryzenCoordY);
+    updateLogs(gameMap, mapObj, ryzenCoordX, ryzenCoordY);
 }

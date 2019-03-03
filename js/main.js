@@ -217,91 +217,9 @@ function gameEffect () {
 
         //store the ship's data
         localStorage.setItem( "name", nameInput.value );
-        window.gameData.shipX           = window.oldSpice.x;
-        window.gameData.shipY           = window.oldSpice.y;
-        window.gameData.shipEnergy      = window.oldSpice.energy;
-        window.gameData.shipSupplies    = window.oldSpice.supplies;
-        window.gameData.shipCredit      = window.oldSpice.credit;
-        window.gameData.shipEngineLv    = window.oldSpice.engineLv;
-        window.gameData.shipDamaged     = window.oldSpice.isDamaged;
-        window.gameData.shipNormalPlay  = window.oldSpice.normalPlay
-        //localStorage.setItem( "savedShip", JSON.stringify( gameData ) );
 
-
-
-        // read all the map and store when location has an object only.
-        for(let i = 0; i < window.gameMap.size; ++i){
-            for(let j = 0; j < window.gameData.mapSize; ++j){
-                if(window.gameMap.map[i][j]){
-                    let index = 0;
-                    switch (window.gameMap.map[i][j].objType) {
-
-
-                        case "Planet":
-
-                            switch (window.gameMap.map[i][j].name) {
-                                // planets have x and y coordinates
-                                case "Celeron":
-                                    window.gameData.celeron = window.gameMap.map[i][j];
-                                    break;
-                                case "Xeon":
-                                    window.gameData.xeon = window.gameMap.map[i][j];
-                                    break;
-                                case "Ryzen":
-                                    window.gameData.ryzen = window.gameMap.map[i][j];
-                                    break;
-                            }
-                            break;
-
-                        // MapObject don't have x and y members
-                        // i will mark the x coordinate
-                        // j will mark the y coordinate
-                        case "StationTRM":
-                            while (window.gameData.stationTRM[index])
-                                ++index;
-                            window.gameData.stationTRM[index] = i;   // x
-                            window.gameData.stationTRM[++index] = j; // y
-                            break;
-
-                        case "StationTR":
-                            while (window.gameData.stationTR[index])
-                                ++index;
-                            window.gameData.stationTR[index] = i;
-                            window.gameData.stationTR[++index] = j;
-                            break;
-
-                        case "StationTM":
-                            while (window.gameData.stationTM[index])
-                                ++index;
-                            window.gameData.stationTM[index] = i;
-                            window.gameData.stationTM[++index] = j;
-                            break;
-
-                        case "StationT":
-                            while (window.gameData.stationT[index])
-                                ++index;
-                            window.gameData.stationT[index] = i;
-                            window.gameData.stationT[++index] = j;
-                            break;
-
-                        case "AbFreighter":
-                            while (window.gameData.abFreighter[index])
-                                ++index;
-                            window.gameData.abFreighter[index] = i;
-                            window.gameData.abFreighter[++index] = j;
-                            break;
-
-                        case "Asteroid":
-                            while (window.gameData.asteroid[index])
-                                ++index;
-                            window.gameData.asteroid[index] = i; // x
-                            window.gameData.asteroid[++index] = j; // y
-                            break;
-                    }
-
-                }
-            }
-        }
+        saveShip(window.gameData, window.oldSpice)
+        //saveMap(window.gameData, window.gameMap )
 
         localStorage.setItem( "savedGame", JSON.stringify(window.gameData) );
     };
