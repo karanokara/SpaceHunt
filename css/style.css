@@ -22,13 +22,24 @@ html, body {
 #ship-name {
     font-family: "Bad Script" , cursive;;
     font-weight: bolder;
-    font-size: 1.5rem;
+    font-size: 1rem;
+}
+
+/*container class for main screen (middle top page) content*/
+.main-screen-container {
+    display: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+    width: 65%;
+    height: 100%;
 }
 
 /*id to target main-screen img*/
 #main-screen {
-    width: 65%;
-    height: 65%;
+    width: 50%;
+    height: 50%;
     border-radius: 20%;
     margin: 1rem;
     overflow: hidden;
@@ -36,9 +47,22 @@ html, body {
 
 /*id for targeting message board*/
 #message-board {
-    width: 70%;
-    background-color: whitesmoke;
+    width: 80%;
+    height: 35%;
+    background-color: darkturquoise;
     text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/*id for message board ul*/
+#message-list {
+
+}
+
+/*class for message board li elements*/
+.message {
+
 }
 
 /*class to target top side panels*/
@@ -119,16 +143,7 @@ html, body {
     justify-content: center;
 }
 
-/*container class for main screen (middle top page) content*/
-.main-screen-container {
-    display: inherit;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: darkgrey;
-    width: 65%;
-    height: 100%;
-}
+
 
 
 /*container for bottom half of page*/
@@ -198,6 +213,7 @@ html, body {
 /*control container specific*/
 #controls {
     background: lightblue;
+    align-items: center;
 }
 
 /*to target input fields container*/
@@ -207,6 +223,7 @@ html, body {
     justify-content: space-evenly;
     align-items: center;
     text-align: center;
+    width: 100%;
 }
 
 #movement-form-fields {
@@ -217,30 +234,11 @@ html, body {
     display: flex;
     justify-content: space-between;
     width: auto;
-    margin: .5rem 1rem;
+    margin: .5rem 2rem;
 }
 
-/*class to target input labels*/
-.input-label {
-    display: inline-block;
-    margin: .5rem;
-}
-
-/*id for heading submit button*/
-#heading-submit {
-    margin-top: 1rem;
-    width: 50%;
-}
-
-/*id for direction selector input*/
-#direction-input {
-    display: inline-block;
-    border-radius: 50%;
-}
-
-/*id for magnitude number input*/
-#magnitude-input {
-    display: inline-block;
+#sensor-scan {
+    width: 40%;
 }
 
 /*the game saving button */
