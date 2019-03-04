@@ -109,26 +109,26 @@
                 <!--control panel-->
                 <div id="controls" class="status-map-control-containers">
                     <h4>Command Console</h4>
-                    <div class="heading-text">
+
                         <div id="heading-container">
-                            X: <span id="x-heading" class="heading-span">0</span><br />
-                            Y: <span id="y-heading" class="heading-span">0</span><br />
+                            Current Heading<br/>
+                            X: <span id="x-heading" class="heading-span">0</span>
+                            Y: <span id="y-heading" class="heading-span">0</span>
                         </div>
-                    </div>
 
                     <form class="control-fields">
-                        <fieldset>
-                            <label class="input-label" for="direction-input">Direction:</label>
-                            <span id="direction-value">0</span><br />
-                            <input id="direction-input" type="range" oninput="showDirectionInput()" max="330" min="0"
-                                step="30" value="0" /><br />
-                            <label class="input-label" for="magnitude-input">Celestial Units</label><br />
-                            <input id="magnitude-input" max="10" min="0" type="number" value="0"><br />
+                        <fieldset id="movement-form-fields">
+                            <div>
+                                <input id="north-input" value="NORTH" type="button" onclick="submitNorthHeading()"/>
+                                <div id="east-west-container">
+                                    <input id="west-input" value="WEST" type="button" onclick="submitWestHeading()"/>
+                                    <input id="east-input" value="EAST" type="button" onclick="submitEastHeading()"/>
+                                </div>
+                                <input id="south-input" value="SOUTH" type="button" onclick="submitSouthHeading()"/>
+                            </div>
                         </fieldset>
-
-                        <input id="heading-submit" type="button" value="Engage" onclick=" submitHeading()">
-                        <input id="sensor-scan" type="button" value="Scan">
                     </form>
+                    <input id="sensor-scan" type="button" value="Scan">
                 </div>
             </div>
         </div>

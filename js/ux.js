@@ -1,13 +1,35 @@
 //File contains functions to render the user interface to the user
 
-function submitHeading () {
+//function captures direction value and calls submit
+function submitNorthHeading() {
+    let direction_value = 90;
+    submitHeading(direction_value);
+}
 
-    //assign element vars
-    let direction = parseInt( document.getElementById( "direction-input" ).value );
-    let magnitude = parseInt( document.getElementById( "magnitude-input" ).value );
+//function captures direction value and calls submit
+function submitEastHeading() {
+    let direction_value = 0;
+    submitHeading(direction_value);
+}
+
+//function captures direction value and calls submit
+function submitSouthHeading() {
+    let direction_value = 270;
+    submitHeading(direction_value);
+}
+
+//function captures direction value and calls submit
+function submitWestHeading() {
+    let direction_value = 180;
+    submitHeading(direction_value);
+}
+
+//function takes direction value and calls oldspice move w/ new
+//heading
+function submitHeading (direction_value) {
 
     //x/y input = new coordinates (assign new location to these)
-    window.oldSpice.move( magnitude, direction );
+    window.oldSpice.move( 1, parseInt(direction_value) );
 
     ctrecipe.tick();
     //create a log of previous location
@@ -58,59 +80,4 @@ function createNewLog () {
     ul.appendChild( log );
 }
 
-//function for rendering the sensor grid to the DOM
-function createGrid () {
-    //target grid container and store to local var
-    let sensor_grid = document.getElementById( "grid-container" );
 
-    //grid changes according to ship sensor upgrade level
-    switch ( window.oldSpice.sensor.level ) {
-        case 1: {
-            let i = 0;
-            for ( i = 0; i < 9; i++ ) {
-                let grid_block = document.createElement( "div" ); //create new grid-block
-                grid_block.className = "grid-block"; //assign grid-block class
-                grid_block.setAttribute( "id", "grid-key" + i.toString() ); //add id 'grid-key(1-i)'
-                sensor_grid.appendChild( grid_block );
-            }
-            sensor_grid.style.gridTemplateColumns = "repeat(3, minmax(20px, 3fr))";
-            sensor_grid.style.gridTemplateRows = "repeat(3, minmax(20px, 3fr))";
-        } break;
-
-        case 2: {
-            let i = 0;
-            for ( i = 0; i < 25; i++ ) {
-                let grid_block = document.createElement( "div" );
-                grid_block.className = "grid-block";
-                grid_block.setAttribute( "id", "grid-key" + i.toString() );
-                sensor_grid.appendChild( grid_block );
-            }
-            sensor_grid.style.gridTemplateColumns = "repeat(5, minmax(20px, 3fr))";
-            sensor_grid.style.gridTemplateRows = "repeat(5, minmax(20px, 3fr))";
-        } break;
-
-        case 3: {
-            let i = 0;
-            for ( i = 0; i < 49; i++ ) {
-                let grid_block = document.createElement( "div" );
-                grid_block.className = "grid-block";
-                grid_block.setAttribute( "id", "grid-key" + i.toString() );
-                sensor_grid.appendChild( grid_block );
-            }
-            sensor_grid.style.gridTemplateColumns = "repeat(7, minmax(20px, 3fr))";
-            sensor_grid.style.gridTemplateRows = "repeat(7, minmax(20px, 3fr))";
-        } break;
-
-        default: {
-            let i = 0;
-            for ( i = 0; i < 9; i++ ) {
-                let grid_block = document.createElement( "div" );
-                grid_block.className = "grid-block";
-                grid_block.setAttribute( "id", "grid-key" + i.toString() );
-                sensor_grid.appendChild( grid_block );
-            }
-            sensor_grid.style.gridTemplateColumns = "repeat(3, minmax(20px, 3fr))";
-            sensor_grid.style.gridTemplateRows = "repeat(3, minmax(20px, 3fr))";
-        }
-    }
-}

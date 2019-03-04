@@ -41,11 +41,6 @@ html, body {
     text-align: center;
 }
 
-.heading-text {
-    width: 80%;
-    justify-content: flex-start;
-}
-
 /*class to target top side panels*/
 .data-panel {
     display: inherit;
@@ -100,12 +95,12 @@ html, body {
 /*class to target heading spans*/
 .heading-span {
     display: inline-block;
-    margin: 1rem 0;
 }
 
 /*container class for current heading*/
 .heading-container {
-    padding-left: 2rem;
+    display: inherit;
+    justify-content: center;
 }
 
 /*container class for main screen (middle top page) content*/
@@ -191,12 +186,22 @@ html, body {
 
 /*to target input fields container*/
 .control-fields {
-    display: flex;
+    display: inherit;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 1rem;
     text-align: center;
+}
+
+#movement-form-fields {
+    width: 100%;
+}
+
+#east-west-container {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    margin: .5rem 1rem;
 }
 
 /*class to target input labels*/
