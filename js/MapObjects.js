@@ -80,6 +80,12 @@ function MeteorShower () { }
 
 MeteorShower.prototype = new MapObject( "MeteorShower", 0 );
 
+MeteorShower.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
+    alert("You flew into a meteor shower and the ship is badly damaged.");
+    oldSpice.isDamaged = true;
+}
+
 /*----------------------------------------------------*/
 /* Abandoned Freighters drop some amount of resources
 when encountered

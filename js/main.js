@@ -1,23 +1,27 @@
 const nameInput = document.querySelector( '#playerName' );
+MAX_CELEST_OBJ = 20;
 window.gameData = {
     shipX: 0,
     shipY: 0,
     shipEnergy: 1000,
     shipSupplies: 100,
     shipCredit: 1000,
+    shipEngineLv: 1,
+    shipDamaged: false,
     shipNormalPlay: 1,
     mapSize: 128,
     celeron: null,
     xeon: null,
     ryzen: null,
-    stationTRM: new Array(20),
-    stationTR: new Array(20),
-    stationTM: new Array(20),
-    stationT: new Array(20),
-    abFreighter: new Array(20),
-    asteroid: new Array(20),
+    stationTRM: new Array(MAX_CELEST_OBJ),
+    stationTR: new Array(MAX_CELEST_OBJ),
+    stationTM: new Array(MAX_CELEST_OBJ),
+    stationT: new Array(MAX_CELEST_OBJ),
+    abFreighter: new Array(MAX_CELEST_OBJ),
+    asteroid: new Array(MAX_CELEST_OBJ),
+    meteorShower: new Array(MAX_CELEST_OBJ)
 };
-
+var setupPage = document.querySelectorAll( '.setup-game' )[0];
 // when DOM loaded, call this
 window.onload = function () {
     // had to move datalog from PopulateMap.js as Continue Game doesn't call populate a fresh map.
@@ -27,7 +31,7 @@ window.onload = function () {
     /**
      * when click the start btn, start loading game
      */
-    let setupPage = document.querySelectorAll( '.setup-game' )[0];
+
 
     // initializes default values
     document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
@@ -52,7 +56,7 @@ window.onload = function () {
  * as well as loads the map the player was playing on.
  */
 function contGame () {
-
+    setupPage.attributes.class.value += ' hide';
     //pull oldSpice state from local storage on load if tab closed
     // call the constructor with pertinent data (not map size)
     let temp = JSON.parse( localStorage.getItem( 'savedGame' ) );
@@ -68,6 +72,7 @@ function contGame () {
     );
 
 
+    // make an empty map with correct dimensions
     window.gameMap = new GameMap( temp.mapSize );
 
     // setup wormhole
@@ -79,34 +84,9 @@ function contGame () {
     // render map
     window.gameMap.renderMap( window.oldSpice.x, window.oldSpice.y );
 
-    // populate saved map
-    // load planets
-    generateCeleron(gameMap, temp.celeron.x, temp.celeron.y);
-    generateXeon(gameMap, temp.xeon.x, temp.xeon.y);
-    generateRyzen(gameMap, temp.ryzen.x, temp.ryzen.y);
+    // place map object from local storage into the empty map
+    PopulateSavedMap(window.gameMap, temp);
 
-
-
-    // Celestial object are displaying in different order on the Gazetteer
-    // due to the fact that when saving the map, it is read in order
-    // when the gazetteer is initially populated it is being populated as the objects are randomly generated.
-
-
-    // load celestial objects
-    for(let i = 0; i < temp.asteroid.length; i += 2){
-        if(temp.stationTRM[i])
-            generateCelestialObjects(gameMap, 0, temp.stationTRM[i], temp.stationTRM[i+1]);
-        if(temp.stationTR[i])
-            generateCelestialObjects(gameMap, 1, temp.stationTR[i], temp.stationTR[i+1]);
-        if(temp.stationTM[i])
-            generateCelestialObjects(gameMap, 2, temp.stationTM[i], temp.stationTM[i+1]);
-        if(temp.stationT[i])
-            generateCelestialObjects(gameMap, 3, temp.stationT[i], temp.stationT[i+1]);
-        if(temp.asteroid[i])
-            generateCelestialObjects(gameMap, 4, temp.asteroid[i], temp.asteroid[i+1]);
-        if(temp.abFreighter[i])
-            generateCelestialObjects(gameMap, 5, temp.abFreighter[i], temp.abFreighter[i+1]);
-    }
 
     // update screen data
     updateHeading();
@@ -124,10 +104,9 @@ function contGame () {
  * Inital game, using default setting or user defined setting or default setting
  */
 function initGame () {
-
+    setupPage.attributes.class.value += ' hide';
     // 1st check if in user defined mode
     if ( window.gameData != undefined ) {
-        //if ( window.gameData != undefined ) {
 
         window.gameMap = new GameMap( window.gameData.mapSize );
 
@@ -137,8 +116,8 @@ function initGame () {
             window.gameData.shipEnergy,
             window.gameData.shipSupplies,
             window.gameData.shipCredit,
-            1,
-            false,
+            window.gameData.shipEngineLv,
+            window.gameData.shipDamaged,
             window.gameData.shipNormalPlay
         );
 
@@ -179,21 +158,11 @@ function initGame () {
 
 //function for storing state upon tab close
 window.onclose = function () {
-    //Testing persistent state with name
+    // update Ship properties and store in local storage
     localStorage.removeItem( 'savedGame' );
-    localStorage.setItem( "name", nameInput.value );
-    window.gameData.shipX = window.oldSpice.x;
-    window.gameData.shipY = window.oldSpice.y;
-    window.gameData.shipEnergy = window.oldSpice.energy;
-    window.gameData.shipSupplies = window.oldSpice.supplies;
-    window.gameData.shipCredit = window.oldSpice.credit;
-    window.gameData.shipEngineLv = window.oldSpice.engineLv;
-    window.gameData.shipDamaged = window.oldSpice.isDamaged;
-    window.gameData.shipNormalPlay = window.oldSpice.normalPlay
-    localStorage.setItem( "savedGame", JSON.stringify( gameData ) );
-    //store state to local storage
-    //localStorage.setItem( "oldSpice", JSON.stringify( window.oldSpice ) );        // error here
-    //localStorage.setItem( "gameMap", JSON.stringify( window.GameMap ) );
+    localStorage.setItem( "playerName", nameInput.value );
+    saveShip(window.gameData, window.oldSpice);
+    localStorage.setItem( "savedGame", JSON.stringify( window.gameData ) );
 };
 
 /**
@@ -213,15 +182,15 @@ function gameEffect () {
      */
     document.querySelector( '#game-save' ).onclick = function () {
 
-        alert( "saved game!" );
-
+        // store the player's name
+        localStorage.setItem( "playerName", nameInput.value );
         //store the ship's data
-        localStorage.setItem( "name", nameInput.value );
-
-        saveShip(window.gameData, window.oldSpice)
+        saveShip(window.gameData, window.oldSpice);
+        // the map is being saved at the time it is being popuated
         //saveMap(window.gameData, window.gameMap )
 
         localStorage.setItem( "savedGame", JSON.stringify(window.gameData) );
+        alert( "saved game!" );
     };
 }
 

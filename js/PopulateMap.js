@@ -17,16 +17,46 @@ function PopulateMap ( gameMap ) {
 
 
 
-
+    // load planets
     generateCeleronRandom( gameMap );
     generateXeonRandom( gameMap );
     generateRyzenRandom( gameMap );
 
+    // load celestial objects
     for ( let i = 0; i < 50; ++i ) {
         objCoordx = Math.ceil(Math.random() * (gameMap.size));
         objCoordy = Math.ceil(Math.random() * (gameMap.size));
 
-        generateCelestialObjects(gameMap, i %6, objCoordx, objCoordy);
+        generateCelestialObjects(gameMap, i %7, objCoordx, objCoordy);
+    }
+}
+/**
+ * generates map objects by reading the local storage to get their locations
+ */
+function PopulateSavedMap(gameMap, savedMap){
+
+    // load planets
+    generateCeleron(gameMap, savedMap.celeron.x, savedMap.celeron.y);
+    generateXeon(gameMap, savedMap.xeon.x, savedMap.xeon.y);
+    generateRyzen(gameMap, savedMap.ryzen.x, savedMap.ryzen.y);
+
+
+    // load celestial objects
+    for(let i = 0; i < MAX_CELEST_OBJ; i += 2){
+        if(savedMap.stationTRM[i])
+            generateCelestialObjects(gameMap, 0, savedMap.stationTRM[i], savedMap.stationTRM[i+1]);
+        if(savedMap.stationTR[i])
+            generateCelestialObjects(gameMap, 1, savedMap.stationTR[i], savedMap.stationTR[i+1]);
+        if(savedMap.stationTM[i])
+            generateCelestialObjects(gameMap, 2, savedMap.stationTM[i], savedMap.stationTM[i+1]);
+        if(savedMap.stationT[i])
+            generateCelestialObjects(gameMap, 3, savedMap.stationT[i], savedMap.stationT[i+1]);
+        if(savedMap.asteroid[i])
+            generateCelestialObjects(gameMap, 4, savedMap.asteroid[i], savedMap.asteroid[i+1]);
+        if(savedMap.abFreighter[i])
+            generateCelestialObjects(gameMap, 5, savedMap.abFreighter[i], savedMap.abFreighter[i+1]);
+        if(savedMap.meteorShower[i])
+            generateCelestialObjects(gameMap, 6, savedMap.meteorShower[i], savedMap.meteorShower[i+1]);
     }
 }
 
@@ -55,6 +85,10 @@ function generateCelestialObjects(gameMap, type, celestX, celestY){
         case 5:
             mapObj = new AbFreighter();
             break;
+
+        case 6:
+            mapObj = new MeteorShower();
+            break;
     }
     updateLogs(gameMap, mapObj, celestX, celestY);
 }
@@ -66,7 +100,7 @@ function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
     gazePopulate( mapObj, objCoordX, objCoordY );
     //saveMap when it is populate as the object's locations won't move ever
     // gazetteer keeps the same order when continuing a game
-    saveMap(gameData, gameMap);
+    saveMap(gameData, mapObj, objCoordX, objCoordY);
 }
 
 
