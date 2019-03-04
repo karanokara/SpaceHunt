@@ -131,7 +131,8 @@ class Ship {
      */
     fixEngine () {
         if ( this.isDamaged ) {
-
+            this.isDamaged = false;
+            this.messageBoard.innerHTML = "All damages have been repaired!";
         }
         else {
             this.messageBoard.innerHTML = "Ship is healthy!";

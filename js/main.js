@@ -21,7 +21,8 @@ window.gameData = {
     asteroid: new Array(MAX_CELEST_OBJ),
     meteorShower: new Array(MAX_CELEST_OBJ)
 };
-var setupPage = document.querySelectorAll( '.setup-game' )[0];
+
+
 // when DOM loaded, call this
 window.onload = function () {
     // had to move datalog from PopulateMap.js as Continue Game doesn't call populate a fresh map.
@@ -31,7 +32,7 @@ window.onload = function () {
     /**
      * when click the start btn, start loading game
      */
-
+    let setupPage = document.querySelectorAll( '.setup-game' )[0];
 
     // initializes default values
     document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
@@ -45,8 +46,8 @@ window.onload = function () {
     // loads saved game data for oldSpice and gameMap
     document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
 
-        contGame();
-        setupPage.attributes.class.value += ' hide';
+       if(contGame())
+            setupPage.attributes.class.value += ' hide';
     };
 
 };
@@ -56,47 +57,59 @@ window.onload = function () {
  * as well as loads the map the player was playing on.
  */
 function contGame () {
-    setupPage.attributes.class.value += ' hide';
+    let start = false;
+    let temp = JSON.parse(localStorage.getItem('savedGame'));
+
+
     //pull oldSpice state from local storage on load if tab closed
     // call the constructor with pertinent data (not map size)
-    let temp = JSON.parse( localStorage.getItem( 'savedGame' ) );
-    window.oldSpice = new Ship(
-        temp.shipX,
-        temp.shipY,
-        temp.shipEnergy,
-        temp.shipSupplies,
-        temp.shipCredit,
-        temp.shipEngineLv,
-        temp.shipDamaged,
-        temp.shipNormalPlay
-    );
+    if ( temp != undefined ) {
+        start = true;
+
+        window.oldSpice = new Ship(
+            temp.shipX,
+            temp.shipY,
+            temp.shipEnergy,
+            temp.shipSupplies,
+            temp.shipCredit,
+            temp.shipEngineLv,
+            temp.shipDamaged,
+            temp.shipNormalPlay
+        );
 
 
-    // make an empty map with correct dimensions
-    window.gameMap = new GameMap( temp.mapSize );
+        // make an empty map with correct dimensions
+        window.gameMap = new GameMap(temp.mapSize);
 
-    // setup wormhole
-    window.boundary = new WormHole();
+        // setup wormhole
+        window.boundary = new WormHole();
 
-    // setup game effect
-    gameEffect();
+        // setup game effect
+        gameEffect();
 
-    // render map
-    window.gameMap.renderMap( window.oldSpice.x, window.oldSpice.y );
+        // render map
+        window.gameMap.renderMap(window.oldSpice.x, window.oldSpice.y);
 
-    // place map object from local storage into the empty map
-    PopulateSavedMap(window.gameMap, temp);
-
-
-    // update screen data
-    updateHeading();
-    updateLevels();
+        // place map object from local storage into the empty map
+        PopulateSavedMap(window.gameMap, temp);
 
 
-    //important that pushes to tickObjects happens nearly last
-    //ctrecipe.tickObjects.push( function () { DrawGameMap(grid_items); } );
-    ctrecipe.tickObjects.push( function () { Collision( window.oldSpice.x, window.oldSpice.y ); } );
-    ctrecipe.tick();
+        // update screen data
+        updateHeading();
+        updateLevels();
+
+
+        //important that pushes to tickObjects happens nearly last
+        //ctrecipe.tickObjects.push( function () { DrawGameMap(grid_items); } );
+        ctrecipe.tickObjects.push(function () {
+            Collision(window.oldSpice.x, window.oldSpice.y);
+        });
+        ctrecipe.tick();
+    } else
+        alert("No previous game has been saved.")
+
+    return start;
+
 }
 
 
@@ -104,7 +117,7 @@ function contGame () {
  * Inital game, using default setting or user defined setting or default setting
  */
 function initGame () {
-    setupPage.attributes.class.value += ' hide';
+
     // 1st check if in user defined mode
     if ( window.gameData != undefined ) {
 
@@ -157,9 +170,9 @@ function initGame () {
 }
 
 //function for storing state upon tab close
-window.onclose = function () {
+window.beforeunload = function () {
     // update Ship properties and store in local storage
-    localStorage.removeItem( 'savedGame' );
+    //localStorage.removeItem( 'savedGame' );
     localStorage.setItem( "playerName", nameInput.value );
     saveShip(window.gameData, window.oldSpice);
     localStorage.setItem( "savedGame", JSON.stringify( window.gameData ) );
@@ -186,7 +199,7 @@ function gameEffect () {
         localStorage.setItem( "playerName", nameInput.value );
         //store the ship's data
         saveShip(window.gameData, window.oldSpice);
-        // the map is being saved at the time it is being popuated
+        // the map is being saved at the time it is being populated
         //saveMap(window.gameData, window.gameMap )
 
         localStorage.setItem( "savedGame", JSON.stringify(window.gameData) );
