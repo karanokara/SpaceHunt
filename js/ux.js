@@ -31,7 +31,7 @@ function submitHeading (direction_value) {
     //x/y input = new coordinates (assign new location to these)
     window.oldSpice.move( 1, parseInt(direction_value) );
 
-    ctrecipe.tick();
+
     //create a log of previous location
     createNewLog();
 }

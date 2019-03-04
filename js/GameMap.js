@@ -17,6 +17,7 @@ class GameMap {
             this.map[i] = new Array( size );
         }
     }
+
     /*
     Method to add a new CelestialObject to the map.
     Takes a CelestialObject and coordinate pair as arguments.
@@ -35,6 +36,23 @@ class GameMap {
 
         return true;
     }
+
+    /*
+    Delete reference to object at position x, y 
+    in the map if it exists and return true.
+    If location is empty, returns false.
+    */
+    remove ( x, y ) {
+        if ( this.hasObject( x, y ) ) {
+            delete this.map[x][y];
+
+            // remove obj to the map, just revert back to a simple CP now
+            document.querySelector( '#c' + x + '-' + y + ' .map-obj' ).className = 'map-obj';
+            return true;
+        }
+        return false;
+    }
+
     /*
     Return the contents of the map at location (x, y).
     If location is empty, returns null.
@@ -103,5 +121,54 @@ class GameMap {
             targetY = 1 * y * this.mapCellSize;
 
         this.mapContainer.style.transform = 'translate(' + targetX + 'px,' + targetY + 'px)';
+    }
+
+    /**
+     * Check if there is ONLY "Asteroid" on the way of ship to the terminating point
+     * return false if there is no asteroid
+     * return asteroid coordinate as the new CP point of ship
+     * 
+     * @param {*} startX 
+     * @param {*} startY 
+     * @param {*} endX 
+     * @param {*} endY 
+     */
+    checkAsteroidOnWay ( startX, startY, endX, endY ) {
+        var checkX = ( startX == endX ) ? 0 : 1;
+
+        if ( checkX ) {
+            if ( startX > endX ) {  // move left
+                for ( var i = ( startX - 1 ); i > endX; --i ) {
+                    if ( this.hasObject( i, startY ) && this.contents( i, startY ).objType === 'Asteroid' ) {
+                        return { x: i, y: startY };
+                    }
+                }
+            }
+            else {  // move right
+                for ( var i = ( startX + 1 ); i < endX; ++i ) {
+                    if ( this.hasObject( i, startY ) && this.contents( i, startY ).objType === 'Asteroid' ) {
+                        return { x: i, y: startY };
+                    }
+                }
+            }
+        }
+        else {  // check Y
+            if ( startY > endY ) {  // move down
+                for ( var i = ( startY - 1 ); i > endY; --i ) {
+                    if ( this.hasObject( startX, i ) && this.contents( startX, i ).objType === 'Asteroid' ) {
+                        return { x: startX, y: i };
+                    }
+                }
+            }
+            else {  // move up
+                for ( var i = ( startY + 1 ); i < endY; ++i ) {
+                    if ( this.hasObject( startX, i ) && this.contents( startX, i ).objType === 'Asteroid' ) {
+                        return { x: startX, y: i };
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

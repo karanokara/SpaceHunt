@@ -24,8 +24,11 @@ class Ship {
      * @param {int} degrees 
      */
     move ( distance, degrees ) {
-        let radians = degrees * ( Math.PI / 180 );
-        let mapSize = window.gameMap.size;
+        let radians = degrees * ( Math.PI / 180 ),
+            mapSize = window.gameMap.size,
+            oldX = this.x,
+            oldY = this.y,
+            midwayAsteroid;
 
         this.x += Math.round( distance * Math.cos( radians ) );
         this.y += Math.round( distance * Math.sin( radians ) );
@@ -45,6 +48,13 @@ class Ship {
                 break;
         }
 
+        // check if there is Asteroid on midway, then stop the ship there (update ship X Y)
+        midwayAsteroid = window.gameMap.checkAsteroidOnWay( oldX, oldY, this.x, this.y );
+        if ( midwayAsteroid ) {
+            this.x = midwayAsteroid.x;
+            this.y = midwayAsteroid.y;
+        }
+
         // update screen new heading and levels before checking game ove or collision
         // so user can see current status before game over
         updateHeading();
@@ -54,21 +64,28 @@ class Ship {
         window.gameMap.move( this.x, this.y );
 
 
-        // let the ship move first, then check boundary, gameover, then jump for wormhole
-        if ( ( this.energy <= 0 && this.normalPlay ) || ( this.supplies <= 0 && this.normalPlay ) ) {
-            setTimeout( function () {
-                gameObj.GameOver();
-            }, 1000 );
-        }
-        else if ( this.x >= mapSize || this.y >= mapSize || this.x < 0 || this.y < 0 ) {
-            setTimeout( function () {
+        // let the ship move first, 
+        // then check boundary (jumping for wormhole), gameover, pop out object event, ....
+        setTimeout( function () {
+            if ( ( window.oldSpice.energy <= 0 && window.oldSpice.normalPlay ) ) {
+                gameObj.GameOver( "Ran out of energy!" );
+            }
+            else if ( window.oldSpice.supplies <= 0 && window.oldSpice.normalPlay ) {
+                gameObj.GameOver( "Ran out of supplies!" );
+            }
+            else if ( window.oldSpice.x >= mapSize || window.oldSpice.y >= mapSize || window.oldSpice.x < 0 || window.oldSpice.y < 0 ) {
                 window.boundary.Collide();
                 updateHeading();
                 updateLevels();
                 window.oldSpice.updateShipHeading( 0 );
                 window.gameMap.move( window.oldSpice.x, window.oldSpice.y );
-            }, 1000 );
-        }
+            }
+
+            // check out any objects events
+            ctrecipe.tick();
+
+        }, 1000 );
+
     }
 
     /**
@@ -114,7 +131,8 @@ class Ship {
      */
     fixEngine () {
         if ( this.isDamaged ) {
-
+            this.isDamaged = false;
+            this.messageBoard.innerHTML = "All damages have been repaired!";
         }
         else {
             this.messageBoard.innerHTML = "Ship is healthy!";

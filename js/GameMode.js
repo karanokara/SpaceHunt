@@ -20,9 +20,9 @@ function GameMode(params)
     gameObj.WormholeX = 0;
     gameObj.WormholeY = 0;
 
-    gameObj.GameOver = function()
+    gameObj.GameOver = function(reason)
     {
-        alert("You lost the game!");
+        alert(reason + "\nYou lost the game!");
     }
 
     gameObj.GameWinner = function()

@@ -46,6 +46,14 @@
     width:100%;
 }
 
+.MeteorShower {
+    background-image: url("../resources/images/meteorShower.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+}
+
 .Planet {
     background-image: url("../resources/images/ryzen.png");
     background-size: contain;
@@ -70,6 +78,10 @@
     width:100%;
     position: relative;
     z-index: 10;
+}
+
+.AbFreighter {
+    background-color: bisque;
 }
 
 .deg0 {

@@ -21,6 +21,7 @@ function developerModeInit () {
     creditInit();
     wormholeInit();
     gameplayInit();
+    gameOfChanceInit();
     mapSizeInit();
     celeronInit();
     xeonInit();
@@ -211,6 +212,40 @@ function gameplayInit () {
 
     document.getElementById( "developerMode" ).appendChild( gameplayLabel );
 }
+/*
+Create inputs to set default Game of Chance behavior.
+If "Chance" is selected, always a game of chance.
+If "Always" is selected, probability.
+Defaults to "Chance".
+*/
+function gameOfChanceInit () {
+    let gameOfChanceLabel = document.createElement( "P" );
+    let gameOfChanceLabelText = document.createTextNode( "Game of Chance at Stations: " );
+    gameOfChanceLabel.appendChild( gameOfChanceLabelText );
+
+    let normalRadio = document.createElement( "INPUT" );
+    normalRadio.setAttribute( "name", "gameOfChanceInput" );
+    normalRadio.setAttribute( "checked", "true" );
+    normalRadio.setAttribute( "type", "radio" );
+    gameOfChanceLabel.appendChild( normalRadio );
+
+    let normalLabel = document.createElement( "SPAN" );
+    let normalLabelText = document.createTextNode( " Random " );
+    normalLabel.appendChild( normalLabelText );
+    gameOfChanceLabel.appendChild( normalLabel );
+
+    let undeadRadio = document.createElement( "INPUT" );
+    undeadRadio.setAttribute( "name", "gameOfChanceInput" );
+    undeadRadio.setAttribute( "type", "radio" );
+    gameOfChanceLabel.appendChild( undeadRadio );
+
+    let undeadLabel = document.createElement( "SPAN" );
+    let undeadLabelText = document.createTextNode( " Guaranted" );
+    undeadLabel.appendChild( undeadLabelText );
+    gameOfChanceLabel.appendChild( undeadLabel );
+
+    document.getElementById( "developerMode" ).appendChild( gameOfChanceLabel );
+}
 
 /*
 Initialize starting coordinates of Celeron.
@@ -333,6 +368,25 @@ function submitInit () {
 }
 
 /*
+Create text box for the player's name for persistent state.
+Default value is admin.
+*/
+function playerNameInit() {
+    let playerNameLabel = document.createElement("P");
+    let playerNameLabelText = document.createTextNode("Player Name: ");
+    playerNameLabel.appendChild(playerNameLabelText);
+
+    let playerNameInput = document.createElement("INPUT");
+    playerNameInput.setAttribute("name", "playerNameInput");
+    playerNameInput.setAttribute("type", "text");
+    playerNameInput.setAttribute("value", "admin");
+    playerNameInput.setAttribute("size", "10");
+    playerNameLabel.appendChild(playerNameInput);
+
+    document.getElementById("developerMode").appendChild(playerNameLabel);
+}
+
+/*
 Read all values from developer mode form.
 Set ship coordinates, energy, supplies, and credit.
 Set wormhole behavior and gameplay mode.
@@ -349,6 +403,7 @@ function developerModeSubmit () {
     let celeron = document.getElementsByName( "celeronInput" );
     let xeon = document.getElementsByName( "xeonInput" );
     let ryzen = document.getElementsByName( "ryzenInput" );
+    playGameOfChance = document.getElementsByName( "gameOfChanceInput" );
 
     //set flags in global ctrecipe (GameMode) object that
     //WormHole Collide method can reference

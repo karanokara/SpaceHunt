@@ -59,9 +59,8 @@ Asteroid.prototype.DamageShip = function () {
 }
 
 Asteroid.prototype.DestroyShip = function () {
-    alert( "You slammed into an asteroid and blew up! You lose!" );
     oldSpice.energy = 0;
-    ctrecipe.GameOver(); //should be redundant (0 energy triggers gameover eventually)
+    ctrecipe.GameOver( "You slammed into an asteroid!" );
 }
 
 Asteroid.prototype.Collide = function () {
@@ -81,11 +80,65 @@ function MeteorShower () { }
 
 MeteorShower.prototype = new MapObject( "MeteorShower", 0 );
 
+MeteorShower.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
+    alert("You flew into a meteor shower and the ship is badly damaged.");
+    oldSpice.isDamaged = true;
+}
+
 /*----------------------------------------------------*/
+/* Abandoned Freighters drop some amount of resources
+when encountered
+*/
 
 function AbFreighter () { }
 
 AbFreighter.prototype = new MapObject( "AbFreighter", 0 );
+
+AbFreighter.prototype.Loot = function () {
+    /*Computes a basic loot table for encountering a freighter*/
+
+    let maxEnergy = 1000;
+    let maxSupply = 100;
+    let retEnergy;
+    let retSupply;
+
+    let roll = Math.random();
+    if ( roll < 0.75 ) {
+        retEnergy = 0.1 * maxEnergy;
+        retSupply = 0.1 * maxSupply;
+    }
+    else if ( roll < 0.95 ) {
+        retEnergy = 0.5 * maxEnergy;
+        retSupply = 0.5 * maxSupply;
+    }
+    else {
+        retEnergy = maxEnergy;
+        retSupply = maxSupply;
+    }
+    return [retEnergy, retSupply];
+}
+
+AbFreighter.prototype.Collide = function () {
+    MapObject.prototype.Collide.call( this );
+    let loot = this.Loot();
+
+    lootEnergy = parseInt( loot[0] );
+    lootSupply = parseInt( loot[1] );
+
+    alert( "You encountered an abandoned freighter and collected " + lootEnergy + " energy and " + lootSupply + " supply from its remains!" );
+
+    oldSpice.energy += lootEnergy;
+    if ( oldSpice.supply + lootSupply <= 100 )
+        oldSpice.supplies += lootSupply;
+    else
+        oldSpice.supplies = 100;
+
+    updateLevels(); //display new supply and energy
+    gameMap.remove( oldSpice.x, oldSpice.y ); // remove this freighter from the map
+
+
+}
 
 /*----------------------------------------------------*/
 
@@ -100,6 +153,7 @@ Planet.prototype = new MapObject( 'Planet', 1 );
 Planet.prototype.Collide = function () {
 
 }
+
 
 Planet.prototype.EnterOrbit = function () {
     alert( "You have entered the orbit of " + this.name );
@@ -181,8 +235,7 @@ BadMax.prototype.Steal = function () {
 }
 
 BadMax.prototype.DestroyShip = function () {
-    alert( "BadMax has destroyed your ship! You lose!" );
-    ctrecipe.GameOver();
+    ctrecipe.GameOver( "BadMax has destroyed your ship!" );
 }
 
 BadMax.prototype.Escape = function () {
@@ -190,6 +243,8 @@ BadMax.prototype.Escape = function () {
 }
 
 /*----------------------------------------------------*/
+//Global game of chance game config variable
+var playGameOfChance;
 
 function SpaceStation ( attachedStations ) {
     this.stations = attachedStations; //container for attached-stations 
@@ -210,6 +265,7 @@ SpaceStation.prototype.Collide = function () {
             this.stations[i].Purchase();
         }
     }
+    gameOfChance();
 }
 
 function CheckBalance ( price ) {
@@ -220,6 +276,33 @@ function CheckBalance ( price ) {
         return true;
     }
 }
+
+//For the game of chance at stations
+function gameOfChance () {
+    //Game of Chance: if the game config variable is set to true
+    if ( playGameOfChance ) {
+        if ( confirm( "DEVMODE: You have been asked to play a game of chance. Would you like to play?" ) ) {
+            PlayGameOfChance();
+        }
+    } else {
+        //Game of Chance: This section creates a randome chance for normal game mode
+        var playChance = Math.floor( Math.random() * Math.floor( 3 ) );
+        if ( playChance < 2 ) {
+            if ( confirm( "You have been asked to play a game of chance. Would you like to play?" ) ) {
+                PlayGameOfChance();
+            }
+        }
+
+    }
+}
+//calculates winnings for game of chance
+function PlayGameOfChance () {
+    var winnings = Math.floor( Math.random() * Math.floor( 200 ) );
+    oldSpice.credit += winnings;
+    alert( "You have won " + winnings + " credit(s)!" );
+    updateLevels();
+}
+
 
 /*----------------------------------------------------*/
 
@@ -242,6 +325,7 @@ MuskTesla.prototype.MenuPrompt = function () {
 MuskTesla.prototype.Purchase = function () {
     oldSpice.energy += this.energyQuantity;
     oldSpice.credit -= this.energyPrice;
+    updateLevels();
     alert( "MuskTesla Attendant:\n\"Thank you for your patronage, happy trails to you!\"" );
 }
 
