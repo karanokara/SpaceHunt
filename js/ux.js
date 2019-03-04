@@ -73,11 +73,18 @@ function createNewLog () {
 
     let x_val = window.oldSpice.x;
     let y_val = window.oldSpice.y;
-    let ul = document.getElementById( "data-log" );
+    let data_log = document.getElementById( "data-log" );
     let log = document.createElement( "li" );
     log.className = "log";
     log.innerHTML = "X: " + x_val + " Y: " + y_val;
-    ul.appendChild( log );
+    data_log.appendChild( log );
 }
 
+function addMessage(message) {
+    let message_list = document.getElementById("message-list");
+    let new_message = document.createElement("li");
+    new_message.setAttribute("class", "message");
+    new_message.innerHTML = message;
+    message_list.appendChild(new_message);
+}
 
