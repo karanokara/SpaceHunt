@@ -37,7 +37,7 @@ window.onload = function () {
     // initializes default values
     document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
         // initial the game object according to the setting
-        localStorage.removeItem( 'savedGame' );
+        //localStorage.removeItem( nameInput.value );
         initGame();
         setupPage.attributes.class.value += ' hide';
     };
@@ -58,7 +58,7 @@ window.onload = function () {
  */
 function contGame () {
     let start = false;
-    let temp = JSON.parse(localStorage.getItem('savedGame'));
+    let temp = JSON.parse(localStorage.getItem(nameInput.value));
 
 
     //pull oldSpice state from local storage on load if tab closed
@@ -172,10 +172,10 @@ function initGame () {
 //function for storing state upon tab close
 window.beforeunload = function () {
     // update Ship properties and store in local storage
-    //localStorage.removeItem( 'savedGame' );
+    //localStorage.removeItem( nameInput.value );
     localStorage.setItem( "playerName", nameInput.value );
     saveShip(window.gameData, window.oldSpice);
-    localStorage.setItem( "savedGame", JSON.stringify( window.gameData ) );
+    localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
 };
 
 /**
@@ -202,7 +202,7 @@ function gameEffect () {
         // the map is being saved at the time it is being populated
         //saveMap(window.gameData, window.gameMap )
 
-        localStorage.setItem( "savedGame", JSON.stringify(window.gameData) );
+        localStorage.setItem( nameInput.value, JSON.stringify(window.gameData) );
         alert( "saved game!" );
     };
 }
