@@ -228,10 +228,15 @@ BadMax.prototype.Collide = function () {
     else {
         this.DestroyShip();
     }
+    //reposition badmax after encounter or delete
+    gameMap.remove( oldSpice.x, oldSpice.y ); // remove this BadMax from the map
+    generateBadMax(gameMap); //add a new badmax to the map
 }
 
 BadMax.prototype.Steal = function () {
-    alert( "BadMax has stolen your supplies and credits!" );
+    alert( "BadMax has boarded your ship and stolen half your supplies and all your credits!" );
+    oldSpice.supplies /= 2;
+    oldSpice.credits = 0;
 }
 
 BadMax.prototype.DestroyShip = function () {

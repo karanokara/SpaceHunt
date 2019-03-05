@@ -21,6 +21,7 @@ function PopulateMap ( gameMap ) {
     generateCeleronRandom( gameMap );
     generateXeonRandom( gameMap );
     generateRyzenRandom( gameMap );
+    generateBadMax(gameMap);
 
     // load celestial objects
     for ( let i = 0; i < 50; ++i ) {
@@ -151,6 +152,12 @@ function generateXeon(gameMap, xeonCoordX, xeonCoordY) {
     updateLogs(gameMap, mapObj, xeonCoordX, xeonCoordY);
 }
 
+function generateBadMax( gameMap)
+{
+    let randomBadMaxX = Math.ceil(Math.random() * (gameMap.size));
+    let randomBadMaxY = Math.ceil(Math.random() * (gameMap.size)); 
+    updateLogs(gameMap, new BadMax(), randomBadMaxX, randomBadMaxY);
+}
 
 function generateRyzenRandom ( gameMap ) {
     let randomRyzenX = Math.ceil(Math.random() * (gameMap.size));
