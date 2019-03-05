@@ -175,14 +175,24 @@ function generateRecipe( gameMap)
 {
     let randomRecipeX = Math.ceil(Math.random() * (gameMap.size));
     let randomRecipeY = Math.ceil(Math.random() * (gameMap.size)); 
-    updateLogs(gameMap, new KokaKolaRecipe(), randomRecipeX, randomRecipeY);
+    while(!gameMap.add(new KokaKolaRecipe(), randomRecipeX, randomRecipeY))
+    {
+        randomRecipeX = Math.ceil(Math.random() * (gameMap.size));
+        randomRecipeY = Math.ceil(Math.random() * (gameMap.size)); 
+    }
+    console.log("Placed Recipe at " + randomRecipeX + ' ' + randomRecipeY);
 }
 
 function generateBadMax( gameMap)
 {
     let randomBadMaxX = Math.ceil(Math.random() * (gameMap.size));
     let randomBadMaxY = Math.ceil(Math.random() * (gameMap.size)); 
-    updateLogs(gameMap, new BadMax(), randomBadMaxX, randomBadMaxY);
+    while(!gameMap.add(new BadMax(), randomBadMaxX, randomBadMaxY)) 
+    {
+        randomBadMaxX = Math.ceil(Math.random() * (gameMap.size));
+        randomBadMaxY = Math.ceil(Math.random() * (gameMap.size)); 
+    }
+    console.log("Placed BadMax at " + randomBadMaxX + ' ' + randomBadMaxY);
 }
 
 function generateRyzenRandom ( gameMap ) {
