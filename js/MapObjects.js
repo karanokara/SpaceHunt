@@ -258,11 +258,11 @@ BadMax.prototype.Steal = function () {
 }
 
 BadMax.prototype.DestroyShip = function () {
-    ctrecipe.GameOver( "BadMax has destroyed your ship!" );
+    ctrecipe.GameOver( "BadMax and his henchmen blasted your ship into stardust!" );
 }
 
 BadMax.prototype.Escape = function () {
-    alert( "You have run away from BadMax!" );
+    alert( "You come across BadMax but successfuly outrun him and his henchmen!" );
 }
 
 /*----------------------------------------------------*/

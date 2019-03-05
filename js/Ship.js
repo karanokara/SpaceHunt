@@ -69,10 +69,10 @@ class Ship {
         // then check boundary (jumping for wormhole), gameover, pop out object event, ....
         setTimeout( function () {
             if ( ( window.oldSpice.energy <= 0 && window.oldSpice.normalPlay ) ) {
-                gameObj.GameOver( "Ran out of energy!" );
+                gameObj.GameOver( "Your ship has run out of energy and is now adrift in deep space!" );
             }
             else if ( window.oldSpice.supplies <= 0 && window.oldSpice.normalPlay ) {
-                gameObj.GameOver( "Ran out of supplies!" );
+                gameObj.GameOver( "Your crew has run out of supplies and have turned to cannibalism!" );
             }
             else if ( window.oldSpice.x >= mapSize || window.oldSpice.y >= mapSize || window.oldSpice.x < 0 || window.oldSpice.y < 0 ) {
                 window.boundary.Collide();
