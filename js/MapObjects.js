@@ -208,10 +208,28 @@ Eniac.prototype = new Planet( 'Eniac', -1, -1 );
 Eniac.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
     this.EnterOrbit();
+
+    if(oldSpice.recipe)
+    {
+        ctrecipe.GameWinner("You captured the KokaKola Recipe!");
+    }
 }
 
 /*----------------------------------------------------*/
 
+function KokaKolaRecipe() {}
+
+KokaKolaRecipe.prototype = new MapObject ("Recipe", 0);
+
+KokaKolaRecipe.prototype.Collide = function()
+{
+    MapObject.prototype.Collide.call( this );
+    oldSpice.recipe = true;
+    alert("You picked up the KokaKola recipe! Return it to Planet Eniac!");
+    gameMap.remove( oldSpice.x, oldSpice.y ); // remove the recipe from the map
+}
+
+/*----------------------------------------------------*/
 function BadMax () { }
 
 BadMax.prototype = new MapObject( "BadMax", 0 );

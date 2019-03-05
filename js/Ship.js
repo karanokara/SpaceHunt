@@ -13,6 +13,7 @@ class Ship {
         this.engineLv = engineLv;         // Lv 1 ~ 3
         this.isDamaged = isDamaged;
         this.normalPlay = normalPlay;
+        this.recipe = false;
         this.sensor = new Sensor( this, window.gameMap );
         this.shipIcon = document.querySelector( '.old-spice' );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];

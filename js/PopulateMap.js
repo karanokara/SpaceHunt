@@ -21,7 +21,9 @@ function PopulateMap ( gameMap ) {
     generateCeleronRandom( gameMap );
     generateXeonRandom( gameMap );
     generateRyzenRandom( gameMap );
+    generateEniacRandom( gameMap );
     generateBadMax(gameMap);
+    generateRecipe(gameMap);
 
     // load celestial objects
     for ( let i = 0; i < 50; ++i ) {
@@ -104,6 +106,23 @@ function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
     saveMap(gameData, mapObj, objCoordX, objCoordY);
 }
 
+function generateEniacRandom ( gameMap ) {
+    let randomEniacX = Math.ceil(Math.random() * (gameMap.size));
+    let randomEniacY = Math.ceil(Math.random() * (gameMap.size));
+    generateEniac(gameMap, randomEniacX, randomEniacY);
+}
+
+function generateEniac(gameMap, eniacCoordX, eniacCoordY) {
+
+    mapObj = new Eniac();
+
+    mapObj.x = eniacCoordX;
+    mapObj.y = eniacCoordY;
+
+    dataLog[2].nodeValue = eniacCoordX + " " + eniacCoordY;
+
+    updateLogs(gameMap, mapObj, eniacCoordX, eniacCoordY);
+}
 
 function generateCeleronRandom ( gameMap ) {
     let randomCelX = Math.ceil(Math.random() * (gameMap.size));
@@ -150,6 +169,13 @@ function generateXeon(gameMap, xeonCoordX, xeonCoordY) {
     dataLog[4].nodeValue = xeonCoordX + " " + xeonCoordY;
 
     updateLogs(gameMap, mapObj, xeonCoordX, xeonCoordY);
+}
+
+function generateRecipe( gameMap)
+{
+    let randomRecipeX = Math.ceil(Math.random() * (gameMap.size));
+    let randomRecipeY = Math.ceil(Math.random() * (gameMap.size)); 
+    updateLogs(gameMap, new KokaKolaRecipe(), randomRecipeX, randomRecipeY);
 }
 
 function generateBadMax( gameMap)

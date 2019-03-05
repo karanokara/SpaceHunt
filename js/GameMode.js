@@ -25,9 +25,9 @@ function GameMode(params)
         alert(reason + "\nYou lost the game!");
     }
 
-    gameObj.GameWinner = function()
+    gameObj.GameWinner = function(reason)
     {
-        alert("You won the game!");
+        alert(reason + "\nYou won the game!");
     }
 
     gameObj.tick = function()
