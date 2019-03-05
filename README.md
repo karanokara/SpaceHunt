@@ -4,11 +4,12 @@
 In SpaceHunt, the player commands the Galactic Schooner, OldSpice. The goal of the game is to locate the ancient recipe for Koca-Kola which was stolen by BadMax and his interstellar gang of henchmen, and hidden on an unknown planet in the Pentium System. While it is unknown which of Pentium’s seven planets (Pentium-1 through Pentium-7) holds the secret recipe, the strong box containing the prize is fitted with a transmitter that sends out a beacon. This beacon can be detected aboard OldSpice when it is within orbital distance of the planet.
 
 ## Usage example
-*
+* Open index.html (works best with Chrome) and play
 
 ## Development setup
 
 ```sh
+Download, write code
 ```
 
 ## Release History

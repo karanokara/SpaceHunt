@@ -129,7 +129,7 @@ AbFreighter.prototype.Collide = function () {
     alert( "You encountered an abandoned freighter and collected " + lootEnergy + " energy and " + lootSupply + " supply from its remains!" );
 
     oldSpice.energy += lootEnergy;
-    if ( oldSpice.supply + lootSupply <= 100 )
+    if ( oldSpice.supplies + lootSupply <= 100 )
         oldSpice.supplies += lootSupply;
     else
         oldSpice.supplies = 100;
