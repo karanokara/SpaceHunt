@@ -1,6 +1,7 @@
 const nameInput = document.querySelector( '#playerName' );
 MAX_CELEST_OBJ = 20;
 window.gameData = {
+    setupMode: false,
     shipX: 0,
     shipY: 0,
     shipEnergy: 1000,
@@ -28,6 +29,8 @@ window.onload = function () {
     // had to move datalog from PopulateMap.js as Continue Game doesn't call populate a fresh map.
     dataLog = document.getElementById( 'data-log' ).childNodes;
     console.log( dataLog );
+
+
 
     /**
      * when click the start btn, start loading game

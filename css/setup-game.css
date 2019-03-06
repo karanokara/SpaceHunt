@@ -42,6 +42,9 @@ Stylesheet for the setup page
 /* this is the text box for the player's name */
 .playerNameField {
     background: #E9ECEF;
+    text-align: inherit;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
 }
 
