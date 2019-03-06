@@ -35,6 +35,20 @@ function submitHeading (direction_value) {
     //create a log of previous location
     createNewLog();
 }
+/*
+// Install keyboard handler for arrow keys
+window.addEventListener("keydown", event => {
+    if (       event.key === 38 || event.key === 'w' ) {
+        submitHeading(90);
+    } else if (event.key === 37 || event.key === 'a' ) {
+            submitHeading(180);
+    } else if (event.key === 40 || event.key === 's' ) {
+        submitHeading(270);
+    } else if (event.key === 39 || event.key === 'd' ) {
+        submitHeading(0);
+    }
+});
+*/
 
 //function for rendering the current position to the DOM
 function updateHeading () {
@@ -86,5 +100,13 @@ function addMessage(message) {
     new_message.setAttribute("class", "message");
     new_message.innerHTML = message;
     message_list.appendChild(new_message);
+}
+
+function savedGameDisplay(savedGame) {
+    let savedGameList = document.getElementById("gameList");
+    let pastGame = document.createElement("li");
+    pastGame.setAttribute("class", "savedGame");
+    pastGame.innerHTML = savedGame;
+    savedGameList.appendChild(pastGame);
 }
 

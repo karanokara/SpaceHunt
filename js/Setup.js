@@ -414,6 +414,7 @@ function developerModeSubmit () {
     }
 
     window.gameData = {
+        setupMode: true,
         shipX: parseInt( coordinates[0].value ),
         shipY: parseInt( coordinates[1].value ),
         shipEnergy: parseInt( energy[0].value ),

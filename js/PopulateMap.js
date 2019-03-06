@@ -103,7 +103,8 @@ function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
     gazePopulate( mapObj, objCoordX, objCoordY );
     //saveMap when it is populate as the object's locations won't move ever
     // gazetteer keeps the same order when continuing a game
-    saveMap(gameData, mapObj, objCoordX, objCoordY);
+    if(!gameData.setupMode)
+        saveMap(gameData, mapObj, objCoordX, objCoordY);
 }
 
 function generateEniacRandom ( gameMap ) {
@@ -124,13 +125,13 @@ function generateEniac(gameMap, eniacCoordX, eniacCoordY) {
     updateLogs(gameMap, mapObj, eniacCoordX, eniacCoordY);
 }
 
-function generateCeleronRandom ( gameMap ) {
+function generateCeleron( gameMap ) {
     let randomCelX = Math.ceil(Math.random() * (gameMap.size));
     let randomCelY = Math.ceil(Math.random() * (gameMap.size));
-    generateCeleron(gameMap, randomCelX, randomCelY);
+    generateCeleronHelper(gameMap, randomCelX, randomCelY);
 }
 
-function generateCeleron(gameMap, celeronCoordX, celeronCoordY) {
+function generateCeleronHelper(gameMap, celeronCoordX, celeronCoordY) {
 
     mapObj = new Celeron();
 
@@ -148,13 +149,13 @@ function generateCeleron(gameMap, celeronCoordX, celeronCoordY) {
 }
 
 
-function generateXeonRandom ( gameMap ) {
+function generateXeon ( gameMap ) {
     let randomXeonX = Math.ceil(Math.random() * (gameMap.size));
     let randomXeonY = Math.ceil(Math.random() * (gameMap.size));
-    generateXeon(gameMap, randomXeonX, randomXeonY )
+    generateXeonHelper(gameMap, randomXeonX, randomXeonY )
 }
 
-function generateXeon(gameMap, xeonCoordX, xeonCoordY) {
+function generateXeonHelper(gameMap, xeonCoordX, xeonCoordY) {
 
     mapObj = new Xeon();
 
@@ -195,13 +196,13 @@ function generateBadMax( gameMap)
     console.log("Placed BadMax at " + randomBadMaxX + ' ' + randomBadMaxY);
 }
 
-function generateRyzenRandom ( gameMap ) {
+function generateRyzen ( gameMap ) {
     let randomRyzenX = Math.ceil(Math.random() * (gameMap.size));
     let randomRyzenY = Math.ceil(Math.random() * (gameMap.size));
-    generateRyzen(gameMap, randomRyzenX, randomRyzenY)
+    generateRyzenHelper(gameMap, randomRyzenX, randomRyzenY)
 }
 
-function generateRyzen(gameMap, ryzenCoordX, ryzenCoordY) {
+function generateRyzenHelper(gameMap, ryzenCoordX, ryzenCoordY) {
 
     mapObj = new Ryzen();
 
