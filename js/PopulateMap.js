@@ -18,10 +18,10 @@ function PopulateMap ( gameMap ) {
 
 
     // load planets
-    generateCeleronRandom( gameMap );
-    generateXeonRandom( gameMap );
-    generateRyzenRandom( gameMap );
-    generateEniacRandom( gameMap );
+    generateCeleron( gameMap );
+    generateXeon( gameMap );
+    generateRyzen( gameMap );
+    generateEniac( gameMap );
     generateBadMax(gameMap);
     generateRecipe(gameMap);
 
@@ -107,13 +107,13 @@ function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
         saveMap(gameData, mapObj, objCoordX, objCoordY);
 }
 
-function generateEniacRandom ( gameMap ) {
+function generateEniac ( gameMap ) {
     let randomEniacX = Math.ceil(Math.random() * (gameMap.size));
     let randomEniacY = Math.ceil(Math.random() * (gameMap.size));
-    generateEniac(gameMap, randomEniacX, randomEniacY);
+    generateEniacHelper(gameMap, randomEniacX, randomEniacY);
 }
 
-function generateEniac(gameMap, eniacCoordX, eniacCoordY) {
+function generateEniacHelper(gameMap, eniacCoordX, eniacCoordY) {
 
     mapObj = new Eniac();
 
