@@ -372,18 +372,20 @@ Create text box for the player's name for persistent state.
 Default value is admin.
 */
 function playerNameInit() {
-    let playerNameLabel = document.createElement("P");
+    let playerNameLabel = document.createElement("LABEL");
+    playerNameLabel.setAttribute("for", "playerName");
     let playerNameLabelText = document.createTextNode("Player Name: ");
     playerNameLabel.appendChild(playerNameLabelText);
+
 
     let playerNameInput = document.createElement("INPUT");
     playerNameInput.setAttribute("name", "playerNameInput");
     playerNameInput.setAttribute("type", "text");
-    playerNameInput.setAttribute("value", "admin");
+    //playerNameInput.setAttribute("value", savedGameName);
     playerNameInput.setAttribute("size", "10");
     playerNameLabel.appendChild(playerNameInput);
 
-    document.getElementById("developerMode").appendChild(playerNameLabel);
+    document.getElementById("playerNameField").appendChild(playerNameLabel);
 }
 
 /*

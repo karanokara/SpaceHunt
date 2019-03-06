@@ -1,4 +1,4 @@
-const nameInput = document.querySelector( '#playerName' );
+var nameInput = document.querySelector( '#playerName' );
 MAX_CELEST_OBJ = 20;
 window.gameData = {
     setupMode: false,
@@ -24,13 +24,15 @@ window.gameData = {
 };
 
 
+
+
 // when DOM loaded, call this
 window.onload = function () {
     // had to move datalog from PopulateMap.js as Continue Game doesn't call populate a fresh map.
     dataLog = document.getElementById( 'data-log' ).childNodes;
     console.log( dataLog );
 
-
+    populateSavedGameList();
 
     /**
      * when click the start btn, start loading game
@@ -53,6 +55,22 @@ window.onload = function () {
             setupPage.attributes.class.value += ' hide';
     };
 
+    // Work in Progress to be able to click the names directly
+    // when they click a name on the list
+    document.querySelectorAll( '.savedGame').onclick = function () {
+        for (let i = 0; i < document.querySelectorAll('.game-name').length; ++i) {
+
+            if (document.querySelectorAll('.game-name')[i]) {
+                document.querySelectorAll('.game-name')[i].onclick = function () {
+                    nameInput = document.querySelectorAll('.game-name')[0].innerText;
+                    if (contGame())
+                        setupPage.attributes.class.value += ' hide';
+                };
+
+            }
+        }
+    };
+
 };
 
 /**
@@ -60,8 +78,10 @@ window.onload = function () {
  * as well as loads the map the player was playing on.
  */
 function contGame () {
+
     let start = false;
-    let temp = JSON.parse(localStorage.getItem(nameInput.value));
+    let name = localStorage.key(localStorage.length - 1);
+    let temp = JSON.parse(localStorage.getItem(name));
 
 
     //pull oldSpice state from local storage on load if tab closed
@@ -109,7 +129,7 @@ function contGame () {
         });
         ctrecipe.tick();
     } else
-        alert("No previous game has been saved.")
+        alert("No previous game has been saved.");
 
     return start;
 
@@ -120,6 +140,9 @@ function contGame () {
  * Inital game, using default setting or user defined setting or default setting
  */
 function initGame () {
+
+    // when they start a new game with the same name as a saved game we remove the old saved data.
+    localStorage.removeItem( document.getElementsByName("playerNameInput")[0].value );
 
     // 1st check if in user defined mode
     if ( window.gameData != undefined ) {
@@ -196,18 +219,20 @@ function gameEffect () {
     /**
      * when click the game save button
      */
-    document.querySelector( '#game-save' ).onclick = function () {
+    if(!gameData.setupMode) {
+        document.querySelector('#game-save').onclick = function () {
 
-        // store the player's name
-        localStorage.setItem( "playerName", nameInput.value );
-        //store the ship's data
-        saveShip(window.gameData, window.oldSpice);
-        // the map is being saved at the time it is being populated
-        //saveMap(window.gameData, window.gameMap )
+            // store the player's name
+            //localStorage.setItem( "playerName", document.getElementsByName("playerNameInput")[0].value);
+            //store the ship's data
+            saveShip(window.gameData, window.oldSpice);
+            // the map is being saved at the time it is being populated
+            //saveMap(window.gameData, window.gameMap )
 
-        localStorage.setItem( nameInput.value, JSON.stringify(window.gameData) );
-        alert( "saved game!" );
-    };
+            localStorage.setItem(document.getElementsByName("playerNameInput")[0].value, JSON.stringify(window.gameData));
+            alert("saved game!");
+        };
+    }
 }
 
 /**
@@ -222,4 +247,54 @@ function gazePopulate ( obj, objX, objY ) {
         '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
         '</li>';
 
+}
+
+function populateSavedGameList(){
+
+    playerNameInit();
+
+    if(localStorage.length > 0) {
+        let test = document.createElement("DIV");
+        test.setAttribute( "class", "monster" );
+        test.setAttribute("id", "monster");
+        document.getElementById("savedGameListBlock").appendChild(test);
+
+        let titleDiv = document.createElement("DIV");
+        titleDiv.setAttribute( "class", "mont" );
+        titleDiv.setAttribute("id", "savedGameListTitle");
+
+
+
+        let savedGameListTitle = document.createTextNode("List of saved Games ");
+
+        //divblock.appendChild(savedGameListTitle);
+        titleDiv.appendChild(savedGameListTitle);
+
+        test.appendChild(titleDiv);
+        document.getElementById("savedGameListBlock").appendChild(test);
+
+
+        let divblock = document.createElement("DIV");
+        //divblock.setAttribute( "class", "modal-content" );
+        divblock.setAttribute("id", "playerNameBlock");
+        divblock.setAttribute("class", "savedGame")
+
+
+
+
+        let unorderdList = document.createElement("UL");
+        unorderdList.setAttribute("id", "savedGameList");
+
+        for (let i = 0; i < localStorage.length; ++i) {
+            let pastGame = document.createElement("li");
+            pastGame.setAttribute("class", "game-name");
+            pastGame.innerHTML = localStorage.key(i);
+            //document.createElement("BR");
+            unorderdList.appendChild(pastGame);
+            divblock.appendChild(unorderdList);
+            //document.getElementById("playerNameField").appendChild(divblock);
+        }
+        test.appendChild(divblock);
+        document.getElementById("savedGameListBlock").appendChild(test);
+    }
 }

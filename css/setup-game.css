@@ -48,6 +48,21 @@ Stylesheet for the setup page
 
 }
 
+
+.playerNameBlock{
+    background: #000000;
+    text-align: inherit;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.savedGameList{
+    background: #000000;
+    text-align: inherit;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .setup-btn {
     padding: 1rem 2rem;
     margin-top: 50px;

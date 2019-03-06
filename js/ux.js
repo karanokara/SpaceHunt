@@ -102,11 +102,21 @@ function addMessage(message) {
     message_list.appendChild(new_message);
 }
 
-function savedGameDisplay(savedGame) {
-    let savedGameList = document.getElementById("gameList");
-    let pastGame = document.createElement("li");
+// I think I will just put this in main.js
+function savedGameDisplay(savedGameName) {
+    //let savedGameList = document.getElementById("playerName");
+
+    let pastGame = document.createElement("INPUT");
+
     pastGame.setAttribute("class", "savedGame");
-    pastGame.innerHTML = savedGame;
-    savedGameList.appendChild(pastGame);
+    //pastGame.className = "sGames";
+    pastGame.setAttribute("type", "text");
+    pastGame.setAttribute("value", savedGameName);
+    //pastGame.innerHTML = savedGameName;
+    document.getElementById("playerName").appendChild(pastGame);
+
+
+    //document.querySelectorAll( "#playerName" )[0].value = "ss";
 }
+
 

@@ -28,16 +28,20 @@
             <h1 class="display-4">Space Hunt</h1>
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
-            <div class="playerNameField">
-                <p>
-                    <label for="playerName">Player Name: </label>
+            <div id="playerNameField" class="player-name-field" >
+                <!-- <p>
+                     <label for="playerName">Player Name: </label>
 
-                    <ul id="gameList">
+                     <ul id="gameList">
+                     <input id="playerName" type="text" required>
 
-                    </ul>
-                    <input id="playerName" type="text" required>
-                </p>
+
+                     </ul>
+
+                </p> -->
             </div>
+
+            <div id="savedGameListBlock"></div>
 
             <div>
                 <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
