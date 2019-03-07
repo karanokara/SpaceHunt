@@ -28,7 +28,7 @@
             <h1 class="display-4">Space Hunt</h1>
             <p class="lead">Welcome to our fancy game Space Hunt!</p>
             <hr class="my-4">
-            <div id="playerNameField" class="player-name-field" >
+            <div id="playerNameField" class="player-name-field">
                 <!-- <p>
                      <label for="playerName">Player Name: </label>
 
@@ -138,25 +138,25 @@
                 <div id="controls" class="status-map-control-containers">
                     <h4>Command Console</h4>
 
-                        <div id="heading-container">
-                            Current Heading<br/>
-                            X: <span id="x-heading" class="heading-span">0</span>
-                            Y: <span id="y-heading" class="heading-span">0</span>
-                        </div>
+                    <div id="heading-container">
+                        Current Heading<br />
+                        X: <span id="x-heading" class="heading-span">0</span>
+                        Y: <span id="y-heading" class="heading-span">0</span>
+                    </div>
 
                     <form class="control-fields">
                         <fieldset id="movement-form-fields">
                             <div>
-                                <input id="north-input" value="NORTH" type="button" onclick="submitNorthHeading()"/>
+                                <input id="north-input" class="btn btn-secondary" value="NORTH" type="button" onclick="submitNorthHeading()" />
                                 <div id="east-west-container">
-                                    <input id="west-input" value="WEST" type="button" onclick="submitWestHeading()"/>
-                                    <input id="east-input" value="EAST" type="button" onclick="submitEastHeading()"/>
+                                    <input id="west-input" class="btn btn-secondary" value="WEST" type="button" onclick="submitWestHeading()" />
+                                    <input id="east-input" class="btn btn-secondary" value="EAST" type="button" onclick="submitEastHeading()" />
                                 </div>
-                                <input id="south-input" value="SOUTH" type="button" onclick="submitSouthHeading()"/>
+                                <input id="south-input" class="btn btn-secondary" value="SOUTH" type="button" onclick="submitSouthHeading()" />
                             </div>
                         </fieldset>
                     </form>
-                    <input id="sensor-scan" type="button" value="Scan">
+                    <input id="sensor-scan" class="btn btn-info" type="button" value="Scan">
                 </div>
             </div>
         </div>
