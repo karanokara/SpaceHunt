@@ -22,49 +22,49 @@ function PopulateMap ( gameMap ) {
     generateXeon( gameMap );
     generateRyzen( gameMap );
     generateEniac( gameMap );
-    generateBadMax(gameMap);
-    generateRecipe(gameMap);
+    generateBadMax( gameMap );
+    generateRecipe( gameMap );
 
     // load celestial objects
     for ( let i = 0; i < 50; ++i ) {
-        objCoordx = Math.ceil(Math.random() * (gameMap.size));
-        objCoordy = Math.ceil(Math.random() * (gameMap.size));
+        objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
+        objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
 
-        generateCelestialObjects(gameMap, i %7, objCoordx, objCoordy);
+        generateCelestialObjects( gameMap, i % 7, objCoordx, objCoordy );
     }
 }
 /**
  * generates map objects by reading the local storage to get their locations
  */
-function PopulateSavedMap(gameMap, savedMap){
+function PopulateSavedMap ( gameMap, savedMap ) {
 
     // load planets
-    generateCeleron(gameMap, savedMap.celeron.x, savedMap.celeron.y);
-    generateXeon(gameMap, savedMap.xeon.x, savedMap.xeon.y);
-    generateRyzen(gameMap, savedMap.ryzen.x, savedMap.ryzen.y);
+    generateCeleron( gameMap, savedMap.celeron.x, savedMap.celeron.y );
+    generateXeon( gameMap, savedMap.xeon.x, savedMap.xeon.y );
+    generateRyzen( gameMap, savedMap.ryzen.x, savedMap.ryzen.y );
 
 
     // load celestial objects
-    for(let i = 0; i < MAX_CELEST_OBJ; i += 2){
-        if(savedMap.stationTRM[i])
-            generateCelestialObjects(gameMap, 0, savedMap.stationTRM[i], savedMap.stationTRM[i+1]);
-        if(savedMap.stationTR[i])
-            generateCelestialObjects(gameMap, 1, savedMap.stationTR[i], savedMap.stationTR[i+1]);
-        if(savedMap.stationTM[i])
-            generateCelestialObjects(gameMap, 2, savedMap.stationTM[i], savedMap.stationTM[i+1]);
-        if(savedMap.stationT[i])
-            generateCelestialObjects(gameMap, 3, savedMap.stationT[i], savedMap.stationT[i+1]);
-        if(savedMap.asteroid[i])
-            generateCelestialObjects(gameMap, 4, savedMap.asteroid[i], savedMap.asteroid[i+1]);
-        if(savedMap.abFreighter[i])
-            generateCelestialObjects(gameMap, 5, savedMap.abFreighter[i], savedMap.abFreighter[i+1]);
-        if(savedMap.meteorShower[i])
-            generateCelestialObjects(gameMap, 6, savedMap.meteorShower[i], savedMap.meteorShower[i+1]);
+    for ( let i = 0; i < MAX_CELEST_OBJ; i += 2 ) {
+        if ( savedMap.stationTRM[i] )
+            generateCelestialObjects( gameMap, 0, savedMap.stationTRM[i], savedMap.stationTRM[i + 1] );
+        if ( savedMap.stationTR[i] )
+            generateCelestialObjects( gameMap, 1, savedMap.stationTR[i], savedMap.stationTR[i + 1] );
+        if ( savedMap.stationTM[i] )
+            generateCelestialObjects( gameMap, 2, savedMap.stationTM[i], savedMap.stationTM[i + 1] );
+        if ( savedMap.stationT[i] )
+            generateCelestialObjects( gameMap, 3, savedMap.stationT[i], savedMap.stationT[i + 1] );
+        if ( savedMap.asteroid[i] )
+            generateCelestialObjects( gameMap, 4, savedMap.asteroid[i], savedMap.asteroid[i + 1] );
+        if ( savedMap.abFreighter[i] )
+            generateCelestialObjects( gameMap, 5, savedMap.abFreighter[i], savedMap.abFreighter[i + 1] );
+        if ( savedMap.meteorShower[i] )
+            generateCelestialObjects( gameMap, 6, savedMap.meteorShower[i], savedMap.meteorShower[i + 1] );
     }
 }
 
-function generateCelestialObjects(gameMap, type, celestX, celestY){
-    switch ( type) {
+function generateCelestialObjects ( gameMap, type, celestX, celestY ) {
+    switch ( type ) {
         case 0:
             mapObj = new SpaceStation( [new MuskTesla( 100, 1000 ), new RepairDepot, new MiniMart()] );
             break;
@@ -93,27 +93,26 @@ function generateCelestialObjects(gameMap, type, celestX, celestY){
             mapObj = new MeteorShower();
             break;
     }
-    updateLogs(gameMap, mapObj, celestX, celestY);
+    updateLogs( gameMap, mapObj, celestX, celestY );
 }
 
 
-function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
+function updateLogs ( gameMap, mapObj, objCoordX, objCoordY ) {
     console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordX + ' ' + objCoordY );
     gameMap.add( mapObj, objCoordX, objCoordY );
-    gazePopulate( mapObj, objCoordX, objCoordY );
-    //saveMap when it is populate as the object's locations won't move ever
-    // gazetteer keeps the same order when continuing a game
-    if(!gameData.setupMode)
-        saveMap(gameData, mapObj, objCoordX, objCoordY);
+
+    //saveMap when it is populate as the object's locations won't move ever    
+    if ( !gameData.setupMode )
+        saveMap( gameData, mapObj, objCoordX, objCoordY );
 }
 
 function generateEniac ( gameMap ) {
-    let randomEniacX = Math.ceil(Math.random() * (gameMap.size));
-    let randomEniacY = Math.ceil(Math.random() * (gameMap.size));
-    generateEniacHelper(gameMap, randomEniacX, randomEniacY);
+    let randomEniacX = Math.ceil( Math.random() * ( gameMap.size ) );
+    let randomEniacY = Math.ceil( Math.random() * ( gameMap.size ) );
+    generateEniacHelper( gameMap, randomEniacX, randomEniacY );
 }
 
-function generateEniacHelper(gameMap, eniacCoordX, eniacCoordY) {
+function generateEniacHelper ( gameMap, eniacCoordX, eniacCoordY ) {
 
     mapObj = new Eniac();
 
@@ -122,16 +121,16 @@ function generateEniacHelper(gameMap, eniacCoordX, eniacCoordY) {
 
     dataLog[2].nodeValue = eniacCoordX + " " + eniacCoordY;
 
-    updateLogs(gameMap, mapObj, eniacCoordX, eniacCoordY);
+    updateLogs( gameMap, mapObj, eniacCoordX, eniacCoordY );
 }
 
-function generateCeleron( gameMap ) {
-    let randomCelX = Math.ceil(Math.random() * (gameMap.size));
-    let randomCelY = Math.ceil(Math.random() * (gameMap.size));
-    generateCeleronHelper(gameMap, randomCelX, randomCelY);
+function generateCeleron ( gameMap ) {
+    let randomCelX = Math.ceil( Math.random() * ( gameMap.size ) );
+    let randomCelY = Math.ceil( Math.random() * ( gameMap.size ) );
+    generateCeleronHelper( gameMap, randomCelX, randomCelY );
 }
 
-function generateCeleronHelper(gameMap, celeronCoordX, celeronCoordY) {
+function generateCeleronHelper ( gameMap, celeronCoordX, celeronCoordY ) {
 
     mapObj = new Celeron();
 
@@ -145,17 +144,18 @@ function generateCeleronHelper(gameMap, celeronCoordX, celeronCoordY) {
 
     dataLog[2].nodeValue = celeronCoordX + " " + celeronCoordY;
 
-    updateLogs(gameMap, mapObj, celeronCoordX, celeronCoordY);
+    updateLogs( gameMap, mapObj, celeronCoordX, celeronCoordY );
+    gazePopulate( mapObj, celeronCoordX, celeronCoordY );
 }
 
 
 function generateXeon ( gameMap ) {
-    let randomXeonX = Math.ceil(Math.random() * (gameMap.size));
-    let randomXeonY = Math.ceil(Math.random() * (gameMap.size));
-    generateXeonHelper(gameMap, randomXeonX, randomXeonY )
+    let randomXeonX = Math.ceil( Math.random() * ( gameMap.size ) );
+    let randomXeonY = Math.ceil( Math.random() * ( gameMap.size ) );
+    generateXeonHelper( gameMap, randomXeonX, randomXeonY )
 }
 
-function generateXeonHelper(gameMap, xeonCoordX, xeonCoordY) {
+function generateXeonHelper ( gameMap, xeonCoordX, xeonCoordY ) {
 
     mapObj = new Xeon();
 
@@ -169,40 +169,37 @@ function generateXeonHelper(gameMap, xeonCoordX, xeonCoordY) {
 
     dataLog[4].nodeValue = xeonCoordX + " " + xeonCoordY;
 
-    updateLogs(gameMap, mapObj, xeonCoordX, xeonCoordY);
+    updateLogs( gameMap, mapObj, xeonCoordX, xeonCoordY );
+    gazePopulate( mapObj, xeonCoordX, xeonCoordY );
 }
 
-function generateRecipe( gameMap)
-{
-    let randomRecipeX = Math.ceil(Math.random() * (gameMap.size));
-    let randomRecipeY = Math.ceil(Math.random() * (gameMap.size)); 
-    while(!gameMap.add(new KokaKolaRecipe(), randomRecipeX, randomRecipeY))
-    {
-        randomRecipeX = Math.ceil(Math.random() * (gameMap.size));
-        randomRecipeY = Math.ceil(Math.random() * (gameMap.size)); 
+function generateRecipe ( gameMap ) {
+    let randomRecipeX = Math.ceil( Math.random() * ( gameMap.size ) );
+    let randomRecipeY = Math.ceil( Math.random() * ( gameMap.size ) );
+    while ( !gameMap.add( new KokaKolaRecipe(), randomRecipeX, randomRecipeY ) ) {
+        randomRecipeX = Math.ceil( Math.random() * ( gameMap.size ) );
+        randomRecipeY = Math.ceil( Math.random() * ( gameMap.size ) );
     }
-    console.log("Placed Recipe at " + randomRecipeX + ' ' + randomRecipeY);
+    console.log( "Placed Recipe at " + randomRecipeX + ' ' + randomRecipeY );
 }
 
-function generateBadMax( gameMap)
-{
-    let randomBadMaxX = Math.ceil(Math.random() * (gameMap.size));
-    let randomBadMaxY = Math.ceil(Math.random() * (gameMap.size)); 
-    while(!gameMap.add(new BadMax(), randomBadMaxX, randomBadMaxY)) 
-    {
-        randomBadMaxX = Math.ceil(Math.random() * (gameMap.size));
-        randomBadMaxY = Math.ceil(Math.random() * (gameMap.size)); 
+function generateBadMax ( gameMap ) {
+    let randomBadMaxX = Math.ceil( Math.random() * ( gameMap.size ) );
+    let randomBadMaxY = Math.ceil( Math.random() * ( gameMap.size ) );
+    while ( !gameMap.add( new BadMax(), randomBadMaxX, randomBadMaxY ) ) {
+        randomBadMaxX = Math.ceil( Math.random() * ( gameMap.size ) );
+        randomBadMaxY = Math.ceil( Math.random() * ( gameMap.size ) );
     }
-    console.log("Placed BadMax at " + randomBadMaxX + ' ' + randomBadMaxY);
+    console.log( "Placed BadMax at " + randomBadMaxX + ' ' + randomBadMaxY );
 }
 
 function generateRyzen ( gameMap ) {
-    let randomRyzenX = Math.ceil(Math.random() * (gameMap.size));
-    let randomRyzenY = Math.ceil(Math.random() * (gameMap.size));
-    generateRyzenHelper(gameMap, randomRyzenX, randomRyzenY)
+    let randomRyzenX = Math.ceil( Math.random() * ( gameMap.size ) );
+    let randomRyzenY = Math.ceil( Math.random() * ( gameMap.size ) );
+    generateRyzenHelper( gameMap, randomRyzenX, randomRyzenY )
 }
 
-function generateRyzenHelper(gameMap, ryzenCoordX, ryzenCoordY) {
+function generateRyzenHelper ( gameMap, ryzenCoordX, ryzenCoordY ) {
 
     mapObj = new Ryzen();
 
@@ -215,5 +212,6 @@ function generateRyzenHelper(gameMap, ryzenCoordX, ryzenCoordY) {
     mapObj.y = ryzenCoordY;
 
     dataLog[6].nodeValue = ryzenCoordX + " " + ryzenCoordY;
-    updateLogs(gameMap, mapObj, ryzenCoordX, ryzenCoordY);
+    updateLogs( gameMap, mapObj, ryzenCoordX, ryzenCoordY );
+    gazePopulate( mapObj, ryzenCoordX, ryzenCoordY );
 }
