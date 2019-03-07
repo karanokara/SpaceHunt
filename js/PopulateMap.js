@@ -10,13 +10,6 @@
     MiniMart(),
 */
 function PopulateMap ( gameMap ) {
-    var mapObj,
-        objIdx,
-        objCoordx,
-        objCoordy;
-
-
-
     // load planets
     generateCeleron( gameMap );
     generateXeon( gameMap );
@@ -27,8 +20,8 @@ function PopulateMap ( gameMap ) {
 
     // load celestial objects
     for ( let i = 0; i < 50; ++i ) {
-        objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
-        objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+        let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
+        let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
 
         generateCelestialObjects( gameMap, i % 7, objCoordx, objCoordy );
     }
