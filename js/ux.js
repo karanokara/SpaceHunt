@@ -35,8 +35,8 @@ function submitHeading (direction_value) {
     //create a log of previous location
     createNewLog();
 }
-/*
-// Install keyboard handler for arrow keys
+
+// Allows WASD and the arrows to control the ship
 window.addEventListener("keydown", event => {
     if (       event.key === 38 || event.key === 'w' ) {
         submitHeading(90);
@@ -48,7 +48,7 @@ window.addEventListener("keydown", event => {
         submitHeading(0);
     }
 });
-*/
+
 
 //function for rendering the current position to the DOM
 function updateHeading () {

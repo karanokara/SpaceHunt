@@ -21,7 +21,6 @@ function developerModeInit () {
     gameplayInit();
     gameOfChanceInit();
     mapSizeInit();
-    playerNameInit();
     submitInit();
 
     document.getElementById( "devLoadModal" ).style.display = "block";

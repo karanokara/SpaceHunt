@@ -39,9 +39,12 @@ function PopulateMap ( gameMap ) {
 function PopulateSavedMap(gameMap, savedMap){
 
     // load planets
-    generateCeleron(gameMap, savedMap.celeron.x, savedMap.celeron.y);
-    generateXeon(gameMap, savedMap.xeon.x, savedMap.xeon.y);
-    generateRyzen(gameMap, savedMap.ryzen.x, savedMap.ryzen.y);
+    generateCeleronAtLocation(gameMap, savedMap.celeron.x, savedMap.celeron.y);
+    generateXeonAtLocation(gameMap, savedMap.xeon.x, savedMap.xeon.y);
+    generateRyzenAtLocation(gameMap, savedMap.ryzen.x, savedMap.ryzen.y);
+    //generateEniacAtLocation(gameMap, eniacCoordX, eniacCoordY);
+    //generateBadMaxAtLocation(gameMap);
+    //generateRecipeAtLoation(gameMap);
 
 
     // load celestial objects
@@ -110,10 +113,10 @@ function updateLogs(gameMap, mapObj, objCoordX, objCoordY ){
 function generateEniac ( gameMap ) {
     let randomEniacX = Math.ceil(Math.random() * (gameMap.size));
     let randomEniacY = Math.ceil(Math.random() * (gameMap.size));
-    generateEniacHelper(gameMap, randomEniacX, randomEniacY);
+    generateEniacAtLocation(gameMap, randomEniacX, randomEniacY);
 }
 
-function generateEniacHelper(gameMap, eniacCoordX, eniacCoordY) {
+function generateEniacAtLocation(gameMap, eniacCoordX, eniacCoordY) {
 
     mapObj = new Eniac();
 
@@ -128,10 +131,10 @@ function generateEniacHelper(gameMap, eniacCoordX, eniacCoordY) {
 function generateCeleron( gameMap ) {
     let randomCelX = Math.ceil(Math.random() * (gameMap.size));
     let randomCelY = Math.ceil(Math.random() * (gameMap.size));
-    generateCeleronHelper(gameMap, randomCelX, randomCelY);
+    generateCeleronAtLocation(gameMap, randomCelX, randomCelY);
 }
 
-function generateCeleronHelper(gameMap, celeronCoordX, celeronCoordY) {
+function generateCeleronAtLocation(gameMap, celeronCoordX, celeronCoordY) {
 
     mapObj = new Celeron();
 
@@ -152,10 +155,10 @@ function generateCeleronHelper(gameMap, celeronCoordX, celeronCoordY) {
 function generateXeon ( gameMap ) {
     let randomXeonX = Math.ceil(Math.random() * (gameMap.size));
     let randomXeonY = Math.ceil(Math.random() * (gameMap.size));
-    generateXeonHelper(gameMap, randomXeonX, randomXeonY )
+    generateXeonAtLocation(gameMap, randomXeonX, randomXeonY )
 }
 
-function generateXeonHelper(gameMap, xeonCoordX, xeonCoordY) {
+function generateXeonAtLocation(gameMap, xeonCoordX, xeonCoordY) {
 
     mapObj = new Xeon();
 
@@ -199,10 +202,10 @@ function generateBadMax( gameMap)
 function generateRyzen ( gameMap ) {
     let randomRyzenX = Math.ceil(Math.random() * (gameMap.size));
     let randomRyzenY = Math.ceil(Math.random() * (gameMap.size));
-    generateRyzenHelper(gameMap, randomRyzenX, randomRyzenY)
+    generateRyzenAtLocation(gameMap, randomRyzenX, randomRyzenY)
 }
 
-function generateRyzenHelper(gameMap, ryzenCoordX, ryzenCoordY) {
+function generateRyzenAtLocation(gameMap, ryzenCoordX, ryzenCoordY) {
 
     mapObj = new Ryzen();
 

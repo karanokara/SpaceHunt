@@ -136,7 +136,7 @@ html, body {
     font-size: .9rem;
 }
 
-/* the scroll window with the list of saved games*/
+/* the scroll window with the list of saved games
 #playerNameBlock{
     background: #FFFFFF;
     overflow-y: scroll;
@@ -151,11 +151,19 @@ html, body {
     height: 100px;
 
 }
+*/
 
 #savedGameListTitle{
     padding-top: 1%;
 }
 
+#savedGameList{
+    width: 200px;
+}
+
+#game-name{
+    width: 100%;
+}
 
 
 /*class to target heading spans*/

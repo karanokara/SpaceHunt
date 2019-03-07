@@ -1,4 +1,4 @@
-var nameInput = document.querySelector( '#playerName' );
+const nameInput = document.querySelector( '#playerName' );
 MAX_CELEST_OBJ = 20;
 window.gameData = {
     setupMode: false,
@@ -60,16 +60,10 @@ window.onload = function () {
     document.querySelectorAll( '.savedGame').onclick = function () {
         for (let i = 0; i < document.querySelectorAll('.game-name').length; ++i) {
 
-            if (document.querySelectorAll('.game-name')[i]) {
-                document.querySelectorAll('.game-name')[i].onclick = function () {
-                    nameInput = document.querySelectorAll('.game-name')[0].innerText;
-                    if (contGame())
-                        setupPage.attributes.class.value += ' hide';
-                };
 
-            }
         }
-    };
+        ;
+    }
 
 };
 
@@ -282,13 +276,17 @@ function populateSavedGameList(){
 
 
 
-        let unorderdList = document.createElement("UL");
+        let unorderdList = document.createElement("SELECT");
+        unorderdList.setAttribute("size", localStorage.length);
         unorderdList.setAttribute("id", "savedGameList");
 
+
         for (let i = 0; i < localStorage.length; ++i) {
-            let pastGame = document.createElement("li");
+            let pastGame = document.createElement("OPTION");
             pastGame.setAttribute("class", "game-name");
+            pastGame.setAttribute("value", localStorage.key(i));
             pastGame.innerHTML = localStorage.key(i);
+            pastGame.setAttribute("onselect", "updatePlayerNameField()" );
             //document.createElement("BR");
             unorderdList.appendChild(pastGame);
             divblock.appendChild(unorderdList);
@@ -297,4 +295,8 @@ function populateSavedGameList(){
         test.appendChild(divblock);
         document.getElementById("savedGameListBlock").appendChild(test);
     }
+};
+
+function updatePlayerNameField(){
+    nameInput.value = "Victor";
 }
