@@ -14,13 +14,13 @@ window.gameData = {
     celeron: null,
     xeon: null,
     ryzen: null,
-    stationTRM: new Array(MAX_CELEST_OBJ),
-    stationTR: new Array(MAX_CELEST_OBJ),
-    stationTM: new Array(MAX_CELEST_OBJ),
-    stationT: new Array(MAX_CELEST_OBJ),
-    abFreighter: new Array(MAX_CELEST_OBJ),
-    asteroid: new Array(MAX_CELEST_OBJ),
-    meteorShower: new Array(MAX_CELEST_OBJ)
+    stationTRM: new Array( MAX_CELEST_OBJ ),
+    stationTR: new Array( MAX_CELEST_OBJ ),
+    stationTM: new Array( MAX_CELEST_OBJ ),
+    stationT: new Array( MAX_CELEST_OBJ ),
+    abFreighter: new Array( MAX_CELEST_OBJ ),
+    asteroid: new Array( MAX_CELEST_OBJ ),
+    meteorShower: new Array( MAX_CELEST_OBJ )
 };
 
 
@@ -51,14 +51,14 @@ window.onload = function () {
     // loads saved game data for oldSpice and gameMap
     document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
 
-       if(contGame())
+        if ( contGame() )
             setupPage.attributes.class.value += ' hide';
     };
 
     // Work in Progress to be able to click the names directly
     // when they click a name on the list
-    document.querySelectorAll( '.savedGame').onclick = function () {
-        for (let i = 0; i < document.querySelectorAll('.game-name').length; ++i) {
+    document.querySelectorAll( '.savedGame' ).onclick = function () {
+        for ( let i = 0; i < document.querySelectorAll( '.game-name' ).length; ++i ) {
 
 
         }
@@ -74,8 +74,8 @@ window.onload = function () {
 function contGame () {
 
     let start = false;
-    let name = localStorage.key(localStorage.length - 1);
-    let temp = JSON.parse(localStorage.getItem(name));
+    let name = localStorage.key( localStorage.length - 1 );
+    let temp = JSON.parse( localStorage.getItem( name ) );
 
 
     //pull oldSpice state from local storage on load if tab closed
@@ -96,7 +96,7 @@ function contGame () {
 
 
         // make an empty map with correct dimensions
-        window.gameMap = new GameMap(temp.mapSize);
+        window.gameMap = new GameMap( temp.mapSize );
 
         // setup wormhole
         window.boundary = new WormHole();
@@ -105,10 +105,10 @@ function contGame () {
         gameEffect();
 
         // render map
-        window.gameMap.renderMap(window.oldSpice.x, window.oldSpice.y);
+        window.gameMap.renderMap( window.oldSpice.x, window.oldSpice.y );
 
         // place map object from local storage into the empty map
-        PopulateSavedMap(window.gameMap, temp);
+        PopulateSavedMap( window.gameMap, temp );
 
 
         // update screen data
@@ -118,12 +118,12 @@ function contGame () {
 
         //important that pushes to tickObjects happens nearly last
         //ctrecipe.tickObjects.push( function () { DrawGameMap(grid_items); } );
-        ctrecipe.tickObjects.push(function () {
-            Collision(window.oldSpice.x, window.oldSpice.y);
-        });
+        ctrecipe.tickObjects.push( function () {
+            Collision( window.oldSpice.x, window.oldSpice.y );
+        } );
         ctrecipe.tick();
     } else
-        alert("No previous game has been saved.");
+        alert( "No previous game has been saved." );
 
     return start;
 
@@ -136,7 +136,7 @@ function contGame () {
 function initGame () {
 
     // when they start a new game with the same name as a saved game we remove the old saved data.
-    localStorage.removeItem( document.getElementsByName("playerNameInput")[0].value );
+    localStorage.removeItem( document.getElementsByName( "playerNameInput" )[0].value );
 
     // 1st check if in user defined mode
     if ( window.gameData != undefined ) {
@@ -194,7 +194,7 @@ window.beforeunload = function () {
     // update Ship properties and store in local storage
     //localStorage.removeItem( nameInput.value );
     localStorage.setItem( "playerName", nameInput.value );
-    saveShip(window.gameData, window.oldSpice);
+    saveShip( window.gameData, window.oldSpice );
     localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
 };
 
@@ -213,18 +213,18 @@ function gameEffect () {
     /**
      * when click the game save button
      */
-    if(!gameData.setupMode) {
-        document.querySelector('#game-save').onclick = function () {
+    if ( !gameData.setupMode ) {
+        document.querySelector( '#game-save' ).onclick = function () {
 
             // store the player's name
             //localStorage.setItem( "playerName", document.getElementsByName("playerNameInput")[0].value);
             //store the ship's data
-            saveShip(window.gameData, window.oldSpice);
+            saveShip( window.gameData, window.oldSpice );
             // the map is being saved at the time it is being populated
             //saveMap(window.gameData, window.gameMap )
 
-            localStorage.setItem(document.getElementsByName("playerNameInput")[0].value, JSON.stringify(window.gameData));
-            alert("saved game!");
+            localStorage.setItem( document.getElementsByName( "playerNameInput" )[0].value, JSON.stringify( window.gameData ) );
+            alert( "saved game!" );
         };
     }
 }
@@ -233,45 +233,48 @@ function gameEffect () {
  * A function to fill obj data into gazetteer
  */
 function gazePopulate ( obj, objX, objY ) {
-    var gazeList = document.querySelector( '#gazetteer .gazetteer-list' ),
-        objName = ( obj.name != undefined ) ? obj.name : obj.objType;
-    gazeList.innerHTML +=
-        '<li class="list-group-item d-flex justify-content-between align-items-center">' +
-        '<span class="gazetteer-obj-name">' + objName + '</span>' +
-        '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
-        '</li>';
+    if ( obj.addedToGaze == undefined ) {
+        var gazeList = document.querySelector( '#gazetteer .gazetteer-list' ),
+            objName = ( obj.name != undefined ) ? obj.name : obj.objType;
 
+        obj.addedToGaze = 1;
+        gazeList.innerHTML +=
+            '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+            '<span class="gazetteer-obj-name">' + objName + '</span>' +
+            '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
+            '</li>';
+    }
 }
 
-function populateSavedGameList(){
+function populateSavedGameList () {
 
     playerNameInit();
 
-    if(localStorage.length > 0) {
-        let test = document.createElement("DIV");
+    if ( localStorage.length > 0 ) {
+        let test = document.createElement( "DIV" );
         test.setAttribute( "class", "monster" );
-        test.setAttribute("id", "monster");
-        document.getElementById("savedGameListBlock").appendChild(test);
+        test.setAttribute( "id", "monster" );
+        document.getElementById( "savedGameListBlock" ).appendChild( test );
 
-        let titleDiv = document.createElement("DIV");
+        let titleDiv = document.createElement( "DIV" );
         titleDiv.setAttribute( "class", "mont" );
-        titleDiv.setAttribute("id", "savedGameListTitle");
+        titleDiv.setAttribute( "id", "savedGameListTitle" );
 
 
 
-        let savedGameListTitle = document.createTextNode("List of saved Games ");
+        let savedGameListTitle = document.createTextNode( "List of saved Games " );
 
         //divblock.appendChild(savedGameListTitle);
-        titleDiv.appendChild(savedGameListTitle);
+        titleDiv.appendChild( savedGameListTitle );
 
-        test.appendChild(titleDiv);
-        document.getElementById("savedGameListBlock").appendChild(test);
+        test.appendChild( titleDiv );
+        document.getElementById( "savedGameListBlock" ).appendChild( test );
 
 
-        let divblock = document.createElement("DIV");
+        let divblock = document.createElement( "DIV" );
         //divblock.setAttribute( "class", "modal-content" );
-        divblock.setAttribute("id", "playerNameBlock");
-        divblock.setAttribute("class", "savedGame")
+        divblock.setAttribute( "id", "playerNameBlock" );
+        divblock.setAttribute( "class", "savedGame" )
 
 
 
@@ -288,12 +291,12 @@ function populateSavedGameList(){
             pastGame.innerHTML = localStorage.key(i);
             pastGame.setAttribute("onselect", "updatePlayerNameField()" );
             //document.createElement("BR");
-            unorderdList.appendChild(pastGame);
-            divblock.appendChild(unorderdList);
+            unorderdList.appendChild( pastGame );
+            divblock.appendChild( unorderdList );
             //document.getElementById("playerNameField").appendChild(divblock);
         }
-        test.appendChild(divblock);
-        document.getElementById("savedGameListBlock").appendChild(test);
+        test.appendChild( divblock );
+        document.getElementById( "savedGameListBlock" ).appendChild( test );
     }
 };
 
