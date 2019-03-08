@@ -129,7 +129,7 @@ AbFreighter.prototype.Collide = function () {
     alert( "You encountered an abandoned freighter and collected " + lootEnergy + " energy and " + lootSupply + " supply from its remains!" );
 
     oldSpice.energy += lootEnergy;
-    if ( oldSpice.supply + lootSupply <= 100 )
+    if ( oldSpice.supplies + lootSupply <= 100 )
         oldSpice.supplies += lootSupply;
     else
         oldSpice.supplies = 100;
@@ -208,10 +208,28 @@ Eniac.prototype = new Planet( 'Eniac', -1, -1 );
 Eniac.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
     this.EnterOrbit();
+
+    if(oldSpice.recipe)
+    {
+        ctrecipe.GameWinner("You captured the KokaKola Recipe!");
+    }
 }
 
 /*----------------------------------------------------*/
 
+function KokaKolaRecipe() {}
+
+KokaKolaRecipe.prototype = new MapObject ("Recipe", 0);
+
+KokaKolaRecipe.prototype.Collide = function()
+{
+    MapObject.prototype.Collide.call( this );
+    oldSpice.recipe = true;
+    alert("You picked up the KokaKola recipe! Return it to Planet Eniac!");
+    gameMap.remove( oldSpice.x, oldSpice.y ); // remove the recipe from the map
+}
+
+/*----------------------------------------------------*/
 function BadMax () { }
 
 BadMax.prototype = new MapObject( "BadMax", 0 );
@@ -228,18 +246,23 @@ BadMax.prototype.Collide = function () {
     else {
         this.DestroyShip();
     }
+    //reposition badmax after encounter or delete
+    gameMap.remove( oldSpice.x, oldSpice.y ); // remove this BadMax from the map
+    generateBadMax(gameMap); //add a new badmax to the map
 }
 
 BadMax.prototype.Steal = function () {
-    alert( "BadMax has stolen your supplies and credits!" );
+    alert( "BadMax has boarded your ship and stolen half your supplies and all your credits!" );
+    oldSpice.supplies /= 2;
+    oldSpice.credits = 0;
 }
 
 BadMax.prototype.DestroyShip = function () {
-    ctrecipe.GameOver( "BadMax has destroyed your ship!" );
+    ctrecipe.GameOver( "BadMax and his henchmen blasted your ship into stardust!" );
 }
 
 BadMax.prototype.Escape = function () {
-    alert( "You have run away from BadMax!" );
+    alert( "You come across BadMax but successfuly outrun him and his henchmen!" );
 }
 
 /*----------------------------------------------------*/

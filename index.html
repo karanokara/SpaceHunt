@@ -17,9 +17,7 @@
     <title>Space Hunt</title>
 
 </head>
-
 <body>
-
 <!-- +++++++++++++++++ This is a configuration page +++++++++++++++++++++++++++++
 - For setting game before start the game
 - All game setting option can be load inside class "game-setting-option"
@@ -28,18 +26,21 @@
     <h1 class="display-4">Space Hunt</h1>
     <p class="lead">Welcome to our fancy game Space Hunt!</p>
     <hr class="my-4">
-    <div class="playerNameField">
+    <div id="playerNameField">
         <p>
             <label for="playerName">Player Name: </label>
             <input id="playerName" type="text" required>
         </p>
     </div>
 
+    <div id="savedGameListBlock"></div>
+
     <div>
         <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
     </div>
     <div id="devLoadModal" class="modal">
     </div>
+
 
     <button class="btn btn-primary btn-lg game-start-btn" id="startButton">Start New Game</button>
 
@@ -49,10 +50,6 @@
     </div>
 
 </div>
-
-
-
-
 
 
 <!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
@@ -79,7 +76,7 @@
 
         <!--center-screen-->
         <div id="main-screen-container">
-            <h1 id="ship-name">G.S.S OldSpice</h1>
+            <h1 id="ship-name">SPACE HUNT</h1>
 
             <!--map panel-->
             <div id="map-container">
@@ -92,7 +89,7 @@
 
             <!--message board-->
             <div id="message-board">
-                Message Board
+                Communication Panel
                 <ul id="message-list">
                 </ul>
             </div>
@@ -158,6 +155,8 @@
 <link rel="stylesheet" type="text/css" href="css/setup-game.css">
 
 <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Changa+One" rel="stylesheet">
 
 <!--script links here-->
 

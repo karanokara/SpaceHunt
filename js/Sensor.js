@@ -12,8 +12,6 @@ class Sensor {
         this.map = map;
         this.level = 1;             // sensor level
         this.ScanCP = 2;
-        this.dataLog = document.querySelector( '#data-log' );
-        this.messageBoard = document.querySelector( '#message-board' );
     }
 
     /**
@@ -61,17 +59,17 @@ class Sensor {
                 found = this.map.map[searchX][searchY];
             if ( found != undefined ) {
                 anyFound = 1;
-                this.dataLog.innerHTML += '<li class="log">' + found.objType + ': (' + searchX + ', ' + searchY + ')</li>';
+
+                // add location of celestial obj found to Celestial Gazetteer
+                gazePopulate( found, searchX, searchY );
             }
         }
 
-        //TODO: add location of celestial obj found to Celestial Map
-
         if ( !anyFound ) {
-            this.messageBoard.innerHTML = "There is nothing found in the current CP!";
+            addMessage( "There is nothing found in the current CP!" );
         }
         else {
-            this.messageBoard.innerHTML = "Some objects found!";
+            addMessage( "Some objects found!" );
         }
 
         return nearCP;
@@ -87,7 +85,7 @@ class Sensor {
             this.ScanCP = 5;
         }
         else {
-            this.messageBoard.innerHTML = "Can't upgrade sensor, check your sensor's lv or your credit";
+            addMessage( "Can't upgrade sensor, check your sensor's lv or your credit" );
         }
     }
 
@@ -98,7 +96,7 @@ class Sensor {
      */
     alert () {
         //TODO: determine if recepit in this plant
-        this.messageBoard.innerHTML = "The KocaKola recipe is in this planet!";
+        addMessage( "The KocaKola recipe is in this planet!" );
     }
 
     /**
@@ -106,10 +104,10 @@ class Sensor {
      */
     print () {
         if ( this.level == 1 ) {
-            this.messageBoard.innerHTML = "Sensor: Standard, Scan within 2 CP";
+            addMessage( "Sensor: Standard, Scan within 2 CP" );
         }
         else {
-            this.messageBoard.innerHTML = "Sensor: Enhanced, Scan within 5 CP";
+            addMessage( "Sensor: Enhanced, Scan within 5 CP" );
         }
     }
 

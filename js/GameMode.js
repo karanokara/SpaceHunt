@@ -23,11 +23,13 @@ function GameMode(params)
     gameObj.GameOver = function(reason)
     {
         alert(reason + "\nYou lost the game!");
+        location.reload();
     }
 
-    gameObj.GameWinner = function()
+    gameObj.GameWinner = function(reason)
     {
-        alert("You won the game!");
+        alert(reason + "\nYou won the game!");
+        location.reload();
     }
 
     gameObj.tick = function()

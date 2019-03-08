@@ -36,8 +36,22 @@ function submitHeading (direction_value, magnitude_value) {
     window.oldSpice.move( magnitude_value, direction_value );
 
     //create a log of previous location
-    //createNewLog();
+    //createNewLog(); //data log not in use
 }
+
+// Allows WASD and the arrows to control the ship
+window.addEventListener("keydown", event => {
+    if (       event.key === 38 || event.key === 'w' ) {
+        submitHeading(90);
+    } else if (event.key === 37 || event.key === 'a' ) {
+            submitHeading(180);
+    } else if (event.key === 40 || event.key === 's' ) {
+        submitHeading(270);
+    } else if (event.key === 39 || event.key === 'd' ) {
+        submitHeading(0);
+    }
+});
+
 
 //function for rendering the current position to the DOM
 function updateHeading () {
@@ -134,3 +148,21 @@ function submitMessageOK() {
 function submitMessageCancel() {
     console.log('test cancel');
 }
+
+// I think I will just put this in main.js
+function savedGameDisplay(savedGameName) {
+    //let savedGameList = document.getElementById("playerName");
+
+    let pastGame = document.createElement("INPUT");
+
+    pastGame.setAttribute("class", "savedGame");
+    //pastGame.className = "sGames";
+    pastGame.setAttribute("type", "text");
+    pastGame.setAttribute("value", savedGameName);
+    //pastGame.innerHTML = savedGameName;
+    document.getElementById("playerName").appendChild(pastGame);
+
+
+    //document.querySelectorAll( "#playerName" )[0].value = "ss";
+}
+
