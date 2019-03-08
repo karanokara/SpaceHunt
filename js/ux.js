@@ -36,7 +36,7 @@ function submitHeading (direction_value, magnitude_value) {
     window.oldSpice.move( magnitude_value, direction_value );
 
     //create a log of previous location
-    //createNewLog(); //data log not in use
+    //createNewLog(); //data log (NOT IN USE)
 }
 
 // Allows "wasd" and the arrows to control the ship
@@ -83,15 +83,8 @@ function updateLevels () {
     engines.innerHTML = window.oldSpice ? window.oldSpice.engineLv : 0;
 }
 
-//function for rendering the current degree selector value to DOM
-function showDirectionInput () {
 
-    let slider = document.getElementById( "direction-input" );
-    let output = document.getElementById( "direction-value" );
-    output.innerHTML = slider.value;
-}
-
-//function for generating new data-log list to DOM
+//function for generating new data-log list to DOM (NOT IN USE)
 function createNewLog () {
 
     let x_val = window.oldSpice.x;
@@ -103,6 +96,8 @@ function createNewLog () {
     data_log.appendChild( log );
 }
 
+//function to add new non form message to message board
+//function takes string message as arg
 function addMessage(message) {
     let message_list = document.getElementById("message-list");
     let new_message = document.createElement("li");
@@ -111,7 +106,9 @@ function addMessage(message) {
     message_list.appendChild(new_message);
 }
 
-function addMessageForm(message) {
+//function to add a new form message to message board
+//function takes string message and 2 input tags as arguments
+function addMessageForm(message, message_res_ok, message_res_cancel) {
 
     //target message-list
     let message_list = document.getElementById("message-list");
@@ -120,34 +117,20 @@ function addMessageForm(message) {
     let new_message = document.createElement("li");
     new_message.setAttribute("class", "message");
 
-    //create ok button
-    let message_res_ok = document.createElement("input");
-    message_res_ok.setAttribute("type", "button");
-    message_res_ok.setAttribute("onclick", "submitMessageOK()");
-    message_res_ok.setAttribute("value", "OK");
+    let new_form = document.createElement("form");
 
-    //create cancel button
-    let message_res_cancel = document.createElement("input");
-    message_res_ok.setAttribute("type", "button");
-    message_res_ok.setAttribute("onclick", "submitMessageCancel()");
-    message_res_ok.setAttribute("value", "Cancel");
+    //add buttons to form
+    new_form.appendChild(message_res_ok);
+    new_form.appendChild(message_res_cancel);
 
-    //nest buttons in li
-    new_message.appendChild(message_res_ok);
-    new_message.appendChild(message_res_cancel);
+    //nest form in li
+    new_message.appendChild(new_form);
 
     //nest li in message list
     new_message.innerHTML = message;
     message_list.appendChild(new_message);
 }
 
-function submitMessageOK() {
-   console.log('test OK');
-}
-
-function submitMessageCancel() {
-    console.log('test cancel');
-}
 
 // I think I will just put this in main.js
 function savedGameDisplay(savedGameName) {
