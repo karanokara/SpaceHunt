@@ -91,20 +91,22 @@
             </div>
 
             <!--message board-->
-            <div id="message-board">
-                Communication Panel
-                <ul id="message-list">
-                </ul>
+            <div id="message-board-container">
+                <div id="message-board">
+                    <span style="padding: .75rem 0">Communications Panel</span>
+                    <ul id="message-list">
+                    </ul>
+                </div>
             </div>
         </div>
 
 
         <!--RHS top panel-->
         <div class="data-panel">
-                <div class="data-title">
-                    <button id="game-save" type="button" class="btn btn-success btn-game-save">SAVE
-                        GAME</button>
-                </div>
+            <div class="data-title">
+                <button id="game-save" type="button" class="btn btn-success btn-game-save">SAVE
+                    GAME</button>
+            </div>
 
             <!--control panel-->
             <div id="controls" class="status-control-containers">
@@ -118,7 +120,7 @@
                         <input id="north-input" value="NORTH" type="button" onclick="submitNorthHeading()"/>
                         <div id="east-west-container">
                             <input id="west-input" value="WEST" type="button" onclick="submitWestHeading()"/>
-                            <input id="movement-magnitude" min="0" max="10" type="number" value="0"/>
+                            <input id="movement-magnitude" min="1" max="10" type="number" value="1"/>
                             <input id="east-input" value="EAST" type="button" onclick="submitEastHeading()"/>
                         </div>
                         <input id="south-input" value="SOUTH" type="button" onclick="submitSouthHeading()"/>
