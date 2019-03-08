@@ -36,15 +36,15 @@ function submitHeading (direction_value) {
     createNewLog();
 }
 
-// Allows WASD and the arrows to control the ship
+// Allows "wasd" and the arrows to control the ship
 window.addEventListener("keydown", event => {
-    if (       event.key === 38 || event.key === 'w' ) {
+    if (       event.keyCode === 38 || event.key === 'w' ) {
         submitHeading(90);
-    } else if (event.key === 37 || event.key === 'a' ) {
+    } else if (event.keyCode === 37 || event.key === 'a' ) {
             submitHeading(180);
-    } else if (event.key === 40 || event.key === 's' ) {
+    } else if (event.keyCode === 40 || event.key === 's' ) {
         submitHeading(270);
-    } else if (event.key === 39 || event.key === 'd' ) {
+    } else if (event.keyCode === 39 || event.key === 'd' ) {
         submitHeading(0);
     }
 });
@@ -60,6 +60,14 @@ function updateHeading () {
     //renders new coordinates to user
     x.innerHTML = window.oldSpice ? window.oldSpice.x : 0;
     y.innerHTML = window.oldSpice ? window.oldSpice.y : 0;
+
+    // persistent state stuff that is less efficient but saves when tab is closed
+    saveShip( window.gameData, window.oldSpice );
+
+    // this checks to see if the player even wants this game to be saved
+    if(gameData.savedGamed)
+    // allows for the game to be saved when the browser is closed
+        localStorage.setItem( document.getElementsByName( "playerNameInput" )[0].value, JSON.stringify( window.gameData ) );
 }
 
 function updateLevels () {

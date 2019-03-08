@@ -1,7 +1,9 @@
-const nameInput = document.querySelector( '#playerName' );
+const  nameInput = document.querySelector( '#playerName' );
+
 MAX_CELEST_OBJ = 20;
 window.gameData = {
     setupMode: false,
+    savedGamed: false,
     shipX: 0,
     shipY: 0,
     shipEnergy: 1000,
@@ -26,6 +28,7 @@ window.gameData = {
 
 
 
+
 // when DOM loaded, call this
 window.onload = function () {
     // had to move datalog from PopulateMap.js as Continue Game doesn't call populate a fresh map.
@@ -39,6 +42,7 @@ window.onload = function () {
      */
     let setupPage = document.querySelectorAll( '.setup-game' )[0];
 
+
     // initializes default values
     document.querySelectorAll( '.game-start-btn' )[0].onclick = function () {
         // initial the game object according to the setting
@@ -51,19 +55,9 @@ window.onload = function () {
     // loads saved game data for oldSpice and gameMap
     document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
 
-        if ( contGame() )
-            setupPage.attributes.class.value += ' hide';
+         contGame()
+         setupPage.attributes.class.value += ' hide';
     };
-
-    // Work in Progress to be able to click the names directly
-    // when they click a name on the list
-    document.querySelectorAll( '.savedGame' ).onclick = function () {
-        for ( let i = 0; i < document.querySelectorAll( '.game-name' ).length; ++i ) {
-
-
-        }
-        ;
-    }
 
 };
 
@@ -73,15 +67,14 @@ window.onload = function () {
  */
 function contGame () {
 
-    let start = false;
-    let name = localStorage.key( localStorage.length - 1 );
+
+    let name = nameInput.value;
     let temp = JSON.parse( localStorage.getItem( name ) );
 
 
     //pull oldSpice state from local storage on load if tab closed
     // call the constructor with pertinent data (not map size)
     if ( temp != undefined ) {
-        start = true;
 
         window.oldSpice = new Ship(
             temp.shipX,
@@ -93,6 +86,8 @@ function contGame () {
             temp.shipDamaged,
             temp.shipNormalPlay
         );
+        // allows for the game to be saved when the browser is closed
+        //window.gameData.savedGamed = temp.savedGamed;
 
 
         // make an empty map with correct dimensions
@@ -122,10 +117,12 @@ function contGame () {
             Collision( window.oldSpice.x, window.oldSpice.y );
         } );
         ctrecipe.tick();
-    } else
-        alert( "No previous game has been saved." );
-
-    return start;
+    } else {
+        if(name)
+            alert("No previous game has been saved for " + name);
+        else
+            alert("No player name was entered.")
+    }
 
 }
 
@@ -135,8 +132,11 @@ function contGame () {
  */
 function initGame () {
 
+
     // when they start a new game with the same name as a saved game we remove the old saved data.
-    localStorage.removeItem( document.getElementsByName( "playerNameInput" )[0].value );
+    if(localStorage.getItem(nameInput.value))
+        alert("By starting a new game, you will be deleted the last saved game for " + nameInput.value);
+    localStorage.removeItem( nameInput.value );
 
     // 1st check if in user defined mode
     if ( window.gameData != undefined ) {
@@ -213,9 +213,9 @@ function gameEffect () {
     /**
      * when click the game save button
      */
-    if ( !gameData.setupMode ) {
+    if ( !window.gameData.setupMode ) {
         document.querySelector( '#game-save' ).onclick = function () {
-
+            window.gameData.savedGamed = true;
             // store the player's name
             //localStorage.setItem( "playerName", document.getElementsByName("playerNameInput")[0].value);
             //store the ship's data
@@ -223,8 +223,8 @@ function gameEffect () {
             // the map is being saved at the time it is being populated
             //saveMap(window.gameData, window.gameMap )
 
-            localStorage.setItem( document.getElementsByName( "playerNameInput" )[0].value, JSON.stringify( window.gameData ) );
-            alert( "saved game!" );
+            localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
+            alert( "Game saved!\n Your progess will also be saved when you close the browser." );
         };
     }
 }
@@ -248,58 +248,70 @@ function gazePopulate ( obj, objX, objY ) {
 
 function populateSavedGameList () {
 
-    playerNameInit();
+    //playerNameInit();
 
+    // only populate a list of saved games if there are any games to show.
     if ( localStorage.length > 0 ) {
-        let test = document.createElement( "DIV" );
-        test.setAttribute( "class", "monster" );
-        test.setAttribute( "id", "monster" );
-        document.getElementById( "savedGameListBlock" ).appendChild( test );
 
+        // creates the container to contain everything being created here.
+        // kinda redundant since I already have a place holder in index.html but why not.
+        let savedGameListTitleDIVContainer = document.createElement( "DIV" );
+        savedGameListTitleDIVContainer.setAttribute( "class", "savedGameListContainer" );
+        savedGameListTitleDIVContainer.setAttribute( "id", "savedGameListContainer" );
+        document.getElementById( "savedGameListBlock" ).appendChild( savedGameListTitleDIVContainer );
+
+        // the div for the title
         let titleDiv = document.createElement( "DIV" );
-        titleDiv.setAttribute( "class", "mont" );
+        titleDiv.setAttribute( "class", "savedGameListTitle" );
         titleDiv.setAttribute( "id", "savedGameListTitle" );
 
+        // the actual title
+        let savedGameListTitle = document.createElement("P");
+        savedGameListTitle.innerHTML = "List of saved Games";
 
-
-        let savedGameListTitle = document.createTextNode( "List of saved Games " );
-
-        //divblock.appendChild(savedGameListTitle);
+        // lets add the title to the div
         titleDiv.appendChild( savedGameListTitle );
 
-        test.appendChild( titleDiv );
-        document.getElementById( "savedGameListBlock" ).appendChild( test );
+        // add that to the container
+        savedGameListTitleDIVContainer.appendChild( titleDiv );
 
-
-        let divblock = document.createElement( "DIV" );
+        // create the div that will contain the list of games
+        let listOfPastGameDiv = document.createElement( "DIV" );
         //divblock.setAttribute( "class", "modal-content" );
-        divblock.setAttribute( "id", "playerNameBlock" );
-        divblock.setAttribute( "class", "savedGame" )
+        listOfPastGameDiv.setAttribute( "id", "playerNameBlock" );
+        listOfPastGameDiv.setAttribute( "class", "savedGame" )
 
 
 
+        // creates the select container
+        let selectOptionList = document.createElement("SELECT");
+        // plus 1 so if there is only game option it won't default to selected
+        selectOptionList.setAttribute("size", localStorage.length + 1);
+        selectOptionList.setAttribute("id", "savedGameList");
+        selectOptionList.setAttribute("onchange", "updatePlayerNameField(this.selectedIndex)");
 
-        let unorderdList = document.createElement("SELECT");
-        unorderdList.setAttribute("size", localStorage.length);
-        unorderdList.setAttribute("id", "savedGameList");
 
-
+        // reads the local storage and adds each game as an option
         for (let i = 0; i < localStorage.length; ++i) {
             let pastGame = document.createElement("OPTION");
             pastGame.setAttribute("class", "game-name");
             pastGame.setAttribute("value", localStorage.key(i));
             pastGame.innerHTML = localStorage.key(i);
-            pastGame.setAttribute("onselect", "updatePlayerNameField()" );
-            //document.createElement("BR");
-            unorderdList.appendChild( pastGame );
-            divblock.appendChild( unorderdList );
-            //document.getElementById("playerNameField").appendChild(divblock);
+            //pastGame.setAttribute("onselect", "updatePlayerNameField()" );
+            selectOptionList.appendChild( pastGame );
+
         }
-        test.appendChild( divblock );
-        document.getElementById( "savedGameListBlock" ).appendChild( test );
+
+        // chain them all up
+        listOfPastGameDiv.appendChild( selectOptionList );
+        savedGameListTitleDIVContainer.appendChild( listOfPastGameDiv );
+        document.getElementById( "savedGameListBlock" ).appendChild( savedGameListTitleDIVContainer );
     }
+
+
 };
 
-function updatePlayerNameField(){
-    nameInput.value = "Victor";
+// update the player name input box when a past game has been selected
+function updatePlayerNameField(selectedGamed){
+    nameInput.value = localStorage.key(selectedGamed);
 }

@@ -154,7 +154,7 @@ html, body {
 */
 
 #savedGameListTitle{
-    padding-top: 1%;
+   margin-bottom: -8px;
 }
 
 #savedGameList{
