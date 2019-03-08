@@ -621,6 +621,7 @@ Create text box for the player's name for persistent state.
 Default value is admin.
 */
 function playerNameInit() {
+
     // makes the label for Player Name :
     let playerNameLabel = document.createElement("LABEL");
     playerNameLabel.setAttribute("for", "playerName");

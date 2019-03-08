@@ -39,15 +39,15 @@ function submitHeading (direction_value, magnitude_value) {
     //createNewLog(); //data log not in use
 }
 
-// Allows WASD and the arrows to control the ship
+// Allows "wasd" and the arrows to control the ship
 window.addEventListener("keydown", event => {
-    if (       event.key === 38 || event.key === 'w' ) {
+    if (       event.keyCode === 38 || event.key === 'w' ) {
         submitHeading(90);
-    } else if (event.key === 37 || event.key === 'a' ) {
+    } else if (event.keyCode === 37 || event.key === 'a' ) {
             submitHeading(180);
-    } else if (event.key === 40 || event.key === 's' ) {
+    } else if (event.keyCode === 40 || event.key === 's' ) {
         submitHeading(270);
-    } else if (event.key === 39 || event.key === 'd' ) {
+    } else if (event.keyCode === 39 || event.key === 'd' ) {
         submitHeading(0);
     }
 });
