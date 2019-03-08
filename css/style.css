@@ -12,44 +12,99 @@ html, body {
 }
 
 /*container for top half of page*/
-.top-container {
+.main-container {
     display: inherit;
     width: 100%;
     height: 100%;
+}
+
+/*class to target top side panels*/
+.data-panel {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: lightskyblue;
+    opacity: 90%;
+    width: 30%;
+    height: 100%;
+}
+
+/*gazetteer section styles*/
+.data-panel .gazetteer-list-wrapper {
+    overflow: auto;
+    margin: 10px 5px;
+}
+
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-track {
+    background: #fff;
+}
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-thumb {
+    background: #007bff;;
+}
+.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.gazetteer-list-wrapper .gazetteer-obj-coordinate {
+    margin-left: 10px;
+}
+
+/* title for a specific part of game */
+.data-title {
+    margin: 20px 0 15px 0;
+}
+
+#main-screen-container {
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: darkgrey;
 }
 
 /*id to target ship name h2*/
 #ship-name {
     font-family: "Bad Script" , cursive;;
     font-weight: bolder;
-    font-size: 1rem;
+    font-size: 2rem;
 }
 
-/*container class for main screen (middle top page) content*/
-.main-screen-container {
-    display: inherit;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: darkgrey;
-    width: 65%;
-    height: 100%;
-}
-
-/*id to target main-screen img*/
-#main-screen {
-    width: 50%;
+#map-container {
     height: 50%;
-    border-radius: 20%;
-    margin: 1rem;
-    overflow: hidden;
+    width: 95%;
+   overflow: hidden;
+}
+
+/*id for map grid container*/
+#grid-container {
+    display: grid;
+    background: lightgray;
+    grid-gap: 1px;
+    height: 100%;
+    width: 100%;
+    background: url("../resources/images/outerspace.jpg");
+    background-size: cover;
+}
+
+/*class for individual map grid tiles*/
+.grid-block {
+    display: flex;
+    z-index: 500;
+    background: black;
+    border: 5px black;
 }
 
 /*id for targeting message board*/
 #message-board {
-    width: 80%;
+    width: 95%;
     height: 35%;
-    background-color: darkturquoise;
+    background-color: lightblue;
     text-align: center;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -69,71 +124,12 @@ html, body {
     text-align: start;
 }
 
-/*class to target top side panels*/
-.data-panel {
-    display: inherit;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background-color: lightskyblue;
-    opacity: 90%;
-    width: 30%;
-    height: 100%;
-}
-
-.data-panel .gazetteer-list-wrapper {
-    overflow: auto;
-    margin: 10px 5px;
-}
-
-.data-panel .gazetteer-list-wrapper::-webkit-scrollbar {
-    width: 5px;
-}
-.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-track {
-    background: #fff; 
-}
-.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-thumb {
-    background: #007bff;; 
-}
-.data-panel .gazetteer-list-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-}
-
-.gazetteer-list-wrapper .gazetteer-obj-coordinate {
-    margin-left: 10px;
-}
-
-/* title for a specific part of game */
-.data-title {
-    margin: 20px 0 15px 0;
-}
-
 /*container class for data log*/
 .data-log-container {
     display: inherit;
     flex-direction: inherit;
     justify-content: center;
     text-align: center;
-}
-
-#star-fleet-icon {
-    align-self: center;
-    height: 50px;
-    width: 50px;
-}
-
-/*id for ul containing data logs*/
-#data-log {
-    padding-top: 10%;
-    text-align: inherit;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-/*individual data log of past coordinates*/
-.log {
-    padding: 1rem 0;
-    font-size: .9rem;
 }
 
 /*class to target heading spans*/
@@ -147,67 +143,28 @@ html, body {
     justify-content: center;
 }
 
-/*container for bottom half of page*/
-.bottom-container {
-    display: inherit;
-    justify-content: space-around;
-    flex-direction: row;
-    align-items: center;
-    background-color: grey;
-    width: 100%;
-    height: 70%;
-}
-
 /*class for map, control panel, and status box containers*/
-.status-map-control-containers {
+.status-control-containers {
     display: inherit;
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
-    width: 25%;
-    height: 100%;
+    width: 95%;
+    height: 38%;
     border-radius: 20%;
-    background: darkturquoise;
+    background: lightblue;
     overflow: hidden;
 }
 
-/*id for sensor container, holds grid-container*/
-#sensor-container {
-    justify-content: center;
-    align-items: center;
+/*the game saving button */
+.data-title .btn-game-save {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
 }
 
-/*id for map grid container*/
-#grid-container {
-    display: grid;
-    background: lightgray;
-    grid-gap: 1px;
-    height: 100%;
-    width: 100%;
-}
-
-/*class for individual map grid tiles*/
-.grid-block {
-    display: flex;
-    z-index: 500;
-    background: black;
-    border: 5px black;
-}
-
-/*id for container holding ship status ul*/
-#status-container {
-    background-color: darkturquoise;
-}
-
-/*id for ul displaying ship status*/
-#status-list {
-    height: 100%;
-    width: 100%;
-    display: inherit;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: left;
-    margin-left: 2rem;
+.data-title .btn-game-save:not(:disabled):not(.disabled):active {
+    color: #000;
 }
 
 /*control container specific*/
@@ -234,9 +191,19 @@ html, body {
 /*id to target div container for east/west input buttons*/
 #east-west-container {
     display: flex;
-    justify-content: space-between;
-    width: auto;
-    margin: .5rem 2rem;
+    justify-content: space-around;
+    width: 100%;
+    margin: .5rem 0;
+}
+
+#movement-magnitude {
+    width: 35%;
+}
+
+/*id for sensor container, holds grid-container*/
+#sensor-container {
+    justify-content: center;
+    align-items: center;
 }
 
 /*id to target scan input button*/
@@ -244,14 +211,18 @@ html, body {
     width: 40%;
 }
 
-/*the game saving button */
-.data-title .btn-game-save {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #000;
-}
-.data-title .btn-game-save:not(:disabled):not(.disabled):active {
-    color: #000;
+/*id for container holding ship status ul*/
+#status-container {
+    background-color: lightblue;
 }
 
-
+/*id for ul displaying ship status*/
+#status-list {
+    height: 100%;
+    width: 100%;
+    display: inherit;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: left;
+    margin-left: 2rem;
+}

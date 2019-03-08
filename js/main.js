@@ -25,9 +25,6 @@ window.gameData = {
 
 // when DOM loaded, call this
 window.onload = function () {
-    // had to move datalog from PopulateMap.js as Continue Game doesn't call populate a fresh map.
-    dataLog = document.getElementById( 'data-log' ).childNodes;
-    console.log( dataLog );
 
     /**
      * when click the start btn, start loading game

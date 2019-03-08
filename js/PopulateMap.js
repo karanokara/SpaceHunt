@@ -122,8 +122,6 @@ function generateCeleron(gameMap, celeronCoordX, celeronCoordY) {
     mapObj.x = celeronCoordX;
     mapObj.y = celeronCoordY;
 
-    dataLog[2].nodeValue = celeronCoordX + " " + celeronCoordY;
-
     updateLogs(gameMap, mapObj, celeronCoordX, celeronCoordY);
 }
 
@@ -145,8 +143,6 @@ function generateXeon(gameMap, xeonCoordX, xeonCoordY) {
 
     mapObj.x = xeonCoordX;
     mapObj.y = xeonCoordY;
-
-    dataLog[4].nodeValue = xeonCoordX + " " + xeonCoordY;
 
     updateLogs(gameMap, mapObj, xeonCoordX, xeonCoordY);
 }
@@ -170,6 +166,5 @@ function generateRyzen(gameMap, ryzenCoordX, ryzenCoordY) {
     mapObj.x = ryzenCoordX;
     mapObj.y = ryzenCoordY;
 
-    dataLog[6].nodeValue = ryzenCoordX + " " + ryzenCoordY;
     updateLogs(gameMap, mapObj, ryzenCoordX, ryzenCoordY);
 }

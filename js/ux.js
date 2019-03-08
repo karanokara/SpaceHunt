@@ -3,61 +3,70 @@
 //function captures direction value and calls submit
 function submitNorthHeading() {
     let direction_value = 90;
-    submitHeading(direction_value);
+    let magnitude_value = parseInt(document.getElementById("movement-magnitude").value);
+    submitHeading(direction_value, magnitude_value);
 }
 
 //function captures direction value and calls submit
 function submitEastHeading() {
     let direction_value = 0;
-    submitHeading(direction_value);
+    let magnitude_value = parseInt(document.getElementById("movement-magnitude").value);
+    submitHeading(direction_value, magnitude_value);
 }
 
 //function captures direction value and calls submit
 function submitSouthHeading() {
     let direction_value = 270;
-    submitHeading(direction_value);
+    let magnitude_value = parseInt(document.getElementById("movement-magnitude").value);
+    submitHeading(direction_value, magnitude_value);
 }
 
 //function captures direction value and calls submit
 function submitWestHeading() {
     let direction_value = 180;
-    submitHeading(direction_value);
+    let magnitude_value = parseInt(document.getElementById("movement-magnitude").value);
+    submitHeading(direction_value, magnitude_value);
 }
 
 //function takes direction value and calls oldspice move w/ new
 //heading
-function submitHeading (direction_value) {
+function submitHeading (direction_value, magnitude_value) {
 
     //x/y input = new coordinates (assign new location to these)
-    window.oldSpice.move( 1, parseInt(direction_value) );
-
+    window.oldSpice.move( magnitude_value, direction_value );
 
     //create a log of previous location
-    createNewLog();
+    //createNewLog();
 }
 
 //function for rendering the current position to the DOM
 function updateHeading () {
 
     //assign element vars
-    let x = document.getElementById( "x-heading" );
-    let y = document.getElementById( "y-heading" );
+    let heading = document.getElementById( "heading" );
 
     //renders new coordinates to user
-    x.innerHTML = window.oldSpice ? window.oldSpice.x : 0;
-    y.innerHTML = window.oldSpice ? window.oldSpice.y : 0;
+    heading.innerHTML = (window.oldSpice ? window.oldSpice.x : 0) + " , " + (window.oldSpice ? window.oldSpice.y : 0);
 }
 
+//function from updating oldspice status levels to DOM
 function updateLevels () {
 
     //assign element vars
     let credit = document.getElementById( "creditValue" );
     let energy = document.getElementById( "energyValue" );
     let supplies = document.getElementById( "supplyValue" );
+    let damage = document.getElementById("damageValue");
+    let sensors = document.getElementById("sensorLevel")
+    let engines = document.getElementById("engineLevel");
 
+    //shows level value or 0 if null
     credit.innerHTML = window.oldSpice ? window.oldSpice.credit : 0;
     energy.innerHTML = window.oldSpice ? window.oldSpice.energy : 0;
     supplies.innerHTML = window.oldSpice ? window.oldSpice.supplies : 0;
+    damage.innerHTML = window.oldSpice ? window.oldSpice.isDamaged : 0;
+    sensors.innerHTML = window.oldSpice ? window.oldSpice.sensor.level : 0;
+    engines.innerHTML = window.oldSpice ? window.oldSpice.engineLv : 0;
 }
 
 //function for rendering the current degree selector value to DOM
@@ -88,3 +97,40 @@ function addMessage(message) {
     message_list.appendChild(new_message);
 }
 
+function addMessageForm(message) {
+
+    //target message-list
+    let message_list = document.getElementById("message-list");
+
+    //create new message li item
+    let new_message = document.createElement("li");
+    new_message.setAttribute("class", "message");
+
+    //create ok button
+    let message_res_ok = document.createElement("input");
+    message_res_ok.setAttribute("type", "button");
+    message_res_ok.setAttribute("onclick", "submitMessageOK()");
+    message_res_ok.setAttribute("value", "OK");
+
+    //create cancel button
+    let message_res_cancel = document.createElement("input");
+    message_res_ok.setAttribute("type", "button");
+    message_res_ok.setAttribute("onclick", "submitMessageCancel()");
+    message_res_ok.setAttribute("value", "Cancel");
+
+    //nest buttons in li
+    new_message.appendChild(message_res_ok);
+    new_message.appendChild(message_res_cancel);
+
+    //nest li in message list
+    new_message.innerHTML = message;
+    message_list.appendChild(new_message);
+}
+
+function submitMessageOK() {
+   console.log('test OK');
+}
+
+function submitMessageCancel() {
+    console.log('test cancel');
+}
