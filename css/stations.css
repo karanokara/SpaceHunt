@@ -81,7 +81,13 @@
 }
 
 .AbFreighter {
-    background-color: bisque;
+    background-image: url("../resources/images/oldspice3.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height:100%;
+    width:100%;
+    position: relative;
+    z-index: 10;
 }
 
 .deg0 {
