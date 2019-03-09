@@ -202,7 +202,7 @@ function initGame () {
 /**
  * saves game when browser closes but there is not prompt, but it works this way!
  */
-functio
+//functio
 //function for storing state upon tab close
 window.beforeunload = window.unload = window.onbeforeunload = function () {
     // update Ship properties and store in local storage

@@ -238,9 +238,7 @@ function updateLogs ( gameMap, mapObj, objCoordX, objCoordY ) {
 }
 
 function generateEniac ( gameMap ) {
-    let randomEniacX = Math.ceil(Math.random() * (gameMap.size));
-    let randomEniacY = Math.ceil(Math.random() * (gameMap.size));
-    generateEniacAtLocation(gameMap, randomEniacX, randomEniacY);
+    generateEniacAtLocation(gameMap, 0, 0);
 }
 
 function generateEniacAtLocation(gameMap, eniacCoordX, eniacCoordY) {

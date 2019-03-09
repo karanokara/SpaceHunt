@@ -60,7 +60,7 @@ Asteroid.prototype.DamageShip = function () {
 
 Asteroid.prototype.DestroyShip = function () {
     oldSpice.energy = 0;
-    ctrecipe.GameOver( "You slammed into an asteroid!" );
+    ctrecipe.GameOver( "You slammed into an asteroid and blew up!" );
 }
 
 Asteroid.prototype.Collide = function () {
@@ -207,12 +207,20 @@ Eniac.prototype = new Planet( 'Eniac', -1, -1 );
 
 Eniac.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
-    this.EnterOrbit();
-
     if(oldSpice.recipe)
     {
         ctrecipe.GameWinner("You captured the KokaKola Recipe!");
     }
+    else
+    {
+        this.EnterOrbit();
+    }
+}
+
+Eniac.prototype.EnterOrbit = function () 
+{
+    alert( "You have entered the orbit of Eniac\nFind the KokaKola Recipe and bring it back here to win the game!" );
+
 }
 
 /*----------------------------------------------------*/
@@ -254,7 +262,7 @@ BadMax.prototype.Collide = function () {
 BadMax.prototype.Steal = function () {
     alert( "BadMax has boarded your ship and stolen half your supplies and all your credits!" );
     oldSpice.supplies /= 2;
-    oldSpice.credits = 0;
+    oldSpice.credit = 0;
 }
 
 BadMax.prototype.DestroyShip = function () {
