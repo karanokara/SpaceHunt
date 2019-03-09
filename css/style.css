@@ -136,6 +136,7 @@ html, body {
 #heading-container {
     position: absolute;
     top: -25px;
+    z-index: 10;
 }
 
 #heading {
