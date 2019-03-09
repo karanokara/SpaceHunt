@@ -84,7 +84,8 @@ class Ship {
 
             // check out any objects events
             ctrecipe.tick();
-
+            updateHeading();
+            updateLevels();
         }, 1000 );
 
     }
