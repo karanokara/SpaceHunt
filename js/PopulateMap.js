@@ -18,13 +18,78 @@ function PopulateMap ( gameMap ) {
     generateBadMax( gameMap );
     generateRecipe( gameMap );
 
-    // load celestial objects
+    if ( window.gameData.asteroidRandom ) {
+        for (let i = 0; i < 10; ++i) {
+            let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
+            let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+
+            generateCelestialObjects( gameMap, 4, objCoordx, objCoordy );
+        }
+    } else {
+        for ( let coords of window.gameData.asteroids ) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects( gameMap, 4, objCoordx, objCoordy );
+        }
+    }
+
+    if ( window.gameData.meteorRandom ) {
+        for (let i = 0; i < 10; ++i) {
+            let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
+            let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+
+            generateCelestialObjects( gameMap, 6, objCoordx, objCoordy ); 
+        }
+    } else {
+        for ( let coords of window.gameData.meteors ) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects( gameMap, 6, objCoordx, objCoordy );
+        }
+    }
+
+    if ( window.gameData.stationRandom ) {
+        for (let i = 0; i < 10; ++i) {
+            let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
+            let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+
+            generateCelestialObjects( gameMap, (i % 4), objCoordx, objCoordy );
+        }
+    } else {
+        for ( let coords of window.gameData.stations ) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+            let stationType = Math.floor ( Math.random() * 4 );
+            generateCelestialObjects( gameMap, stationType, objCoordx, objCoordy );
+        }
+    }
+
+    if ( window.gameData.freighterRandom ) {
+        for (let i = 0; i < 10; ++i) {
+            let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
+            let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
+
+            generateCelestialObjects( gameMap, 5, objCoordx, objCoordy );
+        }
+    } else {
+        for ( let coords of window.gameData.freighters ) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects( gameMap, 5, objCoordx, objCoordy );
+        }
+    }
+
+    /* load celestial objects -- deprecated
     for ( let i = 0; i < 50; ++i ) {
         let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
         let objCoordy = Math.ceil( Math.random() * ( gameMap.size ) );
 
         generateCelestialObjects( gameMap, i % 7, objCoordx, objCoordy );
     }
+    */
 }
 /**
  * generates map objects by reading the local storage to get their locations

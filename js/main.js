@@ -23,6 +23,10 @@ window.gameData = {
     abFreighter: new Array( MAX_CELEST_OBJ ),
     asteroid: new Array( MAX_CELEST_OBJ ),
     meteorShower: new Array( MAX_CELEST_OBJ ),
+    asteroidRandom : true,
+    meteorRandom : true,
+    freighterRandom : true,
+    stationRandom : true,
     gaze: { length: 0 }
 };
 
