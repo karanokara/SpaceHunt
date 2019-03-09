@@ -397,7 +397,7 @@ function stationInit () {
     let submitButton = document.createElement( "INPUT" );
     submitButton.setAttribute( "name", "stationSubmit" );
     submitButton.setAttribute( "type", "button" );
-    submitButton.setAttribute( "value", "Save Changes" );
+    submitButton.setAttribute( "value", "Add" );
     submitButton.onclick = function () { stationSubmit() };
     stationLabel.appendChild( submitButton );
 
@@ -450,7 +450,7 @@ function freighterInit () {
     let submitButton = document.createElement( "INPUT" );
     submitButton.setAttribute( "name", "freighterSubmit" );
     submitButton.setAttribute( "type", "button" );
-    submitButton.setAttribute( "value", "Save Changes" );
+    submitButton.setAttribute( "value", "Add" );
     submitButton.onclick = function () { freighterSubmit() };
     freighterLabel.appendChild( submitButton );
 
@@ -503,7 +503,7 @@ function asteroidInit () {
     let submitButton = document.createElement( "INPUT" );
     submitButton.setAttribute( "name", "asteroidSubmit" );
     submitButton.setAttribute( "type", "button" );
-    submitButton.setAttribute( "value", "Save Changes" );
+    submitButton.setAttribute( "value", "Add" );
     submitButton.onclick = function () { asteroidSubmit() };
     asteroidLabel.appendChild( submitButton );
 
@@ -556,7 +556,7 @@ function meteorInit () {
     let submitButton = document.createElement( "INPUT" );
     submitButton.setAttribute( "name", "meteorSubmit" );
     submitButton.setAttribute( "type", "button" );
-    submitButton.setAttribute( "value", "Save Changes" );
+    submitButton.setAttribute( "value", "Add" );
     submitButton.onclick = function () { meteorSubmit() };
     meteorLabel.appendChild( submitButton );
 
