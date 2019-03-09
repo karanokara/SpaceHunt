@@ -687,6 +687,15 @@ function locationSubmit () {
     let celeron = document.getElementsByName( "celeronInput" );
     let xeon = document.getElementsByName( "xeonInput" );
     let ryzen = document.getElementsByName( "ryzenInput" );
+    let station = document.getElementsByName ( "stationInput" );
+    let freighter = document.getElementsByName ( "freighterInput" );
+    let meteor = document.getElementsByName ( "meteorInput" );
+    let asteroid = document.getElementsByName ( "asteroidInput" );
+ 
+    if ( station[0].checked ) window.gameData.stationRandom = true;
+    if ( freighter[0].checked ) window.gameData.freighterRandom = true;
+    if ( meteor[0].checked ) window. gameData.meteorRandom = true;
+    if ( asteroid[0].checked ) window.gameData.asteroidRandom = true;
 
     window.gameData.celeronX = parseInt( celeron[0].value );
     window.gameData.celeronY = parseInt( celeron[1].value );
@@ -702,59 +711,83 @@ function locationSubmit () {
 function stationSubmit () {
     let station = document.getElementsByName ( "stationInput" );
 
-    if (!window.gameData.stations)
-        window.gameData.stations = new Set();
-    
-    let stationX = parseInt( station[2].value );
-    let stationY = parseInt( station[3].value );
+    if ( station[1].checked ) {
+        if (!window.gameData.stations)
+            window.gameData.stations = new Set();
+        
+        let stationX = parseInt( station[2].value );
+        let stationY = parseInt( station[3].value );
 
-    window.gameData.stations.add( [stationX, stationY] );
+        window.gameData.stations.add( [stationX, stationY] );
 
-    station[2].value = "";
-    station[3].value = "";
+        station[2].value = "";
+        station[3].value = "";
+
+        window.gameData.stationRandom = false;
+    }
+
+    else window.gameData.stationRandom = true;
 }
 
 function freighterSubmit () {
     let freighter = document.getElementsByName ( "freighterInput" );
- 
-    let freighterX = parseInt( freighter[2].value );
-    let freighterY = parseInt( freighter[3].value );
 
-    if (!window.gameData.freighters)
-        window.gameData.freighters = new Set();
+    if ( freighter[1].checked ) {
+        let freighterX = parseInt( freighter[2].value );
+        let freighterY = parseInt( freighter[3].value );
 
-    window.gameData.freighters.add( [freighterX, freighterY] );
+        if (!window.gameData.freighters)
+            window.gameData.freighters = new Set();
 
-    freighter[2].value = "";
-    freighter[3].value = "";
+        window.gameData.freighters.add( [freighterX, freighterY] );
+
+        freighter[2].value = "";
+        freighter[3].value = "";
+
+        window.gameData.freighterRandom = false;
+    }
+
+    else window.gameData.freighterRandom = true;
 }
 
 function meteorSubmit () {
     let meteor = document.getElementsByName ( "meteorInput" );
-    
-    let meteorX = parseInt( meteor[2].value );
-    let meteorY = parseInt( meteor[3].value ); 
-    
-    if (!window.gameData.meteors)
-        window.gameData.meteors = new Set();
 
-    window.gameData.meteors.add( [meteorX, meteorY] );
-    
-    meteor[2].value = "";
-    meteor[3].value = "";
+    if ( meteor[1].checked ) {
+        let meteorX = parseInt( meteor[2].value );
+        let meteorY = parseInt( meteor[3].value ); 
+        
+        if (!window.gameData.meteors)
+            window.gameData.meteors = new Set();
+
+        window.gameData.meteors.add( [meteorX, meteorY] );
+        
+        meteor[2].value = "";
+        meteor[3].value = "";
+
+        window.gameData.meteorRandom = false;
+    }
+
+    else window.gameData.meteorRandom = true;
 }
 
 function asteroidSubmit () {
     let asteroid = document.getElementsByName ( "asteroidInput" );
 
-    let asteroidX = parseInt( asteroid[2].value );
-    let asteroidY = parseInt( asteroid[3].value );  
+    if ( asteroid[1].checked ) {
+        let asteroidX = parseInt( asteroid[2].value );
+        let asteroidY = parseInt( asteroid[3].value );  
 
-    if (!window.gameData.asteroids)
-        window.gameData.asteroids = new Set();
+        if (!window.gameData.asteroids)
+            window.gameData.asteroids = new Set();
 
-    window.gameData.asteroids.add( [ asteroidX, asteroidY ]);
+        window.gameData.asteroids.add( [ asteroidX, asteroidY ]);
 
-    asteroid[2].value = "";
-    asteroid[3].value = "";
+        asteroid[2].value = "";
+        asteroid[3].value = "";
+
+        window.gameData.asteroidRandom = false;
+    }
+
+    else window.gameData.asteroidRandom = true;
 }
