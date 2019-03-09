@@ -18,6 +18,7 @@ function PopulateMap ( gameMap ) {
     generateBadMax( gameMap );
     generateRecipe( gameMap );
 
+    // load celestial objects
     if ( window.gameData.asteroidRandom ) {
         for (let i = 0; i < 10; ++i) {
             let objCoordx = Math.ceil( Math.random() * ( gameMap.size ) );
@@ -91,21 +92,90 @@ function PopulateMap ( gameMap ) {
     }
     */
 }
+
 /**
  * generates map objects by reading the local storage to get their locations
  */
 function PopulateSavedMap ( gameMap, savedMap ) {
 
     // load planets
-    generateCeleronAtLocation(gameMap, savedMap.celeron.x, savedMap.celeron.y);
-    generateXeonAtLocation(gameMap, savedMap.xeon.x, savedMap.xeon.y);
-    generateRyzenAtLocation(gameMap, savedMap.ryzen.x, savedMap.ryzen.y);
-    //generateEniacAtLocation(gameMap, eniacCoordX, eniacCoordY);
-    //generateBadMaxAtLocation(gameMap);
-    //generateRecipeAtLoation(gameMap);
+    if(savedMap.celeron)
+        generateCeleronAtLocation(gameMap, savedMap.celeron.x, savedMap.celeron.y);
+    else
+        generateCeleronAtLocation(gameMap, savedMap.celeronX, savedMap.celeronY);
+    if(savedMap.xeon)
+        generateXeonAtLocation(gameMap, savedMap.xeon.x, savedMap.xeon.y);
+    else
+        generateXeonAtLocation(gameMap, savedMap.xeonX, savedMap.xeonY);
+    if(savedMap.ryzen)
+        generateRyzenAtLocation(gameMap, savedMap.ryzen.x, savedMap.ryzen.y);
+    else
+        generateRyzenAtLocation(gameMap, savedMap.ryzenX, savedMap.ryzenY);
+
+    generateEniacAtLocation(gameMap, savedMap.eniac.x, savedMap.eniac.y);
+    generateBadMaxAtLocation(gameMap, savedMap.badMax[0], savedMap.badMax[1]);
+    generateRecipeAtLoation(gameMap, savedMap.recipe[0], savedMap.recipe[1]);
 
 
     // load celestial objects
+    for ( const coords of savedMap.stationTRM ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 0, objCoordx, objCoordy);
+        }
+    }
+    for ( let coords of savedMap.stationTR ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 1, objCoordx, objCoordy);
+        }
+    }
+    for ( let coords of savedMap.stationTM ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 2, objCoordx, objCoordy);
+        }
+    }
+    for ( let coords of savedMap.stationT ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 3, objCoordx, objCoordy);
+        }
+    }
+    for ( const coords of savedMap.asteroid ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 4, objCoordx, objCoordy);
+        }
+    }
+    for ( let coords of savedMap.abFreighter ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 5, objCoordx, objCoordy);
+        }
+    }
+    for ( let coords of savedMap.meteorShower ) {
+        if(coords[0]) {
+            let objCoordx = coords[0];
+            let objCoordy = coords[1];
+
+            generateCelestialObjects(gameMap, 6, objCoordx, objCoordy);
+        }
+    }
+
+    /*
     for ( let i = 0; i < MAX_CELEST_OBJ; i += 2 ) {
         if ( savedMap.stationTRM[i] )
             generateCelestialObjects( gameMap, 0, savedMap.stationTRM[i], savedMap.stationTRM[i + 1] );
@@ -122,6 +192,7 @@ function PopulateSavedMap ( gameMap, savedMap ) {
         if ( savedMap.meteorShower[i] )
             generateCelestialObjects( gameMap, 6, savedMap.meteorShower[i], savedMap.meteorShower[i + 1] );
     }
+    */
 }
 
 function generateCelestialObjects ( gameMap, type, celestX, celestY ) {
@@ -162,9 +233,8 @@ function updateLogs ( gameMap, mapObj, objCoordX, objCoordY ) {
     console.log( 'Placed ' + mapObj.objType + " at position: " + objCoordX + ' ' + objCoordY );
     gameMap.add( mapObj, objCoordX, objCoordY );
 
-    //saveMap when it is populate as the object's locations won't move ever    
-    if ( !gameData.setupMode )
-        saveMap( gameData, mapObj, objCoordX, objCoordY );
+    //saveMap when it is populate as the object's locations won't ever change
+    saveMap( gameData, mapObj, objCoordX, objCoordY );
 }
 
 function generateEniac ( gameMap ) {
@@ -237,21 +307,25 @@ function generateXeonAtLocation(gameMap, xeonCoordX, xeonCoordY) {
 function generateRecipe ( gameMap ) {
     let randomRecipeX = Math.ceil( Math.random() * ( gameMap.size ) );
     let randomRecipeY = Math.ceil( Math.random() * ( gameMap.size ) );
-    while ( !gameMap.add( new KokaKolaRecipe(), randomRecipeX, randomRecipeY ) ) {
+    mapObj = new KokaKolaRecipe();
+    while ( !gameMap.add( mapObj, randomRecipeX, randomRecipeY ) ) {
         randomRecipeX = Math.ceil( Math.random() * ( gameMap.size ) );
         randomRecipeY = Math.ceil( Math.random() * ( gameMap.size ) );
     }
     console.log( "Placed Recipe at " + randomRecipeX + ' ' + randomRecipeY );
+    saveMap( gameData, mapObj, randomRecipeX, randomRecipeY );
 }
 
 function generateBadMax ( gameMap ) {
     let randomBadMaxX = Math.ceil( Math.random() * ( gameMap.size ) );
     let randomBadMaxY = Math.ceil( Math.random() * ( gameMap.size ) );
-    while ( !gameMap.add( new BadMax(), randomBadMaxX, randomBadMaxY ) ) {
+    mapObj = new BadMax();
+    while ( !gameMap.add( mapObj, randomBadMaxX, randomBadMaxY ) ) {
         randomBadMaxX = Math.ceil( Math.random() * ( gameMap.size ) );
         randomBadMaxY = Math.ceil( Math.random() * ( gameMap.size ) );
     }
     console.log( "Placed BadMax at " + randomBadMaxX + ' ' + randomBadMaxY );
+    saveMap( gameData, mapObj, randomBadMaxX, randomBadMaxY );
 }
 
 function generateRyzen ( gameMap ) {
@@ -275,4 +349,19 @@ function generateRyzenAtLocation(gameMap, ryzenCoordX, ryzenCoordY) {
     //dataLog[6].nodeValue = ryzenCoordX + " " + ryzenCoordY; //data log not in use
     updateLogs( gameMap, mapObj, ryzenCoordX, ryzenCoordY );
     gazePopulate( mapObj, ryzenCoordX, ryzenCoordY );
+}
+
+function generateBadMaxAtLocation(gameMap, badMaxCoordX, badMaxCoordY){
+
+    mapObj = new BadMax();
+    console.log( "Placed BadMax at " + badMaxCoordX + ' ' + badMaxCoordY );
+    updateLogs( gameMap, mapObj, badMaxCoordX, badMaxCoordY );
+}
+
+
+function generateRecipeAtLoation(gameMap, recipeCoordX, recipeCoordY){
+
+    mapObj = new KokaKolaRecipe();
+    console.log( "Placed BadMax at " + recipeCoordX + ' ' + recipeCoordX );
+    updateLogs( gameMap, mapObj, recipeCoordX, recipeCoordY );
 }

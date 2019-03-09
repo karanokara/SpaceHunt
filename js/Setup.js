@@ -668,7 +668,7 @@ function developerModeSubmit () {
         ctrecipe.WormholeY = parseInt( wormhole[3].value );
     }
 
-    window.gameData.setupMode = true;
+
     window.gameData.shipX = parseInt( coordinates[0].value );
     window.gameData.shipY = parseInt( coordinates[1].value );
     window.gameData.shipEnergy = parseInt( energy[0].value );

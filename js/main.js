@@ -1,8 +1,6 @@
 const nameInput = document.querySelector( '#playerName' );
 
-MAX_CELEST_OBJ = 20;
 window.gameData = {
-    setupMode: false,
     savedGamed: false,
     shipX: 0,
     shipY: 0,
@@ -16,13 +14,16 @@ window.gameData = {
     celeron: null,
     xeon: null,
     ryzen: null,
-    stationTRM: new Array( MAX_CELEST_OBJ ),
-    stationTR: new Array( MAX_CELEST_OBJ ),
-    stationTM: new Array( MAX_CELEST_OBJ ),
-    stationT: new Array( MAX_CELEST_OBJ ),
-    abFreighter: new Array( MAX_CELEST_OBJ ),
-    asteroid: new Array( MAX_CELEST_OBJ ),
-    meteorShower: new Array( MAX_CELEST_OBJ ),
+    eniac: null,
+    badMax: new Array(2),
+    recipe: new Array(2),
+    stationTRM: [new Array(2)],
+    stationTR: [new Array(2)],
+    stationTM: [new Array(2)],
+    stationT: [new Array(2)],
+    abFreighter: [new Array(2)],
+    asteroid: [new Array(2)],
+    meteorShower: [new Array(2)],
     asteroidRandom : true,
     meteorRandom : true,
     freighterRandom : true,
@@ -198,12 +199,13 @@ function initGame () {
     //DrawGameMap(grid_items);
     //document.querySelectorAll( '.setup-game' )[0].attributes.class.value += ' hide';
 }
-
+/**
+ * saves game when browser closes but there is not prompt, but it works this way!
+ */
+functio
 //function for storing state upon tab close
-window.beforeunload = function () {
+window.beforeunload = window.unload = window.onbeforeunload = function () {
     // update Ship properties and store in local storage
-    //localStorage.removeItem( nameInput.value );
-    localStorage.setItem( "playerName", nameInput.value );
     saveShip( window.gameData, window.oldSpice );
     localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
 };
@@ -218,12 +220,12 @@ function gameEffect () {
      */
     document.querySelector( '#sensor-scan' ).onclick = function () {
         window.oldSpice.scan();
-    }
+    };
 
     /**
      * when click the game save button
      */
-    if ( !window.gameData.setupMode ) {
+    //if ( !window.gameData.setupMode ) {
         document.querySelector( '#game-save' ).onclick = function () {
             // if user didn't enter name at the beginning, ask for it
             if ( nameInput.value == '' ) {
@@ -232,8 +234,7 @@ function gameEffect () {
             }
 
             window.gameData.savedGamed = true;
-            // store the player's name
-            //localStorage.setItem( "playerName", document.getElementsByName("playerNameInput")[0].value);
+
             //store the ship's data
             saveShip( window.gameData, window.oldSpice );
             // the map is being saved at the time it is being populated
@@ -242,7 +243,7 @@ function gameEffect () {
             localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
             alert( "Game saved!\n Your progess will also be saved when you close the browser." );
         };
-    }
+    //}
 }
 
 /**
@@ -342,7 +343,7 @@ function populateSavedGameList () {
     }
 
 
-};
+}
 
 // update the player name input box when a past game has been selected
 function updatePlayerNameField ( selectedGamed ) {

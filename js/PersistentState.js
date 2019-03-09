@@ -29,57 +29,63 @@ function saveMap(gameData, mapObj, objX, objY){
                 case "Ryzen":
                     gameData.ryzen = mapObj;
                     break;
+                case "Eniac":
+                    gameData.eniac = mapObj;
+                    break;
             }
             break;
 
         // MapObject don't have x and y members
+        case "Recipe":
+            gameData.recipe[0] = objX;
+            gameData.recipe[1] = objY;
+            break;
+
+        case "BadMax":
+            gameData.badMax[0] = objX;
+            gameData.badMax[1] = objY;
+            break;
+
         case "StationTRM":
-            while (gameData.stationTRM[index])
+            while (gameData.stationTRM[index] && gameData.stationTRM[index][0] !== undefined )
                 ++index;
-            gameData.stationTRM[index] = objX;   // x
-            gameData.stationTRM[++index] = objY; // y
+            gameData.stationTRM[index] = [objX, objY];
             break;
 
         case "StationTR":
-            while (gameData.stationTR[index])
+            while (gameData.stationTR[index] && gameData.stationTR[index][0] !== undefined )
                 ++index;
-            gameData.stationTR[index] = objX;
-            gameData.stationTR[++index] = objY;
+            gameData.stationTR[index] = [objX, objY];
             break;
 
         case "StationTM":
-            while (gameData.stationTM[index])
+            while (gameData.stationTM[index] && gameData.stationTM[index][0] !== undefined )
                 ++index;
-            gameData.stationTM[index] = objX;
-            gameData.stationTM[++index] = objY;
+            gameData.stationTM[index] = [objX, objY];
             break;
 
         case "StationT":
-            while (gameData.stationT[index])
+            while (gameData.stationT[index] && gameData.stationT[index][0] !== undefined )
                 ++index;
-            gameData.stationT[index] = objX;
-            gameData.stationT[++index] = objY;
+            gameData.stationT[index] = [objX, objY];
             break;
 
         case "AbFreighter":
-            while (gameData.abFreighter[index])
+            while (gameData.abFreighter[index] && gameData.abFreighter[index][0] !== undefined )
                 ++index;
-            gameData.abFreighter[index] = objX;
-            gameData.abFreighter[++index] = objY;
+            gameData.abFreighter[index] = [objX, objY];
             break;
 
         case "Asteroid":
-            while (gameData.asteroid[index])
+            while (gameData.asteroid[index] && gameData.asteroid[index][0] !== undefined )
                 ++index;
-            gameData.asteroid[index] = objX;
-            gameData.asteroid[++index] = objY;
+            gameData.asteroid[index] = [objX, objY];
             break;
 
         case "MeteorShower":
-            while (gameData.meteorShower[index])
+            while (gameData.meteorShower[index] && gameData.meteorShower[index][0] !== undefined )
                 ++index;
-            gameData.meteorShower[index] = objX; // x
-            gameData.meteorShower[++index] = objY; // y
+            gameData.meteorShower[index] = [objX, objY];
             break;
     }
 
