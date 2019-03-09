@@ -35,7 +35,11 @@ html, body {
     height: 100%;
 }
 
-
+.display-4 {
+    font-family: "Changa One", cursive;
+    font-weight: normal;
+    font-size: 4rem;  
+}
 .data-panel .gazetteer-list-wrapper {
     overflow: auto;
     margin: 10px 5px;
