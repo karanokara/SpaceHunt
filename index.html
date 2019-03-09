@@ -86,6 +86,9 @@
                     <div id="map-container">
                         <div id="grid-container">
                             <div id="map-wrapper">
+                                <div id="heading-container">
+                                    <span id="heading" class="heading-span badge badge-primary badge-pill">0, 0</span>
+                                </div>
                                 <div class="old-spice deg0"></div>
                             </div>
                         </div>
@@ -94,7 +97,7 @@
                     <!--message board-->
                     <div id="message-board-container">
                         <div id="message-board">
-                            <span style="padding: .75rem 0">Communications Panel</span>
+                            <h4 class="data-title">Communications Panel</h4>
                             <ul id="message-list">
                             </ul>
                         </div>
@@ -111,23 +114,19 @@
 
                     <!--control panel-->
                     <div id="controls" class="status-control-containers">
-                        <h4 style="margin: 0 0">Command Console</h4>
-                        <div id="heading-container">
-                            Heading<br />
-                            <span id="heading" class="heading-span badge badge-primary badge-pill">0, 0</span>
-                        </div>
+                        <h4 class="data-title" style="margin: 0 0">Command Console</h4>
                         <form class="control-fields">
                             <fieldset id="movement-form-fields">
-                                <input id="north-input" value="NORTH" type="button" onclick="submitNorthHeading()" />
+                                <input id="north-input" class="btn btn-secondary" value="NORTH" type="button" onclick="submitNorthHeading()" />
                                 <div id="east-west-container">
-                                    <input id="west-input" value="WEST" type="button" onclick="submitWestHeading()" />
+                                    <input id="west-input" class="btn btn-secondary" value="WEST" type="button" onclick="submitWestHeading()" />
                                     <input id="movement-magnitude" min="1" max="10" type="number" value="1" />
-                                    <input id="east-input" value="EAST" type="button" onclick="submitEastHeading()" />
+                                    <input id="east-input" class="btn btn-secondary" value="EAST" type="button" onclick="submitEastHeading()" />
                                 </div>
-                                <input id="south-input" value="SOUTH" type="button" onclick="submitSouthHeading()" />
+                                <input id="south-input" class="btn btn-secondary" value="SOUTH" type="button" onclick="submitSouthHeading()" />
                             </fieldset>
                         </form>
-                        <input id="sensor-scan" type="button" value="Scan">
+                        <input id="sensor-scan" class="btn btn-secondary" type="button" value="Scan">
                     </div>
 
                     <!--status board-->
