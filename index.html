@@ -5,184 +5,184 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
+    <head>
+        <meta charset="utf-8" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="icon" href="site_icon.jpg" type="image/x-icon">   sit logo icon -->
+        <!-- <link rel="icon" href="site_icon.jpg" type="image/x-icon">   sit logo icon -->
 
-    <title>Space Hunt</title>
+        <title>Space Hunt</title>
 
-</head>
-<body>
+    </head>
+
+    <body>
 
 
-<!-- +++++++++++++++++ This is a configuration page +++++++++++++++++++++++++++++
+        <!-- +++++++++++++++++ This is a configuration page +++++++++++++++++++++++++++++
 - For setting game before start the game
 - All game setting option can be load inside class "game-setting-option"
 -->
-<div class="setup-game jumbotron">
-    <h1 class="display-4">Space Hunt</h1>
-    <p class="lead">A SPACE ADVENTURE GAME</p>
-    <hr class="my-4">
-    <div id="playerNameField">
-        <p>
-            <label for="playerName">Player Name: </label>
-            <input id="playerName" type="text" required>
-        </p>
-    </div>
+        <div class="setup-game jumbotron">
+            <h1 class="display-4">Space Hunt</h1>
+            <p class="lead">A SPACE ADVENTURE GAME</p>
+            <hr class="my-4">
+            <div id="playerNameField">
+                <p>
+                    <label for="playerName">Player Name: </label>
+                    <input id="playerName" type="text" required>
+                </p>
+            </div>
 
-    <div id="savedGameListBlock"></div>
+            <div id="savedGameListBlock"></div>
 
-    <div>
-        <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
-    </div>
-    <div id="devLoadModal" class="modal">
-    </div>
-
-
-    <button class="btn btn-primary btn-lg game-start-btn" id="startButton">Start New Game</button>
-
-    <div>
-        <button class="btn btn-primary btn-lg game-cont-btn" id="continueButton" onclick="">Continue Previous
-            Game</button>
-    </div>
-
-</div>
+            <div>
+                <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
+            </div>
+            <div id="devLoadModal" class="modal">
+            </div>
 
 
+            <button class="btn btn-primary btn-lg game-start-btn" id="startButton">Start New Game</button>
 
-<!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
+            <div>
+                <button class="btn btn-primary btn-lg game-cont-btn" id="continueButton" onclick="">Continue Previous
+                    Game</button>
+            </div>
+
+        </div>
+
+
+
+        <!-- +++++++++++++++++ main game page going below +++++++++++++++++++++++++++++
 - Don't put game content outside of the main-game tag, otherwise it will not look good.
 
 -->
-<div class="main-game">
-    <!--top half of web-page-->
-    <div class="main-container">
+        <div class="main-game">
+            <!--top half of web-page-->
+            <div class="main-container">
 
-        <!--LHS panel-->
-        <div class="data-panel">
+                <!--LHS panel-->
+                <div class="data-panel">
 
-            <!--gazetteer section-->
-            <div id="gazetteer" class="gazetteer data-log-container">
-                <h1 class="data-title">Gazetteer</h1>
-                <div class="gazetteer-list-wrapper">
-                    <ul class="list-group gazetteer-list">
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-        <!--center-screen-->
-        <div id="main-screen-container">
-            <h1 id="ship-name">SPACE HUNT</h1>
-
-            <!--map panel-->
-            <div id="map-container">
-                <div id="grid-container">
-                    <div id="map-wrapper">
-                        <div class="old-spice deg0"></div>
+                    <!--gazetteer section-->
+                    <div id="gazetteer" class="gazetteer data-log-container">
+                        <h1 class="data-title">Gazetteer</h1>
+                        <div class="gazetteer-list-wrapper">
+                            <ul class="list-group gazetteer-list">
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!--message board-->
-            <div id="message-board-container">
-                <div id="message-board">
-                    <span style="padding: .75rem 0">Communications Panel</span>
-                    <ul id="message-list">
-                    </ul>
-                </div>
-            </div>
-        </div>
 
 
-        <!--RHS top panel-->
-        <div class="data-panel">
-            <div class="data-title">
-                <button id="game-save" type="button" class="btn btn-success btn-game-save">SAVE
-                    GAME</button>
-            </div>
+                <!--center-screen-->
+                <div id="main-screen-container">
+                    <h1 id="ship-name">SPACE HUNT</h1>
 
-            <!--control panel-->
-            <div id="controls" class="status-control-containers">
-                <h4 style="margin: 0 0">Command Console</h4>
-                <div id="heading-container">
-                    Heading<br/>
-                    <span id="heading" class="heading-span badge badge-primary badge-pill">0, 0</span>
-                </div>
-                <form class="control-fields">
-                    <fieldset id="movement-form-fields">
-                        <input id="north-input" value="NORTH" type="button" onclick="submitNorthHeading()"/>
-                        <div id="east-west-container">
-                            <input id="west-input" value="WEST" type="button" onclick="submitWestHeading()"/>
-                            <input id="movement-magnitude" min="1" max="10" type="number" value="1"/>
-                            <input id="east-input" value="EAST" type="button" onclick="submitEastHeading()"/>
+                    <!--map panel-->
+                    <div id="map-container">
+                        <div id="grid-container">
+                            <div id="map-wrapper">
+                                <div id="heading-container">
+                                    <span id="heading" class="heading-span badge badge-primary badge-pill">0, 0</span>
+                                </div>
+                                <div class="old-spice deg0"></div>
+                            </div>
                         </div>
-                        <input id="south-input" value="SOUTH" type="button" onclick="submitSouthHeading()"/>
-                    </fieldset>
-                </form>
-                <input id="sensor-scan" type="button" value="Scan">
-            </div>
+                    </div>
 
-            <!--status board-->
-            <div id="status-container" class="status-control-containers">
-                <ul id="status-list">
-                    <li>Credits: <span id="creditValue" class="credit-value badge badge-primary badge-pill">0</span></li>
-                    <li>Energy: <span id="energyValue" class="energy-value badge badge-primary badge-pill">0</span></li>
-                    <li>Supplies: <span id="supplyValue" class="supply-value badge badge-primary badge-pill">0</span></li>
-                    <li>Damage: <span id="damageValue" class="damage-value badge badge-primary badge-pill">0</span></li>
-                    <li>Sensor Level: <span id="sensorLevel" class="sensor-level badge badge-primary badge-pill">0</span></li>
-                    <li>Engine Level: <span id="engineLevel" class="engine-level badge badge-primary badge-pill">0</span></li>
-                </ul>
+                    <!--message board-->
+                    <div id="message-board-container">
+                        <div id="message-board">
+                            <h4 class="data-title">Communications Panel</h4>
+                            <ul id="message-list">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--RHS top panel-->
+                <div class="data-panel">
+                    <div class="data-title">
+                        <button id="game-save" type="button" class="btn btn-success btn-game-save">SAVE
+                            GAME</button>
+                    </div>
+
+                    <!--control panel-->
+                    <div id="controls" class="status-control-containers">
+                        <h4 class="data-title" style="margin: 0 0">Command Console</h4>
+                        <form class="control-fields">
+                            <fieldset id="movement-form-fields">
+                                <input id="north-input" class="btn btn-secondary" value="NORTH" type="button" onclick="submitNorthHeading()" />
+                                <div id="east-west-container">
+                                    <input id="west-input" class="btn btn-secondary" value="WEST" type="button" onclick="submitWestHeading()" />
+                                    <input id="movement-magnitude" min="1" max="10" type="number" value="1" />
+                                    <input id="east-input" class="btn btn-secondary" value="EAST" type="button" onclick="submitEastHeading()" />
+                                </div>
+                                <input id="south-input" class="btn btn-secondary" value="SOUTH" type="button" onclick="submitSouthHeading()" />
+                            </fieldset>
+                        </form>
+                        <input id="sensor-scan" class="btn btn-secondary" type="button" value="Scan">
+                    </div>
+
+                    <!--status board-->
+                    <div id="status-container" class="status-control-containers">
+                        <ul id="status-list">
+                            <li>Credits: <span id="creditValue" class="credit-value badge badge-primary badge-pill">0</span></li>
+                            <li>Energy: <span id="energyValue" class="energy-value badge badge-primary badge-pill">0</span></li>
+                            <li>Supplies: <span id="supplyValue" class="supply-value badge badge-primary badge-pill">0</span></li>
+                            <li>Damage: <span id="damageValue" class="damage-value badge badge-primary badge-pill">0</span></li>
+                            <li>Sensor Level: <span id="sensorLevel" class="sensor-level badge badge-primary badge-pill">0</span></li>
+                            <li>Engine Level: <span id="engineLevel" class="engine-level badge badge-primary badge-pill">0</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
+        <!--stylesheet links here-->
+        <link rel="stylesheet" type="text/css" href="css/reset.css" />
 
-    </div>
-</div>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-<!--stylesheet links here-->
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/stations.css" />
 
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/game-map.css">
 
-<link rel="stylesheet" type="text/css" href="css/stations.css" />
+        <link rel="stylesheet" type="text/css" href="css/setup-game.css">
 
-<link rel="stylesheet" type="text/css" href="css/game-map.css">
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="css/setup-game.css">
+        <link href="https://fonts.googleapis.com/css?family=Changa+One" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+        <!--script links here-->
 
-<link href="https://fonts.googleapis.com/css?family=Changa+One" rel="stylesheet">
-
-<!--script links here-->
-
-<!--top level scripts (stuff depends on these)-->
-<script src="js/Setup.js"></script>
-<script src="js/gameMode.js"></script>
-<script>var ctrecipe = GameMode( null );</script>
+        <!--top level scripts (stuff depends on these)-->
+        <script src="js/Setup.js"></script>
+        <script src="js/gameMode.js"></script>
+        <script>var ctrecipe = GameMode( null );</script>
 
 
-<!--mid level scripts -->
-<script src="js/Sensor.js"></script>
-<script src="js/GameMap.js"></script>
-<script src="js/Ship.js"></script>
-<script src="js/MapObjects.js"></script>
-<script src="js/ux.js"></script>
-<script src="js/main.js"></script>
-<script src="js/PopulateMap.js"></script>
-<script src="js/Collision.js"></script>
-<script src="js/PersistentState.js"></script>
+        <!--mid level scripts -->
+        <script src="js/Sensor.js"></script>
+        <script src="js/GameMap.js"></script>
+        <script src="js/Ship.js"></script>
+        <script src="js/MapObjects.js"></script>
+        <script src="js/ux.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/PopulateMap.js"></script>
+        <script src="js/Collision.js"></script>
+        <script src="js/PersistentState.js"></script>
 
-<script src="js/DrawGameMap.js"></script>
-</body>
+        <script src="js/DrawGameMap.js"></script>
+    </body>
 
 </html>
