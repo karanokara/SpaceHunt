@@ -38,17 +38,13 @@
 
             <div id="savedGameListBlock"></div>
 
-            <div>
-                <button class="btn btn-primary btn-lg setup-btn" id="setupButton" onclick=developerModeInit()>Setup</button>
-            </div>
             <div id="devLoadModal" class="modal">
             </div>
-
-
-            <button class="btn btn-primary btn-lg game-start-btn" id="startButton">Start New Game</button>
-
-            <div>
-                <button class="btn btn-primary btn-lg game-cont-btn" id="continueButton" onclick="">Continue Previous
+            <div class="setup-btn-ls">
+                <button class="btn btn-primary btn-lg setup-btn btn-block" id="setupButton" onclick=developerModeInit()>Setup</button>
+                <button class="btn btn-primary btn-lg game-start-btn btn-block" id="startButton">Start New Game</button>
+                <button class="btn btn-primary btn-lg game-cont-btn btn-block" id="continueButton" onclick="">Continue
+                    Previous
                     Game</button>
             </div>
 
@@ -86,10 +82,12 @@
                     <div id="map-container">
                         <div id="grid-container">
                             <div id="map-wrapper">
-                                <div id="heading-container">
-                                    <span id="heading" class="heading-span badge badge-primary badge-pill">0, 0</span>
+                                <div id="ship-wrapper" class="ship-wrapper">
+                                    <div id="heading-container">
+                                        <span id="heading" class="heading-span badge badge-primary badge-pill">0, 0</span>
+                                    </div>
+                                    <div class="old-spice deg0"></div>
                                 </div>
-                                <div class="old-spice deg0"></div>
                             </div>
                         </div>
                     </div>

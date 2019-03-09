@@ -16,6 +16,7 @@ class Ship {
         this.recipe = false;
         this.sensor = new Sensor( this, window.gameMap );
         this.shipIcon = document.querySelector( '.old-spice' );
+        this.shipWrapper = document.querySelector( '#ship-wrapper' );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];
     }
 
@@ -78,8 +79,12 @@ class Ship {
                 window.boundary.Collide();
                 updateHeading();
                 updateLevels();
-                window.oldSpice.updateShipHeading( 0 );
-                window.gameMap.move( window.oldSpice.x, window.oldSpice.y );
+                window.oldSpice.hide();
+                setTimeout( () => {
+                    window.gameMap.move( window.oldSpice.x, window.oldSpice.y, ( ( s ) => {
+                        return () => { s.show(); };
+                    } )( window.oldSpice ) );
+                }, 200 );
             }
 
             // check out any objects events
@@ -91,15 +96,23 @@ class Ship {
     }
 
     /**
-     * Called after a move to update info to the screen
+     * hide the ship
      */
-    updateShipInfo () {
-        document.querySelectorAll( ".credit-value" )[0].innerHTML = this.credit;
-        document.querySelectorAll( ".energy-value" )[0].innerHTML = this.energy;
-        document.querySelectorAll( ".supply-value" )[0].innerHTML = this.supplies;
+    hide () {
+        this.shipWrapper.className += ' hidden';
     }
 
+    /**
+     * show the ship
+     */
+    show () {
+        this.shipWrapper.className = 'ship-wrapper';
+    }
 
+    /**
+     * Update the direction of ship icon
+     * @param {} degree 
+     */
     updateShipHeading ( degree ) {
         this.shipIcon.className = this.shipIcon.className.replace( /(deg)(.*)/i, 'deg' + degree );
     }

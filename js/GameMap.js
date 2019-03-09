@@ -112,7 +112,7 @@ class GameMap {
      * @param {*} x - The new x coordinate of ship
      * @param {*} y - The new y coordinate of ship
      */
-    move ( x, y ) {
+    move ( x, y, callB ) {
         if ( !this.mapCellSize ) {
             this.mapCellSize = document.querySelector( '#c0-0' ).offsetWidth;
         }
@@ -121,6 +121,11 @@ class GameMap {
             targetY = 1 * y * this.mapCellSize;
 
         this.mapContainer.style.transform = 'translate(' + targetX + 'px,' + targetY + 'px)';
+        if ( callB != undefined ) {
+            setTimeout( () => {
+                callB();
+            }, 1000 );
+        }
     }
 
     /**

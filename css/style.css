@@ -74,6 +74,10 @@ html, body {
     margin-left: 10px;
 }
 
+.list-group-item {
+    background-color: #ffffffb8;
+}
+
 /*container class for data log*/
 .data-log-container {
     display: inherit;
@@ -133,10 +137,20 @@ html, body {
     width: 100%;
 }
 
+.ship-wrapper {
+    position: relative;
+    height: 100%;
+    transition: .2s all cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    transform: scale(1);
+    z-index: 10;
+}
+.ship-wrapper.hidden {
+    transform: scale(0);
+}
+
 #heading-container {
     position: absolute;
     top: -25px;
-    z-index: 10;
 }
 
 #heading {
