@@ -5,8 +5,7 @@
 ** Lose Condition and Flagging
 */
 
-function GameMode(params) 
-{
+function GameMode ( params ) {
     //Game mode object that gets returned
     gameObj = {};
 
@@ -19,26 +18,24 @@ function GameMode(params)
     gameObj.WormholeFixed = false;
     gameObj.WormholeX = 0;
     gameObj.WormholeY = 0;
+    gameObj.isGameover = false;
 
-    gameObj.GameOver = function(reason)
-    {
-        alert(reason + "\nYou lost the game!");
+    gameObj.GameOver = function ( reason ) {
+        this.isGameover = true;
+        alert( reason + "\nYou lost the game!" );
         location.reload();
     }
 
-    gameObj.GameWinner = function(reason)
-    {
-        alert(reason + "\nYou won the game!");
+    gameObj.GameWinner = function ( reason ) {
+        alert( reason + "\nYou won the game!" );
         location.reload();
     }
 
-    gameObj.tick = function()
-    {
-        console.log("Calling tick objects")
+    gameObj.tick = function () {
+        console.log( "Calling tick objects" )
         //Iterate through all tick objects and call methods
         let i;
-        for(i = 0; i < gameObj.tickObjects.length; ++i)
-        {
+        for ( i = 0; i < gameObj.tickObjects.length; ++i ) {
             gameObj.tickObjects[i]();
         }
     }
