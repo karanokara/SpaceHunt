@@ -61,7 +61,7 @@ class Sensor {
                 anyFound = 1;
 
                 // add location of celestial obj found to Celestial Gazetteer
-                gazePopulate( found, searchX, searchY );
+                gazePopulate( found, searchX, searchY, true );
             }
         }
 

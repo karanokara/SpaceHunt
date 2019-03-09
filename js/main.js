@@ -22,7 +22,8 @@ window.gameData = {
     stationT: new Array( MAX_CELEST_OBJ ),
     abFreighter: new Array( MAX_CELEST_OBJ ),
     asteroid: new Array( MAX_CELEST_OBJ ),
-    meteorShower: new Array( MAX_CELEST_OBJ )
+    meteorShower: new Array( MAX_CELEST_OBJ ),
+    gaze: { length: 0 }
 };
 
 
@@ -52,6 +53,7 @@ window.onload = function () {
     // loads saved game data for oldSpice and gameMap
     document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
 
+        // if there is saved game, then can continue
         if ( contGame() ) {
             setupPage.attributes.class.value += ' hide';
         }
@@ -74,6 +76,9 @@ function contGame () {
     // call the constructor with pertinent data (not map size)
     if ( temp != undefined ) {
 
+        // make an empty map with correct dimensions
+        window.gameMap = new GameMap( temp.mapSize );
+
         window.oldSpice = new Ship(
             temp.shipX,
             temp.shipY,
@@ -84,12 +89,9 @@ function contGame () {
             temp.shipDamaged,
             temp.shipNormalPlay
         );
+
         // allows for the game to be saved when the browser is closed
         //window.gameData.savedGamed = temp.savedGamed;
-
-
-        // make an empty map with correct dimensions
-        window.gameMap = new GameMap( temp.mapSize );
 
         // setup wormhole
         window.boundary = new WormHole();
@@ -103,6 +105,8 @@ function contGame () {
         // place map object from local storage into the empty map
         PopulateSavedMap( window.gameMap, temp );
 
+        console.log( temp );
+        populateSavedGaze( temp.gaze );
 
         // update screen data
         updateHeading();
@@ -217,6 +221,12 @@ function gameEffect () {
      */
     if ( !window.gameData.setupMode ) {
         document.querySelector( '#game-save' ).onclick = function () {
+            // if user didn't enter name at the beginning, ask for it
+            if ( nameInput.value == '' ) {
+                var playerName = prompt( 'Please enter a player name: ', 'default' );
+                nameInput.value = playerName;
+            }
+
             window.gameData.savedGamed = true;
             // store the player's name
             //localStorage.setItem( "playerName", document.getElementsByName("playerNameInput")[0].value);
@@ -234,10 +244,11 @@ function gameEffect () {
 /**
  * A function to fill obj data into gazetteer
  */
-function gazePopulate ( obj, objX, objY ) {
+function gazePopulate ( obj, objX, objY, isToSave ) {
     if ( obj.addedToGaze == undefined ) {
         var gazeList = document.querySelector( '#gazetteer .gazetteer-list' ),
-            objName = ( obj.name != undefined ) ? obj.name : obj.objType;
+            objName = ( obj.name != undefined ) ? obj.name : obj.objType,
+            objIndex = ( window.gameData.gaze.length++ );
 
         obj.addedToGaze = 1;
         gazeList.innerHTML +=
@@ -245,6 +256,22 @@ function gazePopulate ( obj, objX, objY ) {
             '<span class="gazetteer-obj-name">' + objName + '</span>' +
             '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
             '</li>';
+
+        if ( isToSave == 1 || isToSave == true ) {
+            // save list of obj to gameData for game save purpose
+            window.gameData.gaze[objIndex] = { x: objX, y: objY };
+        }
+    }
+}
+
+/**
+ * pupulate the saved gaze from saved data
+ */
+function populateSavedGaze ( gaze ) {
+    for ( var i = 0; i < gaze.length; ++i ) {
+        if ( gaze[i] != undefined ) {
+            gazePopulate( window.gameMap.contents( gaze[i].x, gaze[i].y ), gaze[i].x, gaze[i].y, 1 );
+        }
     }
 }
 
