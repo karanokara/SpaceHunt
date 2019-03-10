@@ -28,18 +28,19 @@ class Sensor {
             yy = this.ship.y - this.ScanCP,
             cx = 0,
             cy = 0,
-            anyFound = 0;
+            anyFound = 0,
+            found = this.map.map[this.ship.x][this.ship.y];
 
         while ( cy < scale && yy <= 127 ) {
             if ( yy >= 0 ) {
                 while ( cx < scale && xx <= 127 ) {
                     if ( xx >= 0 ) {
-                        if ( !( xx == this.ship.x && yy == this.ship.y ) ) {
+                        //if ( !( xx == this.ship.x && yy == this.ship.y ) ) {
                             nearCP[count++] = {
                                 x: xx,
                                 y: yy
                             };
-                        }
+                        //}
                     }
                     ++xx;
                     ++cx
@@ -56,20 +57,38 @@ class Sensor {
         for ( var j = 0; j < nearCP.length; ++j ) {
             var searchX = nearCP[j].x,
                 searchY = nearCP[j].y,
-                found = this.map.map[searchX][searchY];
-            if ( found != undefined ) {
+                duplicate = false;
+            found = this.map.map[searchX][searchY];
+
+            if ( found !== undefined ) {
                 anyFound = 1;
 
-                // add location of celestial obj found to Celestial Gazetteer
-                gazePopulate( found, searchX, searchY, true );
+                for(let k = 3; k < window.gameData.gaze.length; ++k) {
+                    if (window.gameData.gaze[k].x === searchX && searchY === window.gameData.gaze[k].y) {
+                        if (found.objType === "Planet")
+                            addMessage("Planet " + found.name + " at (" + searchX + ", " + searchY + ") " + " already in gazetteer");
+                        else
+                            addMessage(found.objType + " at (" + searchX + ", " + searchY + ") " + "already in gazetteer");
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if( !duplicate ){
+
+
+                    if (found.objType === "Planet")
+                        addMessage("Planet " + found.name + " found at (" + searchX + ", " + searchY + ")");
+                    else
+                        addMessage(found.objType + " found at (" + searchX + ", " + searchY + ")");
+
+                    // add location of celestial obj found to Celestial Gazetteer
+                    gazePopulate( found, searchX, searchY, true );
+                }
             }
         }
 
         if ( !anyFound ) {
             addMessage( "There is nothing found in the current CP!" );
-        }
-        else {
-            addMessage( "Some objects found!" );
         }
 
         return nearCP;

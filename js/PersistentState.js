@@ -12,7 +12,6 @@ function saveShip(gameData, oldSpice){
 
 
 function saveMap(gameData, mapObj, objX, objY){
-    let index = 0;
 
     switch (mapObj.objType) {
 
@@ -47,45 +46,31 @@ function saveMap(gameData, mapObj, objX, objY){
             break;
 
         case "StationTRM":
-            while (gameData.stationTRM[index] && gameData.stationTRM[index][0] !== undefined )
-                ++index;
-            gameData.stationTRM[index] = [objX, objY];
+            gameData.stationTRM.push([objX, objY]);
             break;
 
         case "StationTR":
-            while (gameData.stationTR[index] && gameData.stationTR[index][0] !== undefined )
-                ++index;
-            gameData.stationTR[index] = [objX, objY];
+            gameData.stationTR.push([objX, objY]);
             break;
 
         case "StationTM":
-            while (gameData.stationTM[index] && gameData.stationTM[index][0] !== undefined )
-                ++index;
-            gameData.stationTM[index] = [objX, objY];
+            gameData.stationTM.push([objX, objY]);
             break;
 
         case "StationT":
-            while (gameData.stationT[index] && gameData.stationT[index][0] !== undefined )
-                ++index;
-            gameData.stationT[index] = [objX, objY];
+            gameData.stationT.push([objX, objY]);
             break;
 
         case "AbFreighter":
-            while (gameData.abFreighter[index] && gameData.abFreighter[index][0] !== undefined )
-                ++index;
-            gameData.abFreighter[index] = [objX, objY];
+            gameData.abFreighter.push([objX, objY]);
             break;
 
         case "Asteroid":
-            while (gameData.asteroid[index] && gameData.asteroid[index][0] !== undefined )
-                ++index;
-            gameData.asteroid[index] = [objX, objY];
+            gameData.asteroid.push([objX, objY]);
             break;
 
         case "MeteorShower":
-            while (gameData.meteorShower[index] && gameData.meteorShower[index][0] !== undefined )
-                ++index;
-            gameData.meteorShower[index] = [objX, objY];
+            gameData.meteorShower.push([objX, objY]);
             break;
     }
 

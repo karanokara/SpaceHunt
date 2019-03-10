@@ -17,18 +17,19 @@ window.gameData = {
     eniac: null,
     badMax: new Array(2),
     recipe: new Array(2),
-    stationTRM: [new Array(2)],
-    stationTR: [new Array(2)],
-    stationTM: [new Array(2)],
-    stationT: [new Array(2)],
-    abFreighter: [new Array(2)],
-    asteroid: [new Array(2)],
-    meteorShower: [new Array(2)],
+    stationTRM: [],
+    stationTR: [],
+    stationTM: [],
+    stationT: [],
+    abFreighter: [],
+    asteroid: [],
+    meteorShower: [],
     asteroidRandom : true,
     meteorRandom : true,
     freighterRandom : true,
     stationRandom : true,
-    gaze: { length: 0 }
+    gaze: { length: 0 },
+    msgs: []
 };
 
 
@@ -58,7 +59,7 @@ window.onload = function () {
     // loads saved game data for oldSpice and gameMap
     document.querySelectorAll( '.game-cont-btn' )[0].onclick = function () {
 
-        // if there is saved game, then can continue
+        // if there is saved game, then you can continue
         if ( contGame() ) {
             setupPage.attributes.class.value += ' hide';
         }
@@ -116,6 +117,7 @@ function contGame () {
         // update screen data
         updateHeading();
         updateLevels();
+        populateMessageBoard(temp.msgs);
 
 
         //important that pushes to tickObjects happens nearly last
@@ -202,12 +204,14 @@ function initGame () {
 /**
  * saves game when browser closes but there is not prompt, but it works this way!
  */
-//functio
+
 //function for storing state upon tab close
 window.beforeunload = window.unload = window.onbeforeunload = function () {
-    // update Ship properties and store in local storage
-    saveShip( window.gameData, window.oldSpice );
-    localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
+    if(window.gameData.savedGamed) {
+        // update Ship properties and store in local storage
+        saveShip(window.gameData, window.oldSpice);
+        localStorage.setItem(nameInput.value, JSON.stringify(window.gameData));
+    }
 };
 
 /**
@@ -229,19 +233,23 @@ function gameEffect () {
         document.querySelector( '#game-save' ).onclick = function () {
             // if user didn't enter name at the beginning, ask for it
             if ( nameInput.value == '' ) {
-                var playerName = prompt( 'Please enter a player name: ', 'default' );
-                nameInput.value = playerName;
+                var playerName = prompt('Please enter a player name: ', 'default');
+                if (playerName) {
+                    nameInput.value = playerName;
+                }
             }
+            if(nameInput.value !== ''){
 
-            window.gameData.savedGamed = true;
+                window.gameData.savedGamed = true;
 
-            //store the ship's data
-            saveShip( window.gameData, window.oldSpice );
-            // the map is being saved at the time it is being populated
-            //saveMap(window.gameData, window.gameMap )
+                //store the ship's data
+                saveShip(window.gameData, window.oldSpice);
+                // the map is being saved at the time it is being populated
+                //saveMap(window.gameData, window.gameMap )
 
-            localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
-            alert( "Game saved!\n Your progess will also be saved when you close the browser." );
+                localStorage.setItem(nameInput.value, JSON.stringify(window.gameData));
+                alert("Game saved!\n Your progess will also be saved when you close the browser.");
+            }
         };
     //}
 }
@@ -270,7 +278,7 @@ function gazePopulate ( obj, objX, objY, isToSave ) {
 }
 
 /**
- * pupulate the saved gaze from saved data
+ * populate the saved gaze from saved data
  */
 function populateSavedGaze ( gaze ) {
     for ( var i = 0; i < gaze.length; ++i ) {
@@ -280,6 +288,25 @@ function populateSavedGaze ( gaze ) {
     }
 }
 
+/**
+ *  saves the message board
+ */
+function saveMessageBoard ( newMessage ) {
+        let msgIndex = window.gameData.msgs.length;
+        window.gameData.msgs[msgIndex] = newMessage;
+}
+
+/**
+ * populates the message board from the local storage
+ */
+function populateMessageBoard(savedMessages){
+    for(const msg of savedMessages)
+        addMessage(msg);
+}
+
+/**
+ * generates the List of saved games
+ */
 function populateSavedGameList () {
 
     //playerNameInit();

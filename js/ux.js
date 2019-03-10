@@ -56,6 +56,8 @@ window.addEventListener("keydown", event => {
             submitHeading(270, distance);
         } else if (keyPressed === 39 || event.key === 'd') {
             submitHeading(0, distance);
+        } else if(keyPressed === 32) {
+            oldSpice.scan();
         } else if ( keyPressed === 49 || keyPressed === 50 ||
             keyPressed === 51 || keyPressed === 52 ||
             keyPressed === 53 || keyPressed === 54 ||
@@ -117,7 +119,10 @@ function addMessage(message) {
     let new_message = document.createElement("li");
     new_message.setAttribute("class", "message");
     new_message.innerHTML = message;
-    message_list.appendChild(new_message);
+    (message_list.children.length == 0) ?
+        message_list.appendChild(new_message) :
+        message_list.insertBefore(new_message, message_list.childNodes[0])
+    saveMessageBoard(message);
 }
 
 //function to add a new form message to message board
