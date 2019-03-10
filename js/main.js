@@ -1,5 +1,7 @@
+//
 const nameInput = document.querySelector( '#playerName' );
 
+//object to store persistent game data
 window.gameData = {
     savedGamed: false,
     shipX: 0,
@@ -36,7 +38,7 @@ window.gameData = {
 
 
 
-// when DOM loaded, call this
+//Main DOM function
 window.onload = function () {
 
     populateSavedGameList();
