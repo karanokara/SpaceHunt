@@ -102,7 +102,7 @@ class GameMap {
         }
 
         if ( shipX != undefined ) {
-            this.move( shipX, shipY );
+            this.move( shipX, shipY, null, true );
         }
     }
 
@@ -112,7 +112,7 @@ class GameMap {
      * @param {*} x - The new x coordinate of ship
      * @param {*} y - The new y coordinate of ship
      */
-    move ( x, y, callB ) {
+    move ( x, y, callB, noAnimate ) {
         if ( !this.mapCellSize ) {
             this.mapCellSize = document.querySelector( '#c0-0' ).offsetWidth;
         }
@@ -120,8 +120,16 @@ class GameMap {
         var targetX = -1 * x * this.mapCellSize,
             targetY = 1 * y * this.mapCellSize;
 
+        if ( noAnimate || noAnimate == 1 ) { // without animate
+            this.mapContainer.style.transition = 'none'
+        }
+        else {
+            this.mapContainer.style.transition = ''
+        }
+
         this.mapContainer.style.transform = 'translate(' + targetX + 'px,' + targetY + 'px)';
-        if ( callB != undefined ) {
+
+        if ( typeof callB == 'function' ) {
             setTimeout( () => {
                 callB();
             }, 1000 );
