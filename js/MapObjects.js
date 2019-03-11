@@ -19,6 +19,7 @@ function MapObject ( type, radius ) {
     /*Base class for MapObjects*/
     this.objType = type;
     this.radius = radius;
+    this.isHidden = false;
 }
 
 MapObject.prototype.Collide = function () {
@@ -82,7 +83,7 @@ MeteorShower.prototype = new MapObject( "MeteorShower", 0 );
 
 MeteorShower.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
-    alert("You flew into a meteor shower and the ship is badly damaged.");
+    alert( "You flew into a meteor shower and the ship is badly damaged." );
     oldSpice.isDamaged = true;
 }
 
@@ -207,33 +208,31 @@ Eniac.prototype = new Planet( 'Eniac', -1, -1 );
 
 Eniac.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
-    if(oldSpice.recipe)
-    {
-        ctrecipe.GameWinner("You captured the KokaKola Recipe!");
+    if ( oldSpice.recipe ) {
+        ctrecipe.GameWinner( "You captured the KokaKola Recipe!" );
     }
-    else
-    {
+    else {
         this.EnterOrbit();
     }
 }
 
-Eniac.prototype.EnterOrbit = function () 
-{
+Eniac.prototype.EnterOrbit = function () {
     alert( "You have entered the orbit of Eniac\nFind the KokaKola Recipe and bring it back here to win the game!" );
 
 }
 
 /*----------------------------------------------------*/
 
-function KokaKolaRecipe() {}
+function KokaKolaRecipe () { }
 
-KokaKolaRecipe.prototype = new MapObject ("Recipe", 0);
+KokaKolaRecipe.prototype = new MapObject( "Recipe", 0 );
 
-KokaKolaRecipe.prototype.Collide = function()
-{
+KokaKolaRecipe.prototype.isHidden = true;
+
+KokaKolaRecipe.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
     oldSpice.recipe = true;
-    alert("You picked up the KokaKola recipe! Return it to Planet Eniac!");
+    alert( "You picked up the KokaKola recipe! Return it to Planet Eniac!" );
     gameMap.remove( oldSpice.x, oldSpice.y ); // remove the recipe from the map
 }
 
@@ -241,6 +240,8 @@ KokaKolaRecipe.prototype.Collide = function()
 function BadMax () { }
 
 BadMax.prototype = new MapObject( "BadMax", 0 );
+
+BadMax.prototype.isHidden = true;
 
 BadMax.prototype.Collide = function () {
     MapObject.prototype.Collide.call( this );
@@ -256,7 +257,7 @@ BadMax.prototype.Collide = function () {
     }
     //reposition badmax after encounter or delete
     gameMap.remove( oldSpice.x, oldSpice.y ); // remove this BadMax from the map
-    generateBadMax(gameMap); //add a new badmax to the map
+    generateBadMax( gameMap ); //add a new badmax to the map
 }
 
 BadMax.prototype.Steal = function () {

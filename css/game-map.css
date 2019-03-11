@@ -32,10 +32,6 @@
     transition: all 1s ease-in-out;
 }
 
-.map-row {
-   
-}
-
 .map-table .map-row .map-cell {
     padding: 0px;
     border: 1px solid #8aab8a;
@@ -45,3 +41,18 @@
     width: 59px;
     height: 59px;
 }
+
+.map-obj.showed-obj:before {
+    display: block;
+    content: attr(alt);
+    position: relative;
+    top: -22px;
+    color: #fff;
+    background: #ffffff59;
+    width: fit-content;
+    font-size: .8rem;
+    font-weight: bold;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+

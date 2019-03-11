@@ -30,9 +30,13 @@ class GameMap {
         if ( this.contents( x, y ) ) return false;
         this.map[x][y] = object;
 
-        // add obj to the map
-        // just add a class name now
-        document.querySelector( '#c' + x + '-' + y + ' .map-obj' ).className += ' ' + object.objType;
+        // add obj to the map if obj is not a hidden obj
+        if ( !object.isHidden ) {
+            var objDOM = document.querySelector( '#c' + x + '-' + y + ' .map-obj' ),
+                objName = ( object.name != undefined ) ? object.name : object.objType;
+            objDOM.className += ' showed-obj ' + object.objType;
+            objDOM.setAttribute( 'alt', objName );
+        }
 
         return true;
     }
@@ -102,7 +106,7 @@ class GameMap {
         }
 
         if ( shipX != undefined ) {
-            this.move( shipX, shipY );
+            this.move( shipX, shipY, null, true );
         }
     }
 
@@ -112,7 +116,7 @@ class GameMap {
      * @param {*} x - The new x coordinate of ship
      * @param {*} y - The new y coordinate of ship
      */
-    move ( x, y, callB ) {
+    move ( x, y, callB, noAnimate ) {
         if ( !this.mapCellSize ) {
             this.mapCellSize = document.querySelector( '#c0-0' ).offsetWidth;
         }
@@ -120,8 +124,16 @@ class GameMap {
         var targetX = -1 * x * this.mapCellSize,
             targetY = 1 * y * this.mapCellSize;
 
+        if ( noAnimate || noAnimate == 1 ) { // without animate
+            this.mapContainer.style.transition = 'none'
+        }
+        else {
+            this.mapContainer.style.transition = ''
+        }
+
         this.mapContainer.style.transform = 'translate(' + targetX + 'px,' + targetY + 'px)';
-        if ( callB != undefined ) {
+
+        if ( typeof callB == 'function' ) {
             setTimeout( () => {
                 callB();
             }, 1000 );

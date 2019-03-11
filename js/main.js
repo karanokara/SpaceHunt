@@ -17,8 +17,8 @@ window.gameData = {
     xeon: null,
     ryzen: null,
     eniac: null,
-    badMax: new Array(2),
-    recipe: new Array(2),
+    badMax: new Array( 2 ),
+    recipe: new Array( 2 ),
     stationTRM: [],
     stationTR: [],
     stationTM: [],
@@ -26,10 +26,10 @@ window.gameData = {
     abFreighter: [],
     asteroid: [],
     meteorShower: [],
-    asteroidRandom : true,
-    meteorRandom : true,
-    freighterRandom : true,
-    stationRandom : true,
+    asteroidRandom: true,
+    meteorRandom: true,
+    freighterRandom: true,
+    stationRandom: true,
     gaze: { length: 0 },
     msgs: []
 };
@@ -119,7 +119,7 @@ function contGame () {
         // update screen data
         updateHeading();
         updateLevels();
-        populateMessageBoard(temp.msgs);
+        populateMessageBoard( temp.msgs );
 
 
         //important that pushes to tickObjects happens nearly last
@@ -209,10 +209,10 @@ function initGame () {
 
 //function for storing state upon tab close
 window.beforeunload = window.unload = window.onbeforeunload = function () {
-    if(window.gameData.savedGamed) {
+    if ( window.gameData.savedGamed ) {
         // update Ship properties and store in local storage
-        saveShip(window.gameData, window.oldSpice);
-        localStorage.setItem(nameInput.value, JSON.stringify(window.gameData));
+        saveShip( window.gameData, window.oldSpice );
+        localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
     }
 };
 
@@ -232,27 +232,27 @@ function gameEffect () {
      * when click the game save button
      */
     //if ( !window.gameData.setupMode ) {
-        document.querySelector( '#game-save' ).onclick = function () {
-            // if user didn't enter name at the beginning, ask for it
-            if ( nameInput.value == '' ) {
-                var playerName = prompt('Please enter a player name: ', 'default');
-                if (playerName) {
-                    nameInput.value = playerName;
-                }
+    document.querySelector( '#game-save' ).onclick = function () {
+        // if user didn't enter name at the beginning, ask for it
+        if ( nameInput.value == '' ) {
+            var playerName = prompt( 'Please enter a player name: ', 'default' );
+            if ( playerName ) {
+                nameInput.value = playerName;
             }
-            if(nameInput.value !== ''){
+        }
+        if ( nameInput.value !== '' ) {
 
-                window.gameData.savedGamed = true;
+            window.gameData.savedGamed = true;
 
-                //store the ship's data
-                saveShip(window.gameData, window.oldSpice);
-                // the map is being saved at the time it is being populated
-                //saveMap(window.gameData, window.gameMap )
+            //store the ship's data
+            saveShip( window.gameData, window.oldSpice );
+            // the map is being saved at the time it is being populated
+            //saveMap(window.gameData, window.gameMap )
 
-                localStorage.setItem(nameInput.value, JSON.stringify(window.gameData));
-                alert("Game saved!\n Your progess will also be saved when you close the browser.");
-            }
-        };
+            localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
+            alert( "Game saved!\n Your progess will also be saved when you close the browser." );
+        }
+    };
     //}
 }
 
@@ -262,6 +262,7 @@ function gameEffect () {
 function gazePopulate ( obj, objX, objY, isToSave ) {
     if ( obj.addedToGaze == undefined ) {
         var gazeList = document.querySelector( '#gazetteer .gazetteer-list' ),
+            gazeWrapper = document.querySelector( '#gazetteer-list-wrapper' ),
             objName = ( obj.name != undefined ) ? obj.name : obj.objType,
             objIndex = ( window.gameData.gaze.length++ );
 
@@ -271,6 +272,8 @@ function gazePopulate ( obj, objX, objY, isToSave ) {
             '<span class="gazetteer-obj-name">' + objName + '</span>' +
             '<span class="badge badge-primary badge-pill gazetteer-obj-coordinate">(' + objX + ', ' + objY + ')</span>' +
             '</li>';
+
+        gazeWrapper.scrollTo( 0, gazeList.offsetHeight );
 
         if ( isToSave == 1 || isToSave == true ) {
             // save list of obj to gameData for game save purpose
@@ -294,16 +297,16 @@ function populateSavedGaze ( gaze ) {
  *  saves the message board
  */
 function saveMessageBoard ( newMessage ) {
-        let msgIndex = window.gameData.msgs.length;
-        window.gameData.msgs[msgIndex] = newMessage;
+    let msgIndex = window.gameData.msgs.length;
+    window.gameData.msgs[msgIndex] = newMessage;
 }
 
 /**
  * populates the message board from the local storage
  */
-function populateMessageBoard(savedMessages){
-    for(const msg of savedMessages)
-        addMessage(msg);
+function populateMessageBoard ( savedMessages ) {
+    for ( const msg of savedMessages )
+        addMessage( msg );
 }
 
 /**

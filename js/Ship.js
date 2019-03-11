@@ -15,6 +15,7 @@ class Ship {
         this.normalPlay = normalPlay;
         this.recipe = false;
         this.sensor = new Sensor( this, window.gameMap );
+        this.sensorDOM = document.querySelector( '#sensor' );
         this.shipIcon = document.querySelector( '.old-spice' );
         this.shipWrapper = document.querySelector( '#ship-wrapper' );
         this.messageBoard = document.querySelectorAll( "#message-board" )[0];
@@ -123,14 +124,24 @@ class Ship {
      * Sensor Scan
      */
     scan () {
-        this.sensor.deploy();
-        this.updateShipInfo();
+        var scanScale = ( this.sensor.level == 1 ) ? 5 : 11;
+        this.sensorDOM.style.transform = 'scale(' + scanScale + ',' + scanScale + ')';
+        setTimeout( ( ( s ) => {
+            return () => { s.sensorDOM.style.transform = ''; };
+        } )( this ), 290 );
+
+        setTimeout( ( ( s ) => {
+            return () => {
+                s.sensor.deploy();
+            };
+        } )( this ), 500 );
+
     }
 
     /**
      * return String of the engine
      */
-    getEngine () {
+    getEngineInfo () {
         switch ( this.engineLv ) {
             case 1:
                 return "basic";

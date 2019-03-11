@@ -36,10 +36,10 @@ class Sensor {
                 while ( cx < scale && xx <= 127 ) {
                     if ( xx >= 0 ) {
                         //if ( !( xx == this.ship.x && yy == this.ship.y ) ) {
-                            nearCP[count++] = {
-                                x: xx,
-                                y: yy
-                            };
+                        nearCP[count++] = {
+                            x: xx,
+                            y: yy
+                        };
                         //}
                     }
                     ++xx;
@@ -63,23 +63,23 @@ class Sensor {
             if ( found !== undefined ) {
                 anyFound = 1;
 
-                for(let k = 3; k < window.gameData.gaze.length; ++k) {
-                    if (window.gameData.gaze[k].x === searchX && searchY === window.gameData.gaze[k].y) {
-                        if (found.objType === "Planet")
-                            addMessage("Planet " + found.name + " at (" + searchX + ", " + searchY + ") " + " already in gazetteer");
+                for ( let k = 3; k < window.gameData.gaze.length; ++k ) {
+                    if ( window.gameData.gaze[k].x === searchX && searchY === window.gameData.gaze[k].y ) {
+                        if ( found.objType === "Planet" )
+                            addMessage( "Planet " + found.name + " at (" + searchX + ", " + searchY + ") " + " already in gazetteer" );
                         else
-                            addMessage(found.objType + " at (" + searchX + ", " + searchY + ") " + "already in gazetteer");
+                            addMessage( found.objType + " at (" + searchX + ", " + searchY + ") " + "already in gazetteer" );
                         duplicate = true;
                         break;
                     }
                 }
-                if( !duplicate ){
+                if ( !duplicate ) {
 
 
-                    if (found.objType === "Planet")
-                        addMessage("Planet " + found.name + " found at (" + searchX + ", " + searchY + ")");
+                    if ( found.objType === "Planet" )
+                        addMessage( "Planet " + found.name + " found at (" + searchX + ", " + searchY + ")" );
                     else
-                        addMessage(found.objType + " found at (" + searchX + ", " + searchY + ")");
+                        addMessage( found.objType + " found at (" + searchX + ", " + searchY + ")" );
 
                     // add location of celestial obj found to Celestial Gazetteer
                     gazePopulate( found, searchX, searchY, true );
@@ -121,12 +121,12 @@ class Sensor {
     /**
      * print sensor's detail to the message board
      */
-    print () {
+    getInfo () {
         if ( this.level == 1 ) {
-            addMessage( "Sensor: Standard, Scan within 2 CP" );
+            return 'Standard - 2 CP';
         }
         else {
-            addMessage( "Sensor: Enhanced, Scan within 5 CP" );
+            return 'Enhanced - 5 CP';
         }
     }
 
