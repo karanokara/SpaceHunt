@@ -141,7 +141,7 @@ class Ship {
     /**
      * return String of the engine
      */
-    getEngine () {
+    getEngineInfo () {
         switch ( this.engineLv ) {
             case 1:
                 return "basic";
