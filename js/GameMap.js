@@ -30,9 +30,13 @@ class GameMap {
         if ( this.contents( x, y ) ) return false;
         this.map[x][y] = object;
 
-        // add obj to the map
-        // just add a class name now
-        document.querySelector( '#c' + x + '-' + y + ' .map-obj' ).className += ' ' + object.objType;
+        // add obj to the map if obj is not a hidden obj
+        if ( !object.isHidden ) {
+            var objDOM = document.querySelector( '#c' + x + '-' + y + ' .map-obj' ),
+                objName = ( object.name != undefined ) ? object.name : object.objType;
+            objDOM.className += ' showed-obj ' + object.objType;
+            objDOM.setAttribute( 'alt', objName );
+        }
 
         return true;
     }

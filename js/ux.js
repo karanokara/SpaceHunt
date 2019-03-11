@@ -101,14 +101,29 @@ function updateLevels () {
     if ( window.oldSpice.credit <= 0 ) {
         credit.className = credit.className.replace( /badge-primary/i, 'badge-danger' );
     }
+    else {
+        credit.className = credit.className.replace( /badge-danger/i, 'badge-primary' );
+    }
+
     if ( window.oldSpice.energy <= 0 ) {
-        energy.className = credit.className.replace( /badge-primary/i, 'badge-danger' );
+        energy.className = energy.className.replace( /badge-primary/i, 'badge-danger' );
     }
+    else {
+        energy.className = energy.className.replace( /badge-danger/i, 'badge-primary' );
+    }
+
     if ( window.oldSpice.supplies <= 0 ) {
-        supplies.className = credit.className.replace( /badge-primary/i, 'badge-danger' );
+        supplies.className = supplies.className.replace( /badge-primary/i, 'badge-danger' );
     }
+    else {
+        supplies.className = supplies.className.replace( /badge-danger/i, 'badge-primary' );
+    }
+
     if ( window.oldSpice.isDamaged ) {
-        damage.className = credit.className.replace( /badge-primary/i, 'badge-danger' );
+        damage.className = damage.className.replace( /badge-primary/i, 'badge-danger' );
+    }
+    else {
+        damage.className = damage.className.replace( /badge-danger/i, 'badge-primary' );
     }
 }
 
