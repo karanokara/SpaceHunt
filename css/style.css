@@ -134,7 +134,7 @@ html, body {
 }
 
 #savedGameList{
-    width: 200px;
+    margin: 0 auto;
 }
 
 #game-name{
@@ -251,7 +251,7 @@ html, body {
     height: 90%;
     width: 100%;
     text-align: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
     margin: 0;

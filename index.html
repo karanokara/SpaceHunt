@@ -29,11 +29,12 @@
             <h1 class="display-4">Space Hunt</h1>
             <p class="lead">A SPACE ADVENTURE GAME</p>
             <hr class="my-4">
-            <div id="playerNameField">
-                <p>
-                    <label for="playerName">Player Name: </label>
-                    <input id="playerName" type="text" required>
-                </p>
+
+            <div id="playerNameField" class="input-group input-group-lg mb-3 setup-btn-ls">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Player Name: </span>
+                </div>
+                <input id="playerName" type="text" class="form-control" placeholder="" required>
             </div>
 
             <div id="savedGameListBlock"></div>
@@ -181,4 +182,5 @@
         <script src="js/Collision.js"></script>
         <script src="js/PersistentState.js"></script>
     </body>
+
 </html>

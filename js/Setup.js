@@ -41,9 +41,9 @@ function setLocations () {
     xeonInit();
     ryzenInit();
     stationInit();
-    freighterInit(); 
+    freighterInit();
     asteroidInit();
-    meteorInit(); 
+    meteorInit();
     locationSubmitInit();
 
     document.getElementById( "devLoadModal" ).style.display = "block";
@@ -593,6 +593,7 @@ function submitInit () {
     submitButton.setAttribute( "name", "submitButton" );
     submitButton.setAttribute( "type", "button" );
     submitButton.setAttribute( "value", "Save Changes" );
+    submitButton.setAttribute( "class", "btn btn-primary" );
     submitButton.onclick = function () { developerModeSubmit() };
     submitLabel.appendChild( submitButton );
 
@@ -610,6 +611,7 @@ function locationSubmitInit () {
     submitButton.setAttribute( "name", "submitButton" );
     submitButton.setAttribute( "type", "button" );
     submitButton.setAttribute( "value", "Save Changes" );
+    submitButton.setAttribute( "class", "btn btn-primary" );
     submitButton.onclick = function () { locationSubmit() };
     submitLabel.appendChild( submitButton );
 
@@ -620,28 +622,28 @@ function locationSubmitInit () {
 Create text box for the player's name for persistent state.
 Default value is admin.
 */
-function playerNameInit() {
+function playerNameInit () {
 
     // makes the label for Player Name :
-    let playerNameLabel = document.createElement("LABEL");
-    playerNameLabel.setAttribute("for", "playerName");
+    let playerNameLabel = document.createElement( "LABEL" );
+    playerNameLabel.setAttribute( "for", "playerName" );
 
     // creates the text
-    let playerNameLabelText = document.createTextNode("Player Name :");
-    playerNameLabel.appendChild(playerNameLabelText);
+    let playerNameLabelText = document.createTextNode( "Player Name :" );
+    playerNameLabel.appendChild( playerNameLabelText );
 
     // puts the label under the playerNameField
-    document.getElementById("playerNameField").appendChild(playerNameLabel);
+    document.getElementById( "playerNameField" ).appendChild( playerNameLabel );
 
     // create the input box
-    let playerNameInput = document.createElement("INPUT");
-    playerNameInput.setAttribute("id", "playerName");
-    playerNameInput.setAttribute("name", "playerNameInput");
-    playerNameInput.setAttribute("type", "text");
-    playerNameInput.setAttribute("size", "10");
+    let playerNameInput = document.createElement( "INPUT" );
+    playerNameInput.setAttribute( "id", "playerName" );
+    playerNameInput.setAttribute( "name", "playerNameInput" );
+    playerNameInput.setAttribute( "type", "text" );
+    playerNameInput.setAttribute( "size", "10" );
 
     // puts the input boc under the playerNameField also, not under the label.
-    document.getElementById("playerNameField").appendChild(playerNameInput);
+    document.getElementById( "playerNameField" ).appendChild( playerNameInput );
 }
 
 /*
@@ -659,7 +661,7 @@ function developerModeSubmit () {
     let gameplay = document.getElementsByName( "gameplayInput" );
     let mapSize = document.getElementsByName( "mapSizeInput" );
     playGameOfChance = document.getElementsByName( "gameOfChanceInput" );
-    
+
     //set flags in global ctrecipe (GameMode) object that
     //WormHole Collide method can reference
     if ( wormhole[1].checked ) {
@@ -687,14 +689,14 @@ function locationSubmit () {
     let celeron = document.getElementsByName( "celeronInput" );
     let xeon = document.getElementsByName( "xeonInput" );
     let ryzen = document.getElementsByName( "ryzenInput" );
-    let station = document.getElementsByName ( "stationInput" );
-    let freighter = document.getElementsByName ( "freighterInput" );
-    let meteor = document.getElementsByName ( "meteorInput" );
-    let asteroid = document.getElementsByName ( "asteroidInput" );
- 
+    let station = document.getElementsByName( "stationInput" );
+    let freighter = document.getElementsByName( "freighterInput" );
+    let meteor = document.getElementsByName( "meteorInput" );
+    let asteroid = document.getElementsByName( "asteroidInput" );
+
     if ( station[0].checked ) window.gameData.stationRandom = true;
     if ( freighter[0].checked ) window.gameData.freighterRandom = true;
-    if ( meteor[0].checked ) window. gameData.meteorRandom = true;
+    if ( meteor[0].checked ) window.gameData.meteorRandom = true;
     if ( asteroid[0].checked ) window.gameData.asteroidRandom = true;
 
     window.gameData.celeronX = parseInt( celeron[0].value );
@@ -703,18 +705,18 @@ function locationSubmit () {
     window.gameData.xeonY = parseInt( xeon[1].value );
     window.gameData.ryzenX = parseInt( ryzen[0].value );
     window.gameData.ryzenY = parseInt( ryzen[1].value );
-    
+
     document.getElementById( "devLoadModal" ).style.display = "none";
     document.getElementById( "devLoadModal" ).removeChild( document.getElementById( "locModal" ) );
 }
 
 function stationSubmit () {
-    let station = document.getElementsByName ( "stationInput" );
+    let station = document.getElementsByName( "stationInput" );
 
     if ( station[1].checked ) {
-        if (!window.gameData.stations)
+        if ( !window.gameData.stations )
             window.gameData.stations = new Set();
-        
+
         let stationX = parseInt( station[2].value );
         let stationY = parseInt( station[3].value );
 
@@ -730,13 +732,13 @@ function stationSubmit () {
 }
 
 function freighterSubmit () {
-    let freighter = document.getElementsByName ( "freighterInput" );
+    let freighter = document.getElementsByName( "freighterInput" );
 
     if ( freighter[1].checked ) {
         let freighterX = parseInt( freighter[2].value );
         let freighterY = parseInt( freighter[3].value );
 
-        if (!window.gameData.freighters)
+        if ( !window.gameData.freighters )
             window.gameData.freighters = new Set();
 
         window.gameData.freighters.add( [freighterX, freighterY] );
@@ -751,17 +753,17 @@ function freighterSubmit () {
 }
 
 function meteorSubmit () {
-    let meteor = document.getElementsByName ( "meteorInput" );
+    let meteor = document.getElementsByName( "meteorInput" );
 
     if ( meteor[1].checked ) {
         let meteorX = parseInt( meteor[2].value );
-        let meteorY = parseInt( meteor[3].value ); 
-        
-        if (!window.gameData.meteors)
+        let meteorY = parseInt( meteor[3].value );
+
+        if ( !window.gameData.meteors )
             window.gameData.meteors = new Set();
 
         window.gameData.meteors.add( [meteorX, meteorY] );
-        
+
         meteor[2].value = "";
         meteor[3].value = "";
 
@@ -772,16 +774,16 @@ function meteorSubmit () {
 }
 
 function asteroidSubmit () {
-    let asteroid = document.getElementsByName ( "asteroidInput" );
+    let asteroid = document.getElementsByName( "asteroidInput" );
 
     if ( asteroid[1].checked ) {
         let asteroidX = parseInt( asteroid[2].value );
-        let asteroidY = parseInt( asteroid[3].value );  
+        let asteroidY = parseInt( asteroid[3].value );
 
-        if (!window.gameData.asteroids)
+        if ( !window.gameData.asteroids )
             window.gameData.asteroids = new Set();
 
-        window.gameData.asteroids.add( [ asteroidX, asteroidY ]);
+        window.gameData.asteroids.add( [asteroidX, asteroidY] );
 
         asteroid[2].value = "";
         asteroid[3].value = "";

@@ -345,7 +345,7 @@ function populateSavedGameList () {
         let listOfPastGameDiv = document.createElement( "DIV" );
         //divblock.setAttribute( "class", "modal-content" );
         listOfPastGameDiv.setAttribute( "id", "playerNameBlock" );
-        listOfPastGameDiv.setAttribute( "class", "savedGame" )
+        listOfPastGameDiv.setAttribute( "class", "savedGame setup-btn-ls" )
 
 
 
@@ -355,6 +355,7 @@ function populateSavedGameList () {
         selectOptionList.setAttribute( "size", localStorage.length + 1 );
         selectOptionList.setAttribute( "id", "savedGameList" );
         selectOptionList.setAttribute( "onchange", "updatePlayerNameField(this.selectedIndex)" );
+        selectOptionList.setAttribute( "class", "form-control" );
 
 
         // reads the local storage and adds each game as an option
