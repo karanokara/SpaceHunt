@@ -318,6 +318,13 @@ function generateBadMax ( gameMap ) {
     let randomBadMaxX = Math.ceil( Math.random() * ( gameMap.size ) );
     let randomBadMaxY = Math.ceil( Math.random() * ( gameMap.size ) );
     mapObj = new BadMax();
+
+    if ( gameData.badMaxX || gameData.badMaxX === 0 )
+        randomBadMaxX = gameData.badMaxX;
+
+    if ( gameData.badMaxY || gameData.badMaxY === 0 )
+        randomBadMaxY = gameData.badMaxY;
+
     while ( !gameMap.add( mapObj, randomBadMaxX, randomBadMaxY ) ) {
         randomBadMaxX = Math.ceil( Math.random() * ( gameMap.size ) );
         randomBadMaxY = Math.ceil( Math.random() * ( gameMap.size ) );
@@ -352,6 +359,13 @@ function generateRyzenAtLocation(gameMap, ryzenCoordX, ryzenCoordY) {
 function generateBadMaxAtLocation(gameMap, badMaxCoordX, badMaxCoordY){
 
     mapObj = new BadMax();
+
+    if ( gameData.badMaxX || gameData.badMaxX === 0 )
+        badMaxCoordX = gameData.badMaxX;
+
+    if ( gameData.badMaxY || gameData.badMaxY === 0 )
+        badMaxCoordY = gameData.badMaxY;
+    
     console.log( "Placed BadMax at " + badMaxCoordX + ' ' + badMaxCoordY );
     updateLogs( gameMap, mapObj, badMaxCoordX, badMaxCoordY );
 }

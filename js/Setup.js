@@ -44,6 +44,7 @@ function setLocations () {
     celeronInit();
     xeonInit();
     ryzenInit();
+    badMaxInit();
     stationInit();
     freighterInit();
     asteroidInit();
@@ -238,8 +239,8 @@ function gameplayInit () {
 }
 /*
 Create inputs to set default Game of Chance behavior.
-If "Chance" is selected, always a game of chance.
-If "Always" is selected, probability.
+If "Chance" is selected, encounters are based on random probability.
+If "Always" is selected, always a game of chance.
 Defaults to "Chance".
 */
 function gameOfChanceInit () {
@@ -247,26 +248,26 @@ function gameOfChanceInit () {
     let gameOfChanceLabelText = document.createTextNode( "Game of Chance at Stations: " );
     gameOfChanceLabel.appendChild( gameOfChanceLabelText );
 
-    let normalRadio = document.createElement( "INPUT" );
-    normalRadio.setAttribute( "name", "gameOfChanceInput" );
-    normalRadio.setAttribute( "checked", "true" );
-    normalRadio.setAttribute( "type", "radio" );
-    gameOfChanceLabel.appendChild( normalRadio );
+    let chanceRadio = document.createElement( "INPUT" );
+    chanceRadio.setAttribute( "name", "gameOfChanceInput" );
+    chanceRadio.setAttribute( "checked", "true" );
+    chanceRadio.setAttribute( "type", "radio" );
+    gameOfChanceLabel.appendChild( chanceRadio );
 
-    let normalLabel = document.createElement( "SPAN" );
-    let normalLabelText = document.createTextNode( " Random " );
-    normalLabel.appendChild( normalLabelText );
-    gameOfChanceLabel.appendChild( normalLabel );
+    let chanceLabel = document.createElement( "SPAN" );
+    let chanceLabelText = document.createTextNode( " Random " );
+    chanceLabel.appendChild( chanceLabelText );
+    gameOfChanceLabel.appendChild( chanceLabel );
 
-    let undeadRadio = document.createElement( "INPUT" );
-    undeadRadio.setAttribute( "name", "gameOfChanceInput" );
-    undeadRadio.setAttribute( "type", "radio" );
-    gameOfChanceLabel.appendChild( undeadRadio );
+    let alwaysRadio = document.createElement( "INPUT" );
+    alwaysRadio.setAttribute( "name", "gameOfChanceInput" );
+    alwaysRadio.setAttribute( "type", "radio" );
+    gameOfChanceLabel.appendChild( alwaysRadio );
 
-    let undeadLabel = document.createElement( "SPAN" );
-    let undeadLabelText = document.createTextNode( " Guaranted" );
-    undeadLabel.appendChild( undeadLabelText );
-    gameOfChanceLabel.appendChild( undeadLabel );
+    let alwaysLabel = document.createElement( "SPAN" );
+    let alwaysLabelText = document.createTextNode( " Guaranteed" );
+    alwaysLabel.appendChild( alwaysLabelText );
+    gameOfChanceLabel.appendChild( alwaysLabel );
 
     document.getElementById( "developerMode" ).appendChild( gameOfChanceLabel );
 }
@@ -643,6 +644,55 @@ function meteorInit () {
 }
 
 /*
+Get starting locations of BadMax.
+*/
+function badMaxInit () {
+    let badMaxLabel = document.createElement( "P" );
+    let badMaxLabelText = document.createTextNode( "BadMax: " );
+    badMaxLabel.appendChild( badMaxLabelText );
+
+    let randomRadio = document.createElement( "INPUT" );
+    randomRadio.setAttribute( "name", "badMaxInput" );
+    randomRadio.setAttribute( "type", "radio" );
+    randomRadio.setAttribute( "checked", "true" );
+    badMaxLabel.appendChild( randomRadio );
+
+    let randomLabel = document.createElement( "SPAN" );
+    let randomLabelText = document.createTextNode( " Random " );
+    randomLabel.appendChild( randomLabelText );
+    badMaxLabel.appendChild( randomLabel );
+
+    let fixedRadio = document.createElement( "INPUT" );
+    fixedRadio.setAttribute( "name", "badMaxInput" );
+    fixedRadio.setAttribute( "type", "radio" );
+    badMaxLabel.appendChild( fixedRadio );
+
+    let fixedLabel = document.createElement( "SPAN" );
+    let fixedLabelText = document.createTextNode( " Fixed " );
+    fixedLabel.appendChild( fixedLabelText );
+    badMaxLabel.appendChild( fixedLabel );
+
+    let xInput = document.createElement( "INPUT" );
+    xInput.setAttribute( "name", "badMaxInput" );
+    xInput.setAttribute( "type", "text" );
+    xInput.setAttribute( "size", "3" );
+    badMaxLabel.appendChild( xInput );
+
+    let coordinateComma = document.createElement( "SPAN" );
+    let coordinateCommaText = document.createTextNode( ", " );
+    coordinateComma.appendChild( coordinateCommaText );
+    badMaxLabel.appendChild( coordinateComma );
+
+    let yInput = document.createElement( "INPUT" );
+    yInput.setAttribute( "name", "badMaxInput" );
+    yInput.setAttribute( "type", "text" );
+    yInput.setAttribute( "size", "3" );
+    badMaxLabel.appendChild( yInput );
+
+    document.getElementById( "developerMode" ).appendChild( badMaxLabel );
+}
+
+/*
 Function to initialize map to given size.
 Default value is 128.
 */
@@ -811,6 +861,7 @@ function locationSubmit () {
     let freighter = document.getElementsByName( "freighterInput" );
     let meteor = document.getElementsByName( "meteorInput" );
     let asteroid = document.getElementsByName( "asteroidInput" );
+    let badMax = document.getElementsByName( "badMaxInput" );
 
     let cX = parseInt( celeron[2].value );
     let cY = parseInt( celeron[3].value );
@@ -818,6 +869,8 @@ function locationSubmit () {
     let xY = parseInt( xeon[3].value );
     let rX = parseInt( ryzen[2].value );
     let rY = parseInt( ryzen[3].value );
+    let bX = parseInt ( badMax[2].value );
+    let bY = parseInt ( badMax[3].value );
     let sizeM = window.gameData.mapSize;
 
     if ( celeron[1].checked ) {
@@ -856,6 +909,17 @@ function locationSubmit () {
         }
     }
 
+    if ( badMax[1].checked ) {
+        if ( isNaN(bX) || isNaN (bY) ) {
+            alert ( "Please enter numbers for BadMax coordinates." );
+            return;
+        }
+
+        if ( bX < 0 || bX >= sizeM || bY < 0 || bY >= sizeM) {
+            alert( "Please starting coordinates of BadMax between 0 and " + (sizeM - 1) );
+            return;
+        }
+    }
     if ( station[0].checked ) window.gameData.stationRandom = true;
     if ( freighter[0].checked ) window.gameData.freighterRandom = true;
     if ( meteor[0].checked ) window.gameData.meteorRandom = true;
@@ -867,6 +931,8 @@ function locationSubmit () {
     window.gameData.xeonY = xY;
     window.gameData.ryzenX = rX;
     window.gameData.ryzenY = rY;
+    window.gameData.badMaxX = bX;
+    window.gameData.badMaxY = bY;
 
     document.getElementById( "devLoadModal" ).style.display = "none";
     document.getElementById( "devLoadModal" ).removeChild( document.getElementById( "locModal" ) );
