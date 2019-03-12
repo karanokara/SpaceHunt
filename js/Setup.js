@@ -26,6 +26,10 @@ function developerModeInit () {
     document.getElementById( "devLoadModal" ).style.display = "block";
 }
 
+/*
+Initialize modal window to set locations of planets and
+celestial objects.
+*/
 function setLocations () {
     let locModal = document.createElement( "DIV" );
     locModal.setAttribute( "class", "modal-content" );
@@ -275,6 +279,27 @@ function celeronInit () {
     let celeronLabelText = document.createTextNode( "Celeron Starting Coordinates: " );
     celeronLabel.appendChild( celeronLabelText );
 
+    let randomRadio = document.createElement( "INPUT" );
+    randomRadio.setAttribute( "name", "celeronInput" );
+    randomRadio.setAttribute( "type", "radio" );
+    randomRadio.setAttribute( "checked", "true" );
+    celeronLabel.appendChild( randomRadio );
+
+    let randomLabel = document.createElement( "SPAN" );
+    let randomLabelText = document.createTextNode( " Random " );
+    randomLabel.appendChild( randomLabelText );
+    celeronLabel.appendChild( randomLabel );
+
+    let fixedRadio = document.createElement( "INPUT" );
+    fixedRadio.setAttribute( "name", "celeronInput" );
+    fixedRadio.setAttribute( "type", "radio" );
+    celeronLabel.appendChild( fixedRadio );
+
+    let fixedLabel = document.createElement( "SPAN" );
+    let fixedLabelText = document.createTextNode( " Fixed " );
+    fixedLabel.appendChild( fixedLabelText );
+    celeronLabel.appendChild( fixedLabel );
+
     let xInput = document.createElement( "INPUT" );
     xInput.setAttribute( "name", "celeronInput" );
     xInput.setAttribute( "type", "text" );
@@ -302,6 +327,27 @@ function xeonInit () {
     let xeonLabel = document.createElement( "P" );
     let xeonLabelText = document.createTextNode( "Xeon Starting Coordinates: " );
     xeonLabel.appendChild( xeonLabelText );
+
+    let randomRadio = document.createElement( "INPUT" );
+    randomRadio.setAttribute( "name", "xeonInput" );
+    randomRadio.setAttribute( "type", "radio" );
+    randomRadio.setAttribute( "checked", "true" );
+    xeonLabel.appendChild( randomRadio );
+
+    let randomLabel = document.createElement( "SPAN" );
+    let randomLabelText = document.createTextNode( " Random " );
+    randomLabel.appendChild( randomLabelText );
+    xeonLabel.appendChild( randomLabel );
+
+    let fixedRadio = document.createElement( "INPUT" );
+    fixedRadio.setAttribute( "name", "xeonInput" );
+    fixedRadio.setAttribute( "type", "radio" );
+    xeonLabel.appendChild( fixedRadio );
+
+    let fixedLabel = document.createElement( "SPAN" );
+    let fixedLabelText = document.createTextNode( " Fixed " );
+    fixedLabel.appendChild( fixedLabelText );
+    xeonLabel.appendChild( fixedLabel );
 
     let xInput = document.createElement( "INPUT" );
     xInput.setAttribute( "name", "xeonInput" );
@@ -331,6 +377,27 @@ function ryzenInit () {
     let ryzenLabelText = document.createTextNode( "Ryzen Starting Coordinates: " );
     ryzenLabel.appendChild( ryzenLabelText );
 
+    let randomRadio = document.createElement( "INPUT" );
+    randomRadio.setAttribute( "name", "ryzenInput" );
+    randomRadio.setAttribute( "type", "radio" );
+    randomRadio.setAttribute( "checked", "true" );
+    ryzenLabel.appendChild( randomRadio );
+
+    let randomLabel = document.createElement( "SPAN" );
+    let randomLabelText = document.createTextNode( " Random " );
+    randomLabel.appendChild( randomLabelText );
+    ryzenLabel.appendChild( randomLabel );
+
+    let fixedRadio = document.createElement( "INPUT" );
+    fixedRadio.setAttribute( "name", "ryzenInput" );
+    fixedRadio.setAttribute( "type", "radio" );
+    ryzenLabel.appendChild( fixedRadio );
+
+    let fixedLabel = document.createElement( "SPAN" );
+    let fixedLabelText = document.createTextNode( " Fixed " );
+    fixedLabel.appendChild( fixedLabelText );
+    ryzenLabel.appendChild( fixedLabel );
+
     let xInput = document.createElement( "INPUT" );
     xInput.setAttribute( "name", "ryzenInput" );
     xInput.setAttribute( "type", "text" );
@@ -351,6 +418,9 @@ function ryzenInit () {
     document.getElementById( "developerMode" ).appendChild( ryzenLabel );
 }
 
+/*
+Get starting location of stations.
+*/
 function stationInit () {
     let stationLabel = document.createElement( "P" );
     let stationLabelText = document.createTextNode( "Station: " );
@@ -404,6 +474,9 @@ function stationInit () {
     document.getElementById( "developerMode" ).appendChild( stationLabel );
 }
 
+/*
+Get starting location of freighters.
+*/
 function freighterInit () {
     let freighterLabel = document.createElement( "P" );
     let freighterLabelText = document.createTextNode( "Freighter: " );
@@ -457,6 +530,9 @@ function freighterInit () {
     document.getElementById( "developerMode" ).appendChild( freighterLabel );
 }
 
+/*
+Get starting locations of asteroids.
+*/
 function asteroidInit () {
     let asteroidLabel = document.createElement( "P" );
     let asteroidLabelText = document.createTextNode( "Asteroid: " );
@@ -510,6 +586,9 @@ function asteroidInit () {
     document.getElementById( "developerMode" ).appendChild( asteroidLabel );
 }
 
+/*
+Get starting locations of meteors.
+*/
 function meteorInit () {
     let meteorLabel = document.createElement( "P" );
     let meteorLabelText = document.createTextNode( "Meteor Shower: " );
@@ -662,22 +741,57 @@ function developerModeSubmit () {
     let mapSize = document.getElementsByName( "mapSizeInput" );
     playGameOfChance = document.getElementsByName( "gameOfChanceInput" );
 
+    let sizeM = parseInt(mapSize[0].value);
+    let coordX = parseInt(coordinates[0].value);
+    let coordY = parseInt(coordinates[1].value);
+    let wormX = parseInt(wormhole[2].value);
+    let wormY = parseInt(wormhole[3].value);
+
+    if ( isNaN(sizeM) ) {
+        alert ( "Please enter a number for the map size!" );
+        return;
+    }
+
+    if ( sizeM < 9 || sizeM > 255 ) {
+        alert( "Please enter a map size between 9 and 255!" );
+        return;
+    }
+
+    if ( isNaN(coordX) || isNaN(coordY) ) {
+        alert( "Please enter numbers for starting coordinates!" );
+        return;
+    }
+
+    if ( isNaN(wormX) || isNaN(wormY) ) {
+        alert( "Please enter numbers for wormhole coordinates!" );
+        return;
+    }
+
+    if ( coordX < 0 || coordX >= sizeM || coordY < 0 || coordY >= sizeM ) {
+        alert( "Please enter starting coordinates between 0 and " + (sizeM - 1) );
+        return;
+    }
+
+    if ( wormX < 0 || wormX >= sizeM || wormY < 0 || wormY >= sizeM ) {
+        alert ( "Please enter wormhole coordinates between 0 and " + (sizeM - 1) );
+        return;
+    }
+
     //set flags in global ctrecipe (GameMode) object that
     //WormHole Collide method can reference
     if ( wormhole[1].checked ) {
         ctrecipe.WormholeFixed = true;
-        ctrecipe.WormholeX = parseInt( wormhole[2].value );
-        ctrecipe.WormholeY = parseInt( wormhole[3].value );
+        ctrecipe.WormholeX = wormX;
+        ctrecipe.WormholeY = wormY;
     }
 
-
-    window.gameData.shipX = parseInt( coordinates[0].value );
-    window.gameData.shipY = parseInt( coordinates[1].value );
+    window.gameData.shipX = coordX;
+    window.gameData.shipY = coordY;
     window.gameData.shipEnergy = parseInt( energy[0].value );
     window.gameData.shipSupplies = parseInt( supplies[0].value );
     window.gameData.shipCredit = parseInt( credits[0].value );
     window.gameData.shipNormalPlay = gameplay[0].checked;
-    window.gameData.mapSize = parseInt( mapSize[0].value );
+    window.gameData.mapSize = sizeM; 
 
     document.getElementById( "devLoadModal" ).style.display = "none";
     document.getElementById( "devLoadModal" ).removeChild( document.getElementById( "devModal" ) );
@@ -685,6 +799,10 @@ function developerModeSubmit () {
     setLocations();
 }
 
+/*
+Submit locations of all planets.
+Checks for valid input before continuing.
+*/
 function locationSubmit () {
     let celeron = document.getElementsByName( "celeronInput" );
     let xeon = document.getElementsByName( "xeonInput" );
@@ -694,31 +812,90 @@ function locationSubmit () {
     let meteor = document.getElementsByName( "meteorInput" );
     let asteroid = document.getElementsByName( "asteroidInput" );
 
+    let cX = parseInt( celeron[2].value );
+    let cY = parseInt( celeron[3].value );
+    let xX = parseInt( xeon[2].value );
+    let xY = parseInt( xeon[3].value );
+    let rX = parseInt( ryzen[2].value );
+    let rY = parseInt( ryzen[3].value );
+    let sizeM = window.gameData.mapSize;
+
+    if ( celeron[1].checked ) {
+        if ( isNaN(cX) || isNaN (cY) ) {
+            alert ( "Please enter numbers for Celeron coordinates." );
+            return;
+        }
+
+        if ( cX < 0 || cX >= sizeM || cY < 0 || cY >= sizeM) {
+            alert( "Please starting coordinates of Celeron between 0 and " + (sizeM - 1) );
+            return;
+        }
+    }
+
+    if ( xeon[1].checked ) {
+        if ( isNaN(xX) || isNaN (xY) ) {
+            alert ( "Please enter numbers for Xeon coordinates." );
+            return;
+        }
+
+        if ( xX < 0 || xX >= sizeM || xY < 0 || xY >= sizeM) {
+            alert( "Please starting coordinates of Xeon between 0 and " + (sizeM - 1) );
+            return;
+        }
+    }
+
+    if ( ryzen[1].checked ) {
+        if ( isNaN(rX) || isNaN (rY) ) {
+            alert ( "Please enter numbers for Ryzen coordinates." );
+            return;
+        }
+
+        if ( rX < 0 || rX >= sizeM || rY < 0 || rY >= sizeM) {
+            alert( "Please starting coordinates of Ryzen between 0 and " + (sizeM - 1) );
+            return;
+        }
+    }
+
     if ( station[0].checked ) window.gameData.stationRandom = true;
     if ( freighter[0].checked ) window.gameData.freighterRandom = true;
     if ( meteor[0].checked ) window.gameData.meteorRandom = true;
     if ( asteroid[0].checked ) window.gameData.asteroidRandom = true;
 
-    window.gameData.celeronX = parseInt( celeron[0].value );
-    window.gameData.celeronY = parseInt( celeron[1].value );
-    window.gameData.xeonX = parseInt( xeon[0].value );
-    window.gameData.xeonY = parseInt( xeon[1].value );
-    window.gameData.ryzenX = parseInt( ryzen[0].value );
-    window.gameData.ryzenY = parseInt( ryzen[1].value );
+    window.gameData.celeronX = cX; 
+    window.gameData.celeronY = cY;
+    window.gameData.xeonX = xX;
+    window.gameData.xeonY = xY;
+    window.gameData.ryzenX = rX;
+    window.gameData.ryzenY = rY;
 
     document.getElementById( "devLoadModal" ).style.display = "none";
     document.getElementById( "devLoadModal" ).removeChild( document.getElementById( "locModal" ) );
 }
 
+/*
+Submit entered values for space station location.
+Adds station to gameData structure.
+*/
 function stationSubmit () {
     let station = document.getElementsByName( "stationInput" );
+    let sizeM = window.gameData.mapSize;
 
     if ( station[1].checked ) {
-        if ( !window.gameData.stations )
-            window.gameData.stations = new Set();
-
         let stationX = parseInt( station[2].value );
         let stationY = parseInt( station[3].value );
+        
+        if ( isNaN(stationX) || isNaN(stationY) ) {
+            alert ( "Please enter numbers for station coordinates!" )
+            return;
+        }
+
+        if ( stationX < 0 || stationX >= sizeM || stationY < 0 || stationY >= sizeM ) {
+            alert ( "Please enter coordinates between 0 and " + (sizeM - 1) );
+            return;
+        }
+
+        if ( !window.gameData.stations )
+            window.gameData.stations = new Set();
 
         window.gameData.stations.add( [stationX, stationY] );
 
@@ -731,12 +908,27 @@ function stationSubmit () {
     else window.gameData.stationRandom = true;
 }
 
+/*
+Submit entered values for abandoned freighter location.
+Adds freighter to gameData structure.
+*/
 function freighterSubmit () {
     let freighter = document.getElementsByName( "freighterInput" );
 
     if ( freighter[1].checked ) {
         let freighterX = parseInt( freighter[2].value );
         let freighterY = parseInt( freighter[3].value );
+        let sizeM = window.gameData.mapSize;
+
+        if ( isNaN(freighterX) || isNaN(freighterY) ) {
+            alert ( "Please enter numbers for freighter coordinates!" )
+            return;
+        }
+
+        if ( freighterX < 0 || freighterX >= sizeM || freighterY < 0 || freighterY >= sizeM ) {
+            alert ( "Please enter coordinates between 0 and " + (sizeM - 1) );
+            return;
+        }
 
         if ( !window.gameData.freighters )
             window.gameData.freighters = new Set();
@@ -752,12 +944,27 @@ function freighterSubmit () {
     else window.gameData.freighterRandom = true;
 }
 
+/*
+Submit entered values for meteor location.
+Adds meteor to gameData structure.
+*/
 function meteorSubmit () {
     let meteor = document.getElementsByName( "meteorInput" );
 
     if ( meteor[1].checked ) {
         let meteorX = parseInt( meteor[2].value );
         let meteorY = parseInt( meteor[3].value );
+        let sizeM = window.gameData.mapSize;
+
+        if ( isNaN(meteorX) || isNaN(meteorY) ) {
+            alert ( "Please enter numbers for meteor coordinates!" )
+            return;
+        }
+
+        if ( meteorX < 0 || meteorX >= sizeM || meteorY < 0 || meteorY >= sizeM ) {
+            alert ( "Please enter coordinates between 0 and " + (sizeM - 1) );
+            return;
+        }
 
         if ( !window.gameData.meteors )
             window.gameData.meteors = new Set();
@@ -773,12 +980,27 @@ function meteorSubmit () {
     else window.gameData.meteorRandom = true;
 }
 
+/*
+Submit entered values for asteroid location.
+Adds asteroid to gameData structure.
+*/
 function asteroidSubmit () {
     let asteroid = document.getElementsByName( "asteroidInput" );
 
     if ( asteroid[1].checked ) {
         let asteroidX = parseInt( asteroid[2].value );
         let asteroidY = parseInt( asteroid[3].value );
+        let sizeM = window.gameData.mapSize;
+
+        if ( isNaN(asteroidX) || isNaN(asteroidY) ) {
+            alert ( "Please enter numbers for asteroid coordinates!" )
+            return;
+        }
+
+        if ( asteroidX < 0 || asteroidX >= sizeM || asteroidY < 0 || asteroidY >= sizeM ) {
+            alert ( "Please enter coordinates between 0 and " + (sizeM - 1) );
+            return;
+        }
 
         if ( !window.gameData.asteroids )
             window.gameData.asteroids = new Set();
