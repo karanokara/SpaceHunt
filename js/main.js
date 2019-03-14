@@ -246,8 +246,8 @@ function gameEffect () {
 
             //store the ship's data
             saveShip( window.gameData, window.oldSpice );
-            // the map is being saved at the time it is being populated
-            //saveMap(window.gameData, window.gameMap )
+            // update BadMax's location if encountered and any removed abFreighters
+            saveMap(window.gameData, window.gameMap )
 
             localStorage.setItem( nameInput.value, JSON.stringify( window.gameData ) );
             alert( "Game saved!\n Your progess will also be saved when you close the browser." );
